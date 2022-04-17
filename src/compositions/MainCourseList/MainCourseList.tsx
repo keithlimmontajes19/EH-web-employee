@@ -1,23 +1,27 @@
 import React from 'react';
 import {ScrollMenu, VisibilityContext} from 'react-horizontal-scrolling-menu';
 
+import {
+  FlexRow,
+  Container,
+  RatingText,
+  UserStyles,
+  TitleCourse,
+  SubtitleText,
+  FlexContainer,
+  ImageContainer,
+  RatingContainer,
+} from './styled';
+import {Image} from 'antd';
+import {NO_IMAGE} from 'utils/constants';
+
+/* icons */
 import IconImage from 'components/IconImage';
 import USER_LOGO from 'assets/images/user-icon.png';
 import LEFT_ARROW from 'assets/icons/left-icon.png';
 import RIGHT_ARROW from 'assets/icons/right-icon.png';
 
-import {
-  Container,
-  UserStyles,
-  DetailsRow,
-  FlexContainer,
-  DetailsContainer,
-} from './styled';
-import {Image} from 'antd';
-import {theme} from 'utils/colors';
-
 /* components */
-import Label from 'components/Label';
 import RatingStar from 'components/RatingStar';
 
 const LeftArrow = () => {
@@ -69,27 +73,33 @@ const renderItem = (item: any, visibility: any) => {
     <Container>
       {visibility.isItemVisible(item?._id)}
 
-      <Image width={380} height={180} preview={false} src={item?.img} />
-      <DetailsContainer>
-        <Label size={14}>{item?.title}</Label>
-        <DetailsRow>
-          <FlexContainer>
+      <Image
+        width={380}
+        height={180}
+        preview={false}
+        src={item?.img ? item?.img : NO_IMAGE}
+      />
+      <TitleCourse>{item?.title}</TitleCourse>
+      <FlexRow>
+        <FlexContainer>
+          <ImageContainer>
             <IconImage
-              width={8}
-              height={10}
+              width={10}
+              height={12}
               source={USER_LOGO}
               styles={UserStyles}
             />
-            <Label color={theme.BLACK} left={5}>
-              {item?.author}
-            </Label>
+          </ImageContainer>
+          <SubtitleText>{item?.author}</SubtitleText>
+        </FlexContainer>
 
-            <Label size={14} color={theme.BLACK} bold="bold">
-              <RatingStar count={1} outOf={1} /> 4.8
-            </Label>
-          </FlexContainer>
-        </DetailsRow>
-      </DetailsContainer>
+        <RatingContainer>
+          <FlexRow>
+            <RatingStar count={1} outOf={1} />
+            <RatingText>4.8</RatingText>
+          </FlexRow>
+        </RatingContainer>
+      </FlexRow>
     </Container>
   );
 };
@@ -111,7 +121,7 @@ const MainCourseList = ({items}: any) => {
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
       {items.map((item) => (
-        <Card item={item} onClick={handleClick(item?._id)} />
+        <Card key={item?._id} item={item} onClick={handleClick(item?._id)} />
       ))}
     </ScrollMenu>
   );

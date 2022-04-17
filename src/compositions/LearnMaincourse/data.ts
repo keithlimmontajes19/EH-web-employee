@@ -22,4 +22,18 @@ export const DUMMY_DATA = [
     author: 'Dianne Russell',
     img: '',
   },
+  {
+    id: 4,
+    title: 'Mc-donalds',
+    price: 101,
+    author: 'Dianne Russell',
+    img: '',
+  },
+  {
+    id: 5,
+    title: 'Mc-donalds',
+    price: 101,
+    author: 'Dianne Russell',
+    img: '',
+  },
 ];

@@ -39,3 +39,6 @@ export const PASSWORD_REGEX = `Password not valid.`;
 export const PASSWORD_NOT_MATCH = `Password does not match.`;
 export const FORGOT_PASSWORD = `Email has been sent. Please check your email for instructions to reset your password `;
 export const IMAGES_SUBTITLE = `If you have images that you would like to use on the site, please upload them here.`;
+
+export const NO_IMAGE =
+  'https://static.wikia.nocookie.net/ousamaranking/images/2/2f/Bojji.png/revision/latest/scale-to-width-down/570?cb=20210824155319';

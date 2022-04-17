@@ -1,6 +1,8 @@
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background-color: #635ffa;
-  border-top-right-radius: 20px !important;
-  border-bottom-right-radius: 20px !important;
-  min-height: 50px;
+.react-horizontal-scrolling-menu--scroll-container {
+  display: flex;
+  height: max-content;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  width: 100%;
 }

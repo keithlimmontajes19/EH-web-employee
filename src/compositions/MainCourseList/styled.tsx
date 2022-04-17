@@ -7,18 +7,18 @@ export const Container = styled.div`
   margin-bottom: ${20}px;
   background-color: ${theme.WHITE};
   height: ${240}px;
-  min-width: ${376}px;
+  max-width: ${376}px;
 `;
 
 export const FlexRow = styled.div`
+  display: flex;
   flex-direction: row;
-  margin-top: ${21}px;
-  margin-bottom: ${21}px;
 `;
 
 export const FlexContainer = styled.div`
   flex: 1;
-  flex-direction: row;
+  display: flex;
+  margin-left: 20px;
 `;
 
 export const DetailsContainer = styled.div`
@@ -26,10 +26,44 @@ export const DetailsContainer = styled.div`
   padding-top: ${10}px;
 `;
 
-export const DetailsRow = styled.div`
-  flex-direction: row;
-  margin-top: ${2}px;
+export const ImageContainer = styled.div`
+  margin-top: ${1}px;
 `;
 
 export const UserStyles = {marginTop: 3};
 export const ImageStyles = {borderTopRightRadius: 20, borderTopLeftRadius: 20};
+
+export const TitleCourse = styled.span`
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #2b2e4a;
+  opacity: 0.8;
+  margin-left: ${20}px;
+`;
+
+export const SubtitleText = styled.span`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #2b2e4a;
+  opacity: 0.5;
+  margin-top: 3px;
+  margin-left: 6px;
+`;
+
+export const RatingContainer = styled.div`
+  margin-right: ${20}px;
+`;
+
+export const RatingText = styled.span`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #2b2e4a;
+  opacity: 0.5;
+  margin-left: 7px;
+  margin-top: 3px;
+`;

@@ -26,3 +26,25 @@ export const HeaderStyled = styled(Header)`
   box-shadow: 0px 4px 5px 1px rgba(99, 95, 250, 0.15);
   height: 100px;
 `;
+
+export const StyledLayout = styled(Layout).attrs(() => ({
+  style: {minHeight: '100vh'},
+}))`
+  .ant-menu-item .ant-menu-item-selected .ant-menu-item-only-child span {
+    color: #000 !important;
+    background: red;
+  }
+
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    min-height: 50px;
+    background: #635ffa;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .ant-menu-item {
+    min-height: 50px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+`;

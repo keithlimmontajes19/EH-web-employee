@@ -1,18 +1,18 @@
 import {ReactElement, useState} from 'react';
 
 /* styles and ant design */
-import {theme} from 'utils/colors';
-import {HeaderStyled} from './styled';
-import {Layout, Menu} from 'antd';
-import {useHistory} from 'react-router-dom';
-
-/* components */
-import NavigationContent from 'navigations/privateRoute';
 import {
   TeamOutlined,
   HomeOutlined,
   PlaySquareOutlined,
 } from '@ant-design/icons';
+import {theme} from 'utils/colors';
+import {Layout, Menu} from 'antd';
+import {useHistory} from 'react-router-dom';
+import {HeaderStyled, StyledLayout} from './styled';
+
+/* components */
+import NavigationContent from 'navigations/privateRoute';
 
 const {Sider, Content} = Layout;
 const MainLayout = (): ReactElement => {
@@ -28,7 +28,7 @@ const MainLayout = (): ReactElement => {
   };
 
   return (
-    <Layout>
+    <StyledLayout>
       <HeaderStyled></HeaderStyled>
       <Layout>
         <Sider width={200} collapsed={false}>
@@ -101,7 +101,7 @@ const MainLayout = (): ReactElement => {
           </Content>
         </Layout>
       </Layout>
-    </Layout>
+    </StyledLayout>
   );
 };
 
