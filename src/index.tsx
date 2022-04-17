@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
+import ReactDOM from 'react-dom';
 
 /* styles */
 import 'antd/dist/antd.css';
 import './styles/index.css';
-import '@coreui/coreui/dist/css/coreui.min.css';
 import 'react-circular-progressbar/dist/styles.css';
 
 ReactDOM.render(

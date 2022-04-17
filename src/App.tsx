@@ -8,9 +8,10 @@ import Layout from 'components/Layout';
 const App = () => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persist}>
-        <Layout />
-      </PersistGate>
+      {/* TO DO: error in persist gate */}
+      {/* <PersistGate loading={null} persistor={persist}> */}
+      <Layout />
+      {/* </PersistGate> */}
     </Provider>
   );
 };

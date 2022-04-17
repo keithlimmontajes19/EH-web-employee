@@ -12,7 +12,7 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
-export const StyledInput = styled(Input)`
+export const StyledInput: any = styled<any>(Input)`
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);
   border-radius: 550px;

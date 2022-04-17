@@ -16,7 +16,7 @@ import {RootState} from 'ducks/store';
 import {closeNotification} from 'ducks/alert/actionCreator';
 import {getUserDetails} from 'ducks/authentication/actionCreator';
 
-const ComponentLayout = (): ReactElement => {
+const ComponentLayout = (): any => {
   const dispatch = useDispatch();
   const {authentication, alert}: any = useSelector<RootState>((state) => state);
   const token = localStorage.getItem('accessToken');
