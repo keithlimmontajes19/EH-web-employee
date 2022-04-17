@@ -1,0 +1,34 @@
+import {TYPES} from './actionTypes';
+import {store} from 'ducks/store';
+
+export const getMyCourses = () =>
+  store.dispatch({
+    type: TYPES.GET_COURSES_LIST_REQUEST,
+  });
+
+export const getCurriculum = (payload) => ({
+  type: TYPES.GET_COURSES_CURICULUM_REQUEST,
+  payload,
+});
+
+export const getCurriculumDetails = (payload) => ({
+  type: TYPES.GET_CURICULUM_DETAILS_REQUEST,
+  payload,
+});
+
+export const getReviews = (payload) => ({
+  type: TYPES.GET_REVIEW_LIST_REQUEST,
+  payload,
+});
+
+export const getLessons = () => ({
+  type: TYPES.GET_LESSONS_LIST_REQUEST,
+});
+
+export const getLessonsDetail = () => ({
+  type: TYPES.GET_DETAILS_LESSONS_LIST_REQUEST,
+});
+
+export const getContents = () => ({
+  type: TYPES.GET_CONTENTS_LIST_REQUEST,
+});
