@@ -27,14 +27,14 @@ import {RootState} from 'ducks/store';
 import {useSelector} from 'react-redux';
 
 const LearnCurriculum = (): ReactElement => {
-  const {myCourses}: any = useSelector<RootState>((state) => state.lms);
+  const {ongoingCourses}: any = useSelector<RootState>((state) => state.lms);
 
   return (
     <CardStyled>
       <TextStyled>My Courses</TextStyled>
       <MarginTop />
 
-      {(myCourses || []).map((item) => {
+      {(ongoingCourses || []).map((item) => {
         return (
           <FlexRow key={item?._id}>
             <Image

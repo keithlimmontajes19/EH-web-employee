@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {ScrollMenu, VisibilityContext} from 'react-horizontal-scrolling-menu';
 
 import {
@@ -23,6 +23,7 @@ import LEFT_ARROW from 'assets/icons/left-icon.png';
 import RIGHT_ARROW from 'assets/icons/right-icon.png';
 
 import {useHistory} from 'react-router-dom';
+import HorizontalScroll from 'react-scroll-horizontal';
 
 const LeftArrow = () => {
   const {scrollPrev} = React.useContext(VisibilityContext);
@@ -104,7 +105,7 @@ const Card = ({item, onClick}) => {
   );
 };
 
-const MainCourseList = (props: any) => {
+const MainCourseList = (props: any): ReactElement<any> => {
   const [selected, setSelected] = React.useState([]);
 
   const isItemSelected = (id) => !!selected.find((el) => el === id);
@@ -117,13 +118,17 @@ const MainCourseList = (props: any) => {
         : currentSelected.concat(id),
     );
   };
-
+  const child = {width: `300em`, height: `100%`};
   return (
-    <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-      {props?.items.map((item) => (
+    // <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+    <HorizontalScroll>
+      <div style={child} key={'1'} />
+      {/* {props?.items.map((item) => (
         <Card item={item} key={item?._id} onClick={handleClick(item?._id)} />
-      ))}
-    </ScrollMenu>
+      ))} */}
+    </HorizontalScroll>
+
+    // </ScrollMenu>
   );
 };
 
