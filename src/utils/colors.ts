@@ -12,4 +12,6 @@ export const theme = {
   LOGIN_ALERT_FONT: '#7367f0',
   GREEN: '#28C76F',
   IMAGE_TEXT: '#6E6B7B',
+  SUB_LAYOUT: '#FAFAFF',
+  LINK_TEXT: '#635FFA',
 };

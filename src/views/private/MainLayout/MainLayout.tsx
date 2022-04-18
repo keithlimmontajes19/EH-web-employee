@@ -31,7 +31,7 @@ const MainLayout = (): ReactElement => {
     <StyledLayout>
       <HeaderStyled></HeaderStyled>
       <Layout>
-        <Sider width={200} collapsed={false}>
+        <Sider width={200} collapsed={true}>
           <Menu
             mode="inline"
             defaultOpenKeys={['sub1']}
@@ -44,14 +44,19 @@ const MainLayout = (): ReactElement => {
               onClick={() => pushHistory('/home')}
               icon={
                 <HomeOutlined
-                  style={{fontSize: 18, color: colorCondition('1')}}
+                  style={{
+                    fontSize: 20,
+                    marginTop: 5,
+                    color: colorCondition('1'),
+                  }}
                 />
               }>
               <span
                 style={{
-                  color: colorCondition('1'),
+                  marginTop: 20,
                   fontSize: 16,
                   fontWeight: 700,
+                  color: colorCondition('1'),
                 }}>
                 Home
               </span>
@@ -62,14 +67,18 @@ const MainLayout = (): ReactElement => {
               onClick={() => pushHistory('/learn')}
               icon={
                 <PlaySquareOutlined
-                  style={{fontSize: 18, color: colorCondition('2')}}
+                  style={{
+                    fontSize: 20,
+                    marginTop: 5,
+                    color: colorCondition('2'),
+                  }}
                 />
               }>
               <span
                 style={{
-                  color: colorCondition('2'),
                   fontSize: 16,
                   fontWeight: 700,
+                  color: colorCondition('2'),
                 }}>
                 Learn
               </span>
@@ -80,14 +89,18 @@ const MainLayout = (): ReactElement => {
               onClick={() => pushHistory('/team')}
               icon={
                 <TeamOutlined
-                  style={{fontSize: 18, color: colorCondition('3')}}
+                  style={{
+                    fontSize: 20,
+                    marginTop: 5,
+                    color: colorCondition('3'),
+                  }}
                 />
               }>
               <span
                 style={{
-                  color: colorCondition('3'),
                   fontSize: 16,
                   fontWeight: 700,
+                  color: colorCondition('3'),
                 }}>
                 Team
               </span>

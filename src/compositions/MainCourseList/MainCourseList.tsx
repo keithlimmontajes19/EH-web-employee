@@ -15,14 +15,14 @@ import {
 import {Image} from 'antd';
 import {NO_IMAGE} from 'utils/constants';
 
-/* icons */
+/* components */
 import IconImage from 'components/IconImage';
+import RatingStar from 'components/RatingStar';
 import USER_LOGO from 'assets/images/user-icon.png';
 import LEFT_ARROW from 'assets/icons/left-icon.png';
 import RIGHT_ARROW from 'assets/icons/right-icon.png';
 
-/* components */
-import RatingStar from 'components/RatingStar';
+import {useHistory} from 'react-router-dom';
 
 const LeftArrow = () => {
   const {scrollPrev} = React.useContext(VisibilityContext);
@@ -31,10 +31,12 @@ const LeftArrow = () => {
       onClick={() => scrollPrev()}
       style={{
         flex: 1,
+        zIndex: 2,
         display: 'flex',
         marginRight: 10,
         justifyContent: 'center',
         flexDirection: 'column',
+        padding: 5,
       }}>
       <IconImage source={RIGHT_ARROW} width={23} height={104} />
     </div>
@@ -53,26 +55,24 @@ const RightArrow = () => {
         marginLeft: 10,
         justifyContent: 'center',
         flexDirection: 'column',
+        padding: 5,
       }}>
       <IconImage source={LEFT_ARROW} width={23} height={104} />
     </div>
   );
 };
 
-const Card = ({onClick, item}) => {
+const Card = ({item, onClick}) => {
+  const history = useHistory();
   const visibility = React.useContext(VisibilityContext);
-  return (
-    <div onClick={() => onClick(visibility)} tabIndex={0}>
-      <div>{renderItem(item, visibility)}</div>
-    </div>
-  );
-};
 
-const renderItem = (item: any, visibility: any) => {
   return (
-    <Container>
-      {visibility.isItemVisible(item?._id)}
-
+    <Container
+      onClick={() => {
+        onClick(visibility);
+        history.push('/learn/curriculum');
+      }}
+      tabIndex={0}>
       <Image
         width={380}
         height={180}
@@ -104,7 +104,7 @@ const renderItem = (item: any, visibility: any) => {
   );
 };
 
-const MainCourseList = ({items}: any) => {
+const MainCourseList = (props: any) => {
   const [selected, setSelected] = React.useState([]);
 
   const isItemSelected = (id) => !!selected.find((el) => el === id);
@@ -120,8 +120,8 @@ const MainCourseList = ({items}: any) => {
 
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-      {items.map((item) => (
-        <Card key={item?._id} item={item} onClick={handleClick(item?._id)} />
+      {props?.items.map((item) => (
+        <Card item={item} key={item?._id} onClick={handleClick(item?._id)} />
       ))}
     </ScrollMenu>
   );
