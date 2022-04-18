@@ -15,7 +15,7 @@ const INITIAL_STATE = {
     loading: false,
   },
   contents: {
-    data: [],
+    data: {},
     loading: false,
   },
   lessonDetails: {
@@ -156,7 +156,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         contents: {
-          data: [],
+          data: {},
           loading: true,
         },
       };
@@ -174,7 +174,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         contents: {
-          data: [],
+          data: {},
           loading: false,
         },
       };
