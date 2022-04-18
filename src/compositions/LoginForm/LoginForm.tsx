@@ -44,18 +44,20 @@ const LoginForm = (): ReactElement => {
     ]);
   };
 
+  const INITIAL_VALUES = {
+    email: '',
+    password: '',
+  };
+
   useEffect(() => {
     const email = form.getFieldValue('email');
     const password = form.getFieldValue('password');
 
-    if (
-      (data?.code === 109 || data?.code === 112 || data?.code === 107) &&
-      email.length
-    ) {
+    if (!data?.success && email.length) {
       setFormFields('email', data?.message);
     }
 
-    if (data?.code === 108 && password.length) {
+    if (!data?.success && password.length) {
       setFormFields('password', data?.message);
     }
   }, [data]);
@@ -68,14 +70,11 @@ const LoginForm = (): ReactElement => {
       <TitleStyled>Welcome back</TitleStyled>
 
       <Form
-        initialValues={{
-          email: '',
-          password: '',
-        }}
         form={form}
         layout="vertical"
         requiredMark={false}
-        onFinish={handlesubmit}>
+        onFinish={handlesubmit}
+        initialValues={INITIAL_VALUES}>
         <Form.Item name="email" rules={rulesConfig('Email is required.')}>
           <StyledInput
             type="email"

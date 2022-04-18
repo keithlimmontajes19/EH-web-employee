@@ -17,7 +17,7 @@ export const StyledInput: any = styled<any>(Input)`
   backdrop-filter: blur(25px);
   border-radius: 550px;
   margin-top: 20px;
-  height: 58px;
+  height: 50px;
   width: 404.29px;
 `;
 
@@ -25,7 +25,7 @@ export const StyledPassword = styled(Input.Password)`
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);
   border-radius: 550px;
-  height: 58px;
+  height: 50px;
   width: 404.29px;
 `;
 
@@ -39,7 +39,7 @@ export const StyledButton = styled(Button)`
   box-shadow: 0px 6px 12px rgba(35, 34, 47, 0.02);
   border-radius: 50px;
   color: white;
-  height: 58px;
+  height: 50px;
   width: 404.29px;
 `;
 
@@ -108,6 +108,7 @@ export const InputContaier = styled.div`
   align-items: flex-end;
   flex-direction: row;
   justify-content: flex-end;
+  margin-top: 5px;
 `;
 
 export const LabelStyled = styled.span`

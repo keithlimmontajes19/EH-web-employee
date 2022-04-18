@@ -13,8 +13,10 @@ import {
   RatingContainer,
 } from './styled';
 import {Image} from 'antd';
+import {useDispatch} from 'react-redux';
 import {NO_IMAGE} from 'utils/constants';
 import {useHistory} from 'react-router-dom';
+import {getCurriculum} from 'ducks/lms/actionCreator';
 
 /* components */
 import IconImage from 'components/IconImage';
@@ -64,6 +66,7 @@ const RightArrow = () => {
 const Card = ({item, itemId, onClick}) => {
   const visibility = React.useContext(VisibilityContext);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   visibility.isItemVisible(itemId);
 
@@ -71,7 +74,11 @@ const Card = ({item, itemId, onClick}) => {
     <Container
       onClick={() => {
         onClick(visibility);
+        dispatch(getCurriculum(item));
+
         history.push('/learn/curriculum');
+        localStorage.setItem('courseId', item?._id);
+        localStorage.setItem('organizationId', item?.organizationId);
       }}
       tabIndex={0}>
       <Image
@@ -95,7 +102,6 @@ const Card = ({item, itemId, onClick}) => {
             {item?.instructor?.title} {item?.instructor?.name}
           </SubtitleText>
         </FlexContainer>
-
         <RatingContainer>
           <FlexRow>
             <RatingStar count={1} outOf={1} />

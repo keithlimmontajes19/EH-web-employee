@@ -10,10 +10,10 @@ const Navigation = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/home" component={Home} />
+      <Route path="/home" component={Home} />
       <Route exact path="/learn" component={Learn} />
       <Route exact path="/learn/curriculum" component={Curriculum} />
-      <Route exact path="/team" component={Team} />
+      <Route path="/team" component={Team} />
       <Redirect to="/" />
     </Switch>
   );

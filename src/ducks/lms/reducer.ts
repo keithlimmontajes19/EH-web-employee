@@ -1,4 +1,4 @@
-import { TYPES } from './actionTypes';
+import {TYPES} from './actionTypes';
 
 const INITIAL_STATE = {
   data: [],
@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   curriculum: [],
   curriculumDetails: {},
   reviews: [],
-  lessons: {
+  lesson: {
     data: [],
     loading: false,
   },
@@ -178,7 +178,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       };
 
     default:
-      return { ...state };
+      return {...state};
   }
 };
 

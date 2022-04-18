@@ -1,20 +1,38 @@
-import {ReactElement} from 'react';
-
-import type {PropsType} from './types';
-import {MenuContainer} from './styled';
+import React, {ReactElement, useEffect} from 'react';
 import {Row, Col} from 'antd';
 
-const Curriculum = (props: PropsType): ReactElement => {
-  return (
+/* composition */
+import SidebarCurriculum from 'compositions/SidebarCurriculum';
+import ContentCurriculum from 'compositions/ContentCurriculum';
+
+/* reducer action */
+import {RootState} from 'ducks/store';
+import {useDispatch, useSelector} from 'react-redux';
+import {getLessons} from 'ducks/lms/actionCreator';
+
+import Loading from 'components/Loading';
+const Curriculum = (): ReactElement => {
+  const dispatch = useDispatch();
+  const {lesson, curriculum}: any = useSelector<RootState>(
+    (state) => state.lms,
+  );
+
+  useEffect(() => {
+    dispatch(getLessons());
+  }, []);
+
+  const content = (
     <Row gutter={16}>
-      <Col span={5} style={{marginTop: -20, marginLeft: -20}}>
-        <MenuContainer>
-          <p>sample</p>
-        </MenuContainer>
+      <Col span={7} style={{marginTop: -20, marginLeft: -20}}>
+        <SidebarCurriculum lesson={lesson} />
       </Col>
-      <Col span={17}>added new</Col>
+      <Col span={17}>
+        <ContentCurriculum curriculum={curriculum} />
+      </Col>
     </Row>
   );
+
+  return lesson?.loading ? <Loading /> : content;
 };
 
 export default Curriculum;
