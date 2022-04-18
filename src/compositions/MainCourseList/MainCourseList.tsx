@@ -14,6 +14,7 @@ import {
 } from './styled';
 import {Image} from 'antd';
 import {NO_IMAGE} from 'utils/constants';
+import {useHistory} from 'react-router-dom';
 
 /* components */
 import IconImage from 'components/IconImage';
@@ -21,8 +22,6 @@ import RatingStar from 'components/RatingStar';
 import USER_LOGO from 'assets/images/user-icon.png';
 import LEFT_ARROW from 'assets/icons/left-icon.png';
 import RIGHT_ARROW from 'assets/icons/right-icon.png';
-
-import {useHistory} from 'react-router-dom';
 
 const LeftArrow = () => {
   const {scrollPrev} = React.useContext(VisibilityContext);
@@ -62,9 +61,11 @@ const RightArrow = () => {
   );
 };
 
-const Card = ({item, onClick}) => {
-  const history = useHistory();
+const Card = ({item, itemId, onClick}) => {
   const visibility = React.useContext(VisibilityContext);
+  const history = useHistory();
+
+  visibility.isItemVisible(itemId);
 
   return (
     <Container
@@ -77,7 +78,7 @@ const Card = ({item, onClick}) => {
         width={380}
         height={180}
         preview={false}
-        src={item?.img ? item?.img : NO_IMAGE}
+        src={item?.preview?.ref ? item?.preview?.ref : NO_IMAGE}
       />
       <TitleCourse>{item?.title}</TitleCourse>
       <FlexRow>
@@ -90,13 +91,15 @@ const Card = ({item, onClick}) => {
               styles={UserStyles}
             />
           </ImageContainer>
-          <SubtitleText>{item?.author}</SubtitleText>
+          <SubtitleText>
+            {item?.instructor?.title} {item?.instructor?.name}
+          </SubtitleText>
         </FlexContainer>
 
         <RatingContainer>
           <FlexRow>
             <RatingStar count={1} outOf={1} />
-            <RatingText>4.8</RatingText>
+            <RatingText>{item?.averageUserRating || 1}</RatingText>
           </FlexRow>
         </RatingContainer>
       </FlexRow>
@@ -119,9 +122,21 @@ const MainCourseList = (props: any) => {
   };
 
   return (
-    <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+    <ScrollMenu
+      LeftArrow={() => (props?.items.length ? LeftArrow() : <></>)}
+      RightArrow={() => (props?.items.length ? RightArrow() : <></>)}
+      options={{
+        ratio: 0.9,
+        rootMargin: '5px',
+        threshold: [0.01, 0.05, 0.5, 0.75, 0.95, 1],
+      }}>
       {props?.items.map((item) => (
-        <Card item={item} key={item?._id} onClick={handleClick(item?._id)} />
+        <Card
+          item={item}
+          key={item?._id}
+          itemId={item?._id}
+          onClick={handleClick(item?._id)}
+        />
       ))}
     </ScrollMenu>
   );
