@@ -32,3 +32,13 @@ export const getLessonsDetail = () => ({
 export const getContents = () => ({
   type: TYPES.GET_CONTENTS_LIST_REQUEST,
 });
+
+export const getTopicID = (payload) => ({
+  type: TYPES.ID_GET_TOPIC_REQUEST,
+  payload,
+});
+
+export const getLessonId = (payload) => ({
+  type: TYPES.ID_GET_LESSON_REQUEST,
+  payload,
+});

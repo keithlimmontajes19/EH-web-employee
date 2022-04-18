@@ -9,7 +9,7 @@ import {
 import {theme} from 'utils/colors';
 import {Layout, Menu} from 'antd';
 import {useHistory} from 'react-router-dom';
-import {HeaderStyled, StyledLayout} from './styled';
+import {HeaderStyled, StyledLayout, LayoutStyles} from './styled';
 
 /* components */
 import NavigationContent from 'navigations/privateRoute';
@@ -108,7 +108,7 @@ const MainLayout = (): ReactElement => {
           </Menu>
         </Sider>
 
-        <Layout style={{padding: 21, background: '#f8f8f8', minHeight: '98vh'}}>
+        <Layout style={LayoutStyles}>
           <Content>
             <NavigationContent />
           </Content>

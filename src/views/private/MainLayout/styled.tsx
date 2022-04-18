@@ -24,7 +24,7 @@ export const HeaderStyled = styled(Header)`
   background: #635ffa;
   border-radius: 0px;
   box-shadow: 0px 4px 5px 1px rgba(99, 95, 250, 0.15);
-  height: 100px;
+  height: 70px;
 `;
 
 export const StyledLayout = styled(Layout).attrs(() => ({
@@ -48,3 +48,10 @@ export const StyledLayout = styled(Layout).attrs(() => ({
     border-bottom-right-radius: 20px;
   }
 `;
+
+export const LayoutStyles = {
+  paddingTop: 21,
+  paddingLeft: 21,
+  background: '#f8f8f8',
+  minHeight: '98vh',
+};

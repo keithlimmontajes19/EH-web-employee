@@ -1,4 +1,4 @@
-import {ReactElement, useState} from 'react';
+import {ReactElement, useEffect, useState} from 'react';
 import type {PropsType} from './types';
 
 import {
@@ -13,11 +13,21 @@ import {Menu} from 'antd';
 import {theme} from 'utils/colors';
 import {CaretRightOutlined} from '@ant-design/icons';
 
+import {useDispatch} from 'react-redux';
+import {getTopicID, getLessonId} from 'ducks/lms/actionCreator';
+
 const {SubMenu} = Menu;
 const SidebarCurriculum = (props: PropsType): ReactElement => {
-  const {lesson} = props;
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    setTopicId(null);
+    setLessonId(null);
+  }, []);
+
+  const {lesson} = props;
   const [selected, setSelected] = useState('1');
+
   const colorCondition = (key: string) => {
     return selected === key ? theme.WHITE : theme.BLACK;
   };
@@ -30,6 +40,9 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
     return stats ? `${stats + ' ' + label}` : ' ';
   };
 
+  const setTopicId = (id) => dispatch(getTopicID(id));
+  const setLessonId = (id) => dispatch(getLessonId(id));
+
   return (
     <MenuContainer>
       <TitleStyled>Curriculum</TitleStyled>
@@ -39,15 +52,22 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
         style={{background: theme.SUB_LAYOUT}}
         onSelect={(e) => setSelected(e?.key)}
         expandIcon={(e) => <CaretRightOutlined rotate={e.isOpen ? 90 : 0} />}>
-        <Menu.Item key={'1'}>
+        <Menu.Item
+          key={'1'}
+          onClick={() => {
+            setTopicId(null);
+            setLessonId(null);
+            localStorage.setItem('topicId', '');
+            localStorage.setItem('lessonId', '');
+          }}>
           <StyledLabel color={colorCondition('1')}>Introduction</StyledLabel>
         </Menu.Item>
 
         {(lesson.data || []).map((item) => {
           const stats = item?.stats;
-          return (
+          return item?.contents.length > 0 ? (
             <SubMenu
-              key="sub1"
+              key={item?.title}
               title={
                 <StyledLabel color={colorCondition(item?.title)}>
                   {item?.title}
@@ -61,7 +81,12 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
               {(item?.contents || []).map((value) => (
                 <Menu.Item
                   key={value?.title}
-                  onClick={() => localStorage.setItem('topicId', value?._id)}>
+                  onClick={() => {
+                    setTopicId(value?._id);
+                    setLessonId(item?._id);
+                    localStorage.setItem('lessonId', item?._id);
+                    localStorage.setItem('topicId', value?._id);
+                  }}>
                   <MenuLabel color={colorCondition(value?.title)}>
                     {value?.title}
                     <MenuSublabel color={subColorCondition(value?.title)}>
@@ -71,6 +96,19 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
                 </Menu.Item>
               ))}
             </SubMenu>
+          ) : (
+            <Menu.Item
+              key={item?.title}
+              onClick={() => {
+                setTopicId(null);
+                setLessonId(item?._id);
+                localStorage.setItem('topicId', '');
+                localStorage.setItem('lessonId', item?._id);
+              }}>
+              <StyledLabel color={colorCondition(item?.title)}>
+                {item?.title}
+              </StyledLabel>
+            </Menu.Item>
           );
         })}
       </Menu>

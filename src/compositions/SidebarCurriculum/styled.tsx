@@ -5,6 +5,7 @@ export const Container = styled.div``;
 export const MenuContainer = styled.div`
   min-height: 100vh;
   background: ${theme.SUB_LAYOUT};
+  margin-top: -22px;
 `;
 
 export const TitleStyled = styled.div`

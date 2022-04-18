@@ -22,6 +22,8 @@ const INITIAL_STATE = {
     data: {},
     loading: false,
   },
+  topicId: null,
+  lessonId: null,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -31,10 +33,10 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: false,
         loading: true,
-        data: [],
-        myCourses: [],
-        ongoingCourses: [],
-        completedCourses: [],
+        data: state.data,
+        myCourses: state.myCourses,
+        ongoingCourses: state.ongoingCourses,
+        completedCourses: state.completedCourses,
       };
 
     case TYPES.GET_COURSES_LIST_SUCCESS:
@@ -53,10 +55,10 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: true,
         loading: false,
-        data: [],
-        myCourses: [],
-        ongoingCourses: [],
-        completedCourses: [],
+        data: state.data,
+        myCourses: state.myCourses,
+        ongoingCourses: state.ongoingCourses,
+        completedCourses: state.completedCourses,
       };
 
     case TYPES.GET_COURSES_CURICULUM_SUCCESS:
@@ -175,6 +177,24 @@ const reducer = (state = INITIAL_STATE, action) => {
           data: [],
           loading: false,
         },
+      };
+
+    /**
+     * TOPIC GET ID  REDUCER
+     * */
+    case TYPES.ID_GET_TOPIC_SUCCESS:
+      return {
+        ...state,
+        topicId: action.payload,
+      };
+
+    /**
+     * LESSON GET ID  REDUCER
+     * */
+    case TYPES.ID_GET_LESSON_SUCCESS:
+      return {
+        ...state,
+        lessonId: action.payload,
       };
 
     default:

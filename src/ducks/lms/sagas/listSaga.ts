@@ -158,7 +158,17 @@ export function* getTopicDetails(): any {
   }
 }
 
+export function* getTopicId({payload}: any): any {
+  yield put({type: TYPES.ID_GET_TOPIC_SUCCESS, payload});
+}
+
+export function* getLessonId({payload}: any): any {
+  yield put({type: TYPES.ID_GET_LESSON_SUCCESS, payload});
+}
+
 export default function* watcher() {
+  yield takeLatest(TYPES.ID_GET_TOPIC_REQUEST, getTopicId);
+  yield takeLatest(TYPES.ID_GET_LESSON_REQUEST, getLessonId);
   yield takeLatest(TYPES.GET_LESSONS_LIST_REQUEST, getLesson);
   yield takeLatest(TYPES.GET_REVIEW_LIST_REQUEST, getReviews);
   yield takeLatest(TYPES.GET_COURSES_LIST_REQUEST, getMyCourses);
