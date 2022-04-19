@@ -37,7 +37,7 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
   };
 
   const checkNullUndefined = (stats: string, label: string) => {
-    return stats ? `${stats + ' ' + label}` : ' ';
+    return stats ? `${stats + ' ' + label} ` : ' ';
   };
 
   const setTopicId = (id) => dispatch(getTopicID(id));
@@ -69,6 +69,12 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
           return item?.contents.length > 0 ? (
             <SubMenu
               key={item?.title}
+              onTitleClick={() => {
+                setTopicId(null);
+                setLessonId(item?._id);
+                localStorage.setItem('topicId', '');
+                localStorage.setItem('lessonId', item?._id);
+              }}
               title={
                 <StyledLabel color={colorCondition(item?.title)}>
                   {item?.title}

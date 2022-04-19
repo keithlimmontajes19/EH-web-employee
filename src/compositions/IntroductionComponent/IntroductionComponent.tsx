@@ -31,7 +31,11 @@ const IntroductionComponent = ({curriculum}: any): ReactElement => {
         width="100%"
         height={316}
         preview={false}
-        src={curriculum?.preview?.ref ? curriculum?.preview?.ref : NO_IMAGE}
+        // TO DO uncomment code
+        // src={curriculum?.preview?.ref ? curriculum?.preview?.ref : NO_IMAGE}
+        src={
+          'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+        }
       />
       <SubContainer>
         <TitleStyled>{curriculum?.title}</TitleStyled>

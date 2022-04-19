@@ -1,4 +1,4 @@
-import {ReactElement, useEffect, useState} from 'react';
+import {Fragment, ReactElement, useEffect, useState} from 'react';
 import {Container} from './styled';
 
 /* reducer action */
@@ -12,6 +12,7 @@ import TextComponent from 'compositions/TextComponent';
 import ImageComponent from 'compositions/ImageComponent';
 import VideoComponent from 'compositions/VideoComponent';
 import IntroductionComponent from 'compositions/IntroductionComponent';
+import CurriculumLayout from 'compositions/CurriculumLayout';
 
 const ContentCurriculum = (): ReactElement => {
   const dispatch = useDispatch();
@@ -40,25 +41,8 @@ const ContentCurriculum = (): ReactElement => {
     }
   };
 
-  const body = (type, data) => {
-    return <></>;
-  };
-
-  const contentType = (type: string, data: any) => {
-    const previewType = data?.preview?.type;
-
-    switch (type) {
-      case 'quiz':
-        return <>2</>;
-      case 'topic':
-        return <>4</>;
-      case 'activity':
-        return <>3</>;
-      case 'assignment':
-        return <>1</>;
-      default:
-        return <>5</>;
-    }
+  const body = (data) => {
+    return <CurriculumLayout data={data} />;
   };
 
   const render = () => {
@@ -67,11 +51,22 @@ const ContentCurriculum = (): ReactElement => {
     } else if (!topicId && lessonId) {
       const data = contents?.data;
       const previewType = contents?.data?.preview?.type;
-      return header(previewType, data);
+      return (
+        <Fragment>
+          {header(previewType, data)}
+          {body(data)}
+        </Fragment>
+      );
     } else {
       const data = lessonDetails?.data;
       const type = lessonDetails?.data?.contentType;
-      return contentType(type, data);
+      const previewType = lessonDetails?.data?.preview?.type;
+      return (
+        <Fragment>
+          {header(previewType, data)}
+          {body(data)}
+        </Fragment>
+      );
     }
   };
 
