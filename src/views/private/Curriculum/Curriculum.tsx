@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect, useState} from 'react';
+import React, {ReactElement, useEffect} from 'react';
 import {Row, Col} from 'antd';
 
 /* composition */
@@ -13,11 +13,12 @@ import {getLessons} from 'ducks/lms/actionCreator';
 
 const Curriculum = (): ReactElement => {
   const dispatch = useDispatch();
-  const {lesson}: any = useSelector<RootState>((state) => state.lms);
 
   useEffect(() => {
     dispatch(getLessons());
   }, []);
+
+  const {lesson}: any = useSelector<RootState>((state) => state.lms);
 
   const content = (
     <Row>

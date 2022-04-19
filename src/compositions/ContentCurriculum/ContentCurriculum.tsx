@@ -8,15 +8,15 @@ import {getContents, getLessonsDetail} from 'ducks/lms/actionCreator';
 
 /* conponents */
 import Loading from 'components/Loading';
-import IntroductionComponent from 'compositions/IntroductionComponent';
+import TextComponent from 'compositions/TextComponent';
 import ImageComponent from 'compositions/ImageComponent';
 import VideoComponent from 'compositions/VideoComponent';
-import TextComponent from 'compositions/TextComponent';
+import IntroductionComponent from 'compositions/IntroductionComponent';
 
 const ContentCurriculum = (): ReactElement => {
   const dispatch = useDispatch();
-  const [id, setid] = useState('');
 
+  const [id, setid] = useState('');
   const {topicId, lessonId, curriculum, contents, lessonDetails}: any =
     useSelector<RootState>((state) => state.lms);
 
@@ -25,40 +25,59 @@ const ContentCurriculum = (): ReactElement => {
   }, [topicId]);
 
   useEffect(() => {
-    if (!topicId && lessonId) {
-      dispatch(getContents());
-    }
-
-    if (topicId && lessonId) {
-      dispatch(getLessonsDetail());
-    }
+    if (!topicId && lessonId) dispatch(getContents());
+    if (topicId && lessonId) dispatch(getLessonsDetail());
   }, [topicId, lessonId]);
 
-  const contentChecker = (type, data) => {
+  const header = (type, data) => {
     switch (type) {
       case 'image':
         return <ImageComponent data={data} />;
       case 'video':
-        return <VideoComponent />;
+        return <VideoComponent data={data} />;
       default:
-        return <TextComponent />;
+        return <TextComponent data={data} />;
     }
   };
 
-  const content = () => {
+  const body = (type, data) => {
+    return <></>;
+  };
+
+  const contentType = (type: string, data: any) => {
+    const previewType = data?.preview?.type;
+
+    switch (type) {
+      case 'quiz':
+        return <>2</>;
+      case 'topic':
+        return <>4</>;
+      case 'activity':
+        return <>3</>;
+      case 'assignment':
+        return <>1</>;
+      default:
+        return <>5</>;
+    }
+  };
+
+  const render = () => {
     if (!id && !lessonId) {
       return <IntroductionComponent curriculum={curriculum} />;
     } else if (!topicId && lessonId) {
-      return contentChecker(contents?.data?.preview?.type, contents?.data);
+      const data = contents?.data;
+      const previewType = contents?.data?.preview?.type;
+      return header(previewType, data);
     } else {
-      // check contentType for quiz assignments video or images
-      return contentChecker(contents?.data?.preview?.type, lessonDetails?.data);
+      const data = lessonDetails?.data;
+      const type = lessonDetails?.data?.contentType;
+      return contentType(type, data);
     }
   };
 
   return (
     <Container>
-      {lessonDetails.loading || contents?.loading ? <Loading /> : content()}
+      {lessonDetails.loading || contents?.loading ? <Loading /> : render()}
     </Container>
   );
 };

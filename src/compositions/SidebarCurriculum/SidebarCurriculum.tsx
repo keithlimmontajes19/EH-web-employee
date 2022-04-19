@@ -65,6 +65,7 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
 
         {(lesson.data || []).map((item) => {
           const stats = item?.stats;
+
           return item?.contents.length > 0 ? (
             <SubMenu
               key={item?.title}

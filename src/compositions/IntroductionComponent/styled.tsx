@@ -66,12 +66,12 @@ export const StyledButton = styled(Button)`
   position: absolute;
   left: 84.86%;
   right: 4.93%;
-  top: 90.92%;
+  top: 85.92%;
   bottom: 4.39%;
-  background: linear-gradient(90deg, #ab70f1 2.6%, #635ffa 47.4%, #4ab9e7 100%);
   border-radius: 8px;
   min-width: 147px;
   height: 48px;
   color: #fff;
   font-weight: bold;
+  background: linear-gradient(90deg, #ab70f1 2.6%, #635ffa 47.4%, #4ab9e7 100%);
 `;
