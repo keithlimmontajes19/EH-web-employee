@@ -1,4 +1,4 @@
-import {ReactElement, useEffect} from 'react';
+import {useEffect} from 'react';
 import {Redirect, Router} from 'react-router-dom';
 
 /* styles utils*/

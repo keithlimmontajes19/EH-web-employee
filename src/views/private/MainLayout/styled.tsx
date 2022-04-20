@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {theme} from 'utils/colors';
-import {Layout, Menu} from 'antd';
+import {Layout, Input} from 'antd';
 
 const {Header} = Layout;
 
@@ -20,11 +20,10 @@ export const MainLayoutStyles = {minHeight: '100vh'};
 export const Siderstyles = {background: theme.WHITE};
 
 export const HeaderStyled = styled(Header)`
-  opacity: 0.1;
-  background: #635ffa;
+  background: #efeffe;
   border-radius: 0px;
+  min-height: 70px;
   box-shadow: 0px 4px 5px 1px rgba(99, 95, 250, 0.15);
-  height: 70px;
 `;
 
 export const StyledLayout = styled(Layout).attrs(() => ({
@@ -55,3 +54,11 @@ export const LayoutStyles = {
   background: '#f8f8f8',
   minHeight: '98vh',
 };
+
+export const SearchInput = styled(Input)`
+  width: 497px;
+  height: 45px;
+  background: #ffffff;
+  border-radius: 16px;
+  margin-left: 160px;
+`;

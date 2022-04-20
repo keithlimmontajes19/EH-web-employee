@@ -10,6 +10,7 @@ import {
   TitleHeader,
   TitleLabel,
   FolderContainer,
+  MainContainer,
 } from './styled';
 
 import {EllipsisOutlined} from '@ant-design/icons';
@@ -26,6 +27,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getDashboard} from 'ducks/dashboard/actionCreator';
 import {getAnnouncements} from 'ducks/announcement/actionCreator';
 import Label from 'components/Label';
+import Loading from 'components/Loading';
+
+import {Row, Col} from 'antd';
 
 const Team = (props: PropsType): ReactElement => {
   const dispatch = useDispatch();
@@ -38,18 +42,21 @@ const Team = (props: PropsType): ReactElement => {
     dispatch(getAnnouncements());
   }, []);
 
-  return (
-    <>
-      <CardStyled>
-        <Container>
-          <IconImage source={ANNOUNCEMENT} height={124} width={124} />
-        </Container>
-        <LabelStyled>No Announcement</LabelStyled>
-      </CardStyled>
-
+  const content = () => {
+    return (
       <FlexWrap>
+        <CardStyled>
+          <Container>
+            <IconImage source={ANNOUNCEMENT} height={124} width={124} />
+          </Container>
+          <LabelStyled>No Announcement</LabelStyled>
+        </CardStyled>
+
         {(data || []).map((item) => {
-          return (item?.boards || []).map((board) => {
+          {
+            /* (item?.boards || []) */
+          }
+          return (item?.boards || []).map((board: any) => {
             return (
               <CardFolders>
                 <TitleHeader>
@@ -57,38 +64,103 @@ const Team = (props: PropsType): ReactElement => {
                   <EllipsisOutlined style={{fontSize: 35}} />
                 </TitleHeader>
 
-                <FlexWrap>
-                  {(board?.board_items || []).map((folder) => {
-                    if (folder?.item_type === 'page') {
-                      return (folder?.item_pages || []).map((page) => {
+                <div
+                  style={{
+                    minHeight: 360,
+                    maxHeight: 360,
+                    overflowY: 'scroll',
+                    scrollbarWidth: 'none',
+                  }}>
+                  <FlexWrap>
+                    {(board?.board_items || []).map((folder) => {
+                      if (folder?.item_type === 'page') {
+                        // (folder?.item_pages || [])
+                        return (folder?.item_pages || []).map((page: any) => {
+                          return (
+                            <Row>
+                              <Col span={20}>
+                                <div
+                                  style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                  }}>
+                                  <MainContainer>
+                                    <div
+                                      style={{
+                                        marginLeft: '35%',
+                                        marginRight: '50%',
+                                        marginTop: '30%',
+                                        justifyContent: 'center',
+                                      }}>
+                                      <IconImage
+                                        source={PAGE}
+                                        height={41}
+                                        width={33}
+                                      />
+                                    </div>
+                                  </MainContainer>
+                                  <p
+                                    style={{
+                                      textAlign: 'center',
+                                      marginLeft: 30,
+                                    }}>
+                                    {page?.title}
+                                  </p>
+                                </div>
+                              </Col>
+                            </Row>
+                          );
+                        });
+                      } else {
                         return (
-                          <FolderContainer>
-                            <div
-                              style={{marginLeft: 'auto', marginRight: 'auto'}}>
-                              <IconImage source={PAGE} height={41} width={33} />
-                            </div>
-                          </FolderContainer>
+                          <Row>
+                            <Col span={20}>
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  justifyContent: 'center',
+                                }}>
+                                <MainContainer>
+                                  <div
+                                    style={{
+                                      marginLeft: '35%',
+                                      marginRight: '50%',
+                                      marginTop: '30%',
+                                      justifyContent: 'center',
+                                    }}>
+                                    <IconImage
+                                      source={FOLDER}
+                                      height={41}
+                                      width={33}
+                                    />
+                                  </div>
+                                </MainContainer>
+                                <p
+                                  style={{
+                                    textAlign: 'center',
+                                    marginLeft: 30,
+                                  }}>
+                                  {folder?.title}
+                                </p>
+                              </div>
+                            </Col>
+                          </Row>
                         );
-                      });
-                    } else {
-                      return (
-                        <FolderContainer>
-                          <div
-                            style={{marginLeft: 'auto', marginRight: 'auto'}}>
-                            <IconImage source={FOLDER} height={41} width={33} />
-                          </div>
-                        </FolderContainer>
-                      );
-                    }
-                  })}
-                </FlexWrap>
+                      }
+                    })}
+                  </FlexWrap>
+                </div>
               </CardFolders>
             );
           });
         })}
       </FlexWrap>
-    </>
-  );
+    );
+  };
+
+  return loading ? <Loading /> : content();
 };
 
 export default Team;

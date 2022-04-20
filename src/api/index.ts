@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {store} from 'ducks/store';
+import {openNotification} from 'ducks/alert/actionCreator';
 
 /**
  * ===================================
@@ -45,8 +46,16 @@ axiosInstance.interceptors.response.use(
   async (requestConfig) => requestConfig,
   async function (error) {
     if (error?.response?.status === 401) {
-      localStorage.clear();
       store.dispatch({type: 'GET_AUTHENTICATION_FAILED'});
+      store.dispatch(
+        openNotification({
+          onShow: true,
+          type: 'warning',
+          message: 'Session has Expired!',
+        }),
+      );
+
+      localStorage.clear();
       return error;
     }
 

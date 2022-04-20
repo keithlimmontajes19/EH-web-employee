@@ -2,22 +2,30 @@ import {ReactElement, useState} from 'react';
 
 /* styles and ant design */
 import {
+  BellOutlined,
+  UserOutlined,
   TeamOutlined,
   HomeOutlined,
+  SearchOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
   PlaySquareOutlined,
 } from '@ant-design/icons';
+
 import {theme} from 'utils/colors';
-import {Layout, Menu} from 'antd';
 import {useHistory} from 'react-router-dom';
-import {HeaderStyled, StyledLayout, LayoutStyles} from './styled';
+import {Layout, Menu, Button, Row, Avatar, Col} from 'antd';
+import {HeaderStyled, StyledLayout, LayoutStyles, SearchInput} from './styled';
 
 /* components */
 import NavigationContent from 'navigations/privateRoute';
 
 const {Sider, Content} = Layout;
+
 const MainLayout = (): ReactElement => {
   const history = useHistory();
   const [selected, setSelected] = useState('1');
+  const [collapsed, setCollapsed] = useState(false);
 
   const colorCondition = (key: string) => {
     return selected === key ? theme.WHITE : theme.BLACK;
@@ -27,11 +35,49 @@ const MainLayout = (): ReactElement => {
     history.push(route);
   };
 
+  const toggleCollapsed = () => setCollapsed(!collapsed);
+
   return (
     <StyledLayout>
-      <HeaderStyled></HeaderStyled>
+      <HeaderStyled>
+        <Row style={{marginTop: 10}}>
+          <Button
+            style={{
+              border: 'none',
+              background: '#efeffe',
+              marginLeft: -35,
+              marginTop: 10,
+            }}
+            onClick={toggleCollapsed}>
+            {collapsed ? (
+              <MenuUnfoldOutlined style={{color: '#000', fontSize: 20}} />
+            ) : (
+              <MenuFoldOutlined style={{color: '#000', fontSize: 20}} />
+            )}
+          </Button>
+
+          <div style={{display: 'flex', flex: 1}}>
+            <SearchInput
+              placeholder="Search for anything"
+              prefix={
+                <SearchOutlined style={{color: '#635FFA', fontSize: 18}} />
+              }
+            />
+          </div>
+          <BellOutlined
+            style={{
+              fontSize: 18,
+              marginTop: 15,
+              marginRight: 10,
+              color: '#635FFA',
+            }}
+          />
+          <Avatar size={50} icon={<UserOutlined />} />
+        </Row>
+      </HeaderStyled>
+
       <Layout>
-        <Sider width={200} collapsed={true}>
+        <Sider width={200} collapsed={collapsed}>
           <Menu
             mode="inline"
             defaultOpenKeys={['sub1']}

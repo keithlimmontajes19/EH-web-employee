@@ -12,9 +12,9 @@
 .ant-menu-vertical-left .ant-menu-item::after,
 .ant-menu-vertical-right .ant-menu-item::after,
 .ant-menu-inline .ant-menu-item::after {
-  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
+  position: absolute;
   border-right: 0px solid #1890ff;
 }

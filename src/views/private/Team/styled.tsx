@@ -7,11 +7,12 @@ export const Container = styled.div`
 `;
 
 export const CardStyled = styled.div`
-  width: 547px;
+  width: 600px;
   height: 452px;
   padding: 24px;
   background: #e0dffe;
   border-radius: 25px;
+  margin-right: 42px;
   box-shadow: 0px 5px 20px -5px rgba(43, 46, 74, 0.2);
 `;
 
@@ -29,10 +30,11 @@ export const LabelStyled = styled.span`
 `;
 
 export const CardFolders = styled.div`
-  width: 547px;
+  width: 600px;
   min-height: 452px;
-  margin-top: 42px;
-  margin-right: 42px;
+  max-height: 452px;
+  margin-bottom: 42px;
+  margin-right: 43px;
   background: #fff;
   border-radius: 25px;
   box-shadow: 0px 5px 20px -5px rgba(43, 46, 74, 0.2);
@@ -70,7 +72,6 @@ export const FolderContainer = styled.div`
   width: 105px;
   bottom: 25.1%;
   background: #ffffff;
-  box-shadow: 0px 4px 8px rgba(10, 130, 0, 0.05);
   border-radius: 15px;
   margin-top: 32px;
   margin-left: 25px;
@@ -79,4 +80,15 @@ export const FolderContainer = styled.div`
   align-content: center;
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 5px 20px rgba(43, 46, 74, 0.2);
+`;
+
+export const MainContainer = styled.div`
+  background: #ffffff;
+  box-shadow: 0px 5px 20px rgba(43, 46, 74, 0.2);
+  height: 105px;
+  width: 105px;
+  border-radius: 15px;
+  margin-left: 25px;
+  margin-top: 25px;
 `;
