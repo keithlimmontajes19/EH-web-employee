@@ -64,9 +64,8 @@ export const RenderContainer = styled.div`
 
 export const StyledButton = styled(Button)`
   position: absolute;
-  left: 84.86%;
-  right: 4.93%;
-  top: 85.92%;
+  right: 3%;
+  top: 83%;
   bottom: 4.39%;
   border-radius: 8px;
   min-width: 147px;

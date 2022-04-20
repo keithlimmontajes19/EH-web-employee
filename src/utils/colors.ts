@@ -14,4 +14,6 @@ export const theme = {
   IMAGE_TEXT: '#6E6B7B',
   SUB_LAYOUT: '#FAFAFF',
   LINK_TEXT: '#635FFA',
+  LIGHT_GRAY: '#A9AEB2',
+  SEMI_BLACK: '#757789',
 };

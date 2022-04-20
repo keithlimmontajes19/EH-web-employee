@@ -8,7 +8,7 @@ import './style.css';
 
 const VideoComponent = (props: PropsType): ReactElement => {
   return (
-    <Player src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" height={0}>
+    <Player src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4">
       <BigPlayButton position="center" />
     </Player>
   );

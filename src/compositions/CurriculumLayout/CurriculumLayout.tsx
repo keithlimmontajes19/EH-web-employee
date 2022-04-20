@@ -1,20 +1,34 @@
-import {ReactElement} from 'react';
+import {ReactElement, Fragment} from 'react';
 import type {PropsType} from './types';
 
-import {SubContainer, TitleStyled, StyledStart, StyledWhite} from './styled';
+import {
+  Container,
+  TitleStyled,
+  StyledStart,
+  StyledWhite,
+  SubContainer,
+} from './styled';
 import RenderHtml from 'components/RenderHtml';
 
-const CurriculumLayout = ({data}: PropsType): ReactElement => {
+const CurriculumLayout = ({data, type, onClick}: PropsType): ReactElement => {
   return (
-    <>
+    <Fragment>
       <SubContainer>
         <TitleStyled>{data?.title}</TitleStyled>
         {data?.body && <RenderHtml source={data?.body} />}
       </SubContainer>
 
-      <StyledWhite>Next Lesson</StyledWhite>
-      <StyledStart>Start Quiz</StyledStart>
-    </>
+      <Container>
+        {type === 'quiz' ? (
+          <Fragment>
+            <StyledWhite>Next</StyledWhite>
+            <StyledStart onClick={onClick}>Start Quiz</StyledStart>
+          </Fragment>
+        ) : (
+          <StyledStart>Next</StyledStart>
+        )}
+      </Container>
+    </Fragment>
   );
 };
 

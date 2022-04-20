@@ -19,6 +19,7 @@ export const StyledInput: any = styled<any>(Input)`
   margin-top: 20px;
   height: 50px;
   width: 404.29px;
+  padding: 15px;
 `;
 
 export const StyledPassword = styled(Input.Password)`
@@ -27,6 +28,7 @@ export const StyledPassword = styled(Input.Password)`
   border-radius: 550px;
   height: 50px;
   width: 404.29px;
+  padding: 15px;
 `;
 
 export const StyledButton = styled(Button)`

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import {Button} from 'antd';
 
-export const Container = styled.div``;
 export const SubContainer = styled.div`
   margin-top: 35px;
   margin-left: 40px;
@@ -17,11 +16,6 @@ export const TitleStyled = styled.p`
 `;
 
 export const StyledStart = styled(Button)`
-  position: absolute;
-  left: 84.86%;
-  right: 4.93%;
-  top: 80.92%;
-  bottom: 4.39%;
   border-radius: 8px;
   min-width: 147px;
   height: 48px;
@@ -31,11 +25,6 @@ export const StyledStart = styled(Button)`
 `;
 
 export const StyledWhite = styled(Button)`
-  position: absolute;
-  left: 72%;
-  right: 4.93%;
-  top: 80.92%;
-  bottom: 4.39%;
   border-radius: 8px;
   min-width: 147px;
   height: 48px;
@@ -43,4 +32,13 @@ export const StyledWhite = styled(Button)`
   font-weight: bold;
   background: #fff;
   border: none;
+`;
+
+export const Container = styled.div`
+  position: absolute;
+  right: 3%;
+  top: 80.92%;
+  bottom: 4.39%;
+  display: flex;
+  flex-direction: row;
 `;

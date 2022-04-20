@@ -8,11 +8,12 @@ import {getContents, getLessonsDetail} from 'ducks/lms/actionCreator';
 
 /* conponents */
 import Loading from 'components/Loading';
+import QuizStepper from 'compositions/QuizStepper';
 import TextComponent from 'compositions/TextComponent';
 import ImageComponent from 'compositions/ImageComponent';
 import VideoComponent from 'compositions/VideoComponent';
-import IntroductionComponent from 'compositions/IntroductionComponent';
 import CurriculumLayout from 'compositions/CurriculumLayout';
+import IntroductionComponent from 'compositions/IntroductionComponent';
 
 const ContentCurriculum = (): ReactElement => {
   const dispatch = useDispatch();
@@ -41,8 +42,12 @@ const ContentCurriculum = (): ReactElement => {
     }
   };
 
-  const body = (data) => {
-    return <CurriculumLayout data={data} />;
+  const body = (data, type) => {
+    if (type === 'quiz') {
+      return <QuizStepper data={data} />;
+    } else {
+      return <CurriculumLayout data={data} type={type} />;
+    }
   };
 
   const render = () => {
@@ -51,20 +56,22 @@ const ContentCurriculum = (): ReactElement => {
     } else if (!topicId && lessonId) {
       const data = contents?.data;
       const previewType = contents?.data?.preview?.type;
+
       return (
         <Fragment>
           {header(previewType, data)}
-          {body(data)}
+          {body(data, null)}
         </Fragment>
       );
     } else {
       const data = lessonDetails?.data;
       const type = lessonDetails?.data?.contentType;
       const previewType = lessonDetails?.data?.preview?.type;
+
       return (
         <Fragment>
           {header(previewType, data)}
-          {body(data)}
+          {body(data, type)}
         </Fragment>
       );
     }

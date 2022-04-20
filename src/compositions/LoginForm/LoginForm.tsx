@@ -2,7 +2,6 @@ import {ReactElement, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
 /* styles antd */
-import {Form} from 'antd';
 import {
   FlexRow,
   Container,
@@ -10,11 +9,12 @@ import {
   LabelStyled,
   TitleStyled,
   StyledButton,
+  InputContaier,
   StyledTextlink,
   StyledPassword,
   SignupContainer,
-  InputContaier,
 } from './styled';
+import {Form, Modal, Spin} from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
 
 /* redux actions helpers */
@@ -29,7 +29,9 @@ import IconImage from 'components/IconImage';
 const LoginForm = (): ReactElement => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const {data}: any = useSelector<RootState>((state) => state.authentication);
+  const {data, loading}: any = useSelector<RootState>(
+    (state) => state.authentication,
+  );
 
   const handlesubmit = (values: never) => {
     dispatch(postLogin(values));
@@ -95,7 +97,10 @@ const LoginForm = (): ReactElement => {
           />
         </Form.Item>
 
-        <StyledButton size="large" onClick={() => form.submit()}>
+        <StyledButton
+          size="large"
+          onClick={() => form.submit()}
+          loading={loading}>
           Sign In
         </StyledButton>
 
