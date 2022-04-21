@@ -1,5 +1,4 @@
 import {ReactElement, useEffect} from 'react';
-import type {PropsType} from './types';
 
 import {
   FlexWrap,
@@ -9,29 +8,22 @@ import {
   CardFolders,
   TitleHeader,
   TitleLabel,
-  FolderContainer,
-  MainContainer,
 } from './styled';
-
-import {EllipsisOutlined} from '@ant-design/icons';
-
-import IconImage from 'components/IconImage';
-import ANNOUNCEMENT from 'assets/icons/announcement.png';
-import PAGE from 'assets/icons/page.png';
-import QUIZ from 'assets/icons/quiz.png';
-import FOLDER from 'assets/icons/folder.png';
 
 /* reducer action */
 import {RootState} from 'ducks/store';
+import {EllipsisOutlined} from '@ant-design/icons';
 import {useSelector, useDispatch} from 'react-redux';
 import {getDashboard} from 'ducks/dashboard/actionCreator';
 import {getAnnouncements} from 'ducks/announcement/actionCreator';
-import Label from 'components/Label';
+
 import Loading from 'components/Loading';
+import IconImage from 'components/IconImage';
+import PagesDetail from 'compositions/PagesDetail';
+import FolderDetail from 'compositions/FolderDetail';
+import ANNOUNCEMENT from 'assets/icons/announcement.png';
 
-import {Row, Col} from 'antd';
-
-const Team = (props: PropsType): ReactElement => {
+const Team = (): ReactElement => {
   const dispatch = useDispatch();
   const {data, loading}: any = useSelector<RootState>(
     (state) => state.dashboard,
@@ -53,9 +45,6 @@ const Team = (props: PropsType): ReactElement => {
         </CardStyled>
 
         {(data || []).map((item) => {
-          {
-            /* (item?.boards || []) */
-          }
           return (item?.boards || []).map((board: any) => {
             return (
               <CardFolders>
@@ -63,7 +52,6 @@ const Team = (props: PropsType): ReactElement => {
                   <TitleLabel>{board?.board_name}</TitleLabel>
                   <EllipsisOutlined style={{fontSize: 35}} />
                 </TitleHeader>
-
                 <div
                   style={{
                     minHeight: 360,
@@ -72,82 +60,11 @@ const Team = (props: PropsType): ReactElement => {
                     scrollbarWidth: 'none',
                   }}>
                   <FlexWrap>
-                    {(board?.board_items || []).map((folder) => {
-                      if (folder?.item_type === 'page') {
-                        // (folder?.item_pages || [])
-                        return (folder?.item_pages || []).map((page: any) => {
-                          return (
-                            <Row>
-                              <Col span={20}>
-                                <div
-                                  style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'center',
-                                  }}>
-                                  <MainContainer>
-                                    <div
-                                      style={{
-                                        marginLeft: '35%',
-                                        marginRight: '50%',
-                                        marginTop: '30%',
-                                        justifyContent: 'center',
-                                      }}>
-                                      <IconImage
-                                        source={PAGE}
-                                        height={41}
-                                        width={33}
-                                      />
-                                    </div>
-                                  </MainContainer>
-                                  <p
-                                    style={{
-                                      textAlign: 'center',
-                                      marginLeft: 30,
-                                    }}>
-                                    {page?.title}
-                                  </p>
-                                </div>
-                              </Col>
-                            </Row>
-                          );
-                        });
+                    {(board?.board_items || []).map((x) => {
+                      if (x?.item_type === 'page') {
+                        return <PagesDetail data={x?.item_pages} />;
                       } else {
-                        return (
-                          <Row>
-                            <Col span={20}>
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  flexDirection: 'column',
-                                  justifyContent: 'center',
-                                }}>
-                                <MainContainer>
-                                  <div
-                                    style={{
-                                      marginLeft: '35%',
-                                      marginRight: '50%',
-                                      marginTop: '30%',
-                                      justifyContent: 'center',
-                                    }}>
-                                    <IconImage
-                                      source={FOLDER}
-                                      height={41}
-                                      width={33}
-                                    />
-                                  </div>
-                                </MainContainer>
-                                <p
-                                  style={{
-                                    textAlign: 'center',
-                                    marginLeft: 30,
-                                  }}>
-                                  {folder?.title}
-                                </p>
-                              </div>
-                            </Col>
-                          </Row>
-                        );
+                        return <FolderDetail item={x} />;
                       }
                     })}
                   </FlexWrap>

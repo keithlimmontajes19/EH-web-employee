@@ -45,7 +45,11 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   async (requestConfig) => requestConfig,
   async function (error) {
-    if (error?.response?.status === 401) {
+    if (
+      error?.response?.status === 401 &&
+      error?.response?.config &&
+      !error?.response?.config.__isRetryRequest
+    ) {
       store.dispatch({type: 'GET_AUTHENTICATION_FAILED'});
       store.dispatch(
         openNotification({

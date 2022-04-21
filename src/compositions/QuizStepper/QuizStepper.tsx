@@ -68,7 +68,7 @@ const QuizStepper = ({data}: PropsType): ReactElement => {
               </Button>
             </Col>
           ) : (
-            <Col offset={17} style={{marginTop: 49}}>
+            <Col offset={15} style={{marginTop: 49}}>
               <Button
                 style={ButtonBackStyles}
                 onClick={() => setActive(active - 1)}>

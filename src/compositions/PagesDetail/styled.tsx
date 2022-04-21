@@ -13,7 +13,6 @@ export const CardStyled = styled.div`
   background: #e0dffe;
   border-radius: 25px;
   margin-right: 42px;
-  margin-bottom: 42px;
   box-shadow: 0px 5px 20px -5px rgba(43, 46, 74, 0.2);
 `;
 
@@ -38,7 +37,6 @@ export const CardFolders = styled.div`
   margin-right: 43px;
   background: #fff;
   border-radius: 25px;
-  padding: 27;
   box-shadow: 0px 5px 20px -5px rgba(43, 46, 74, 0.2);
 `;
 
@@ -47,7 +45,6 @@ export const FlexWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  padding: 27;
 `;
 
 export const TitleHeader = styled.div`
