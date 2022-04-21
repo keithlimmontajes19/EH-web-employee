@@ -25,6 +25,10 @@ import USER_LOGO from 'assets/images/user-icon.png';
 import LEFT_ARROW from 'assets/icons/left-icon.png';
 import RIGHT_ARROW from 'assets/icons/right-icon.png';
 
+/* recuer action */
+import {RootState} from 'ducks/store';
+import {useSelector} from 'react-redux';
+
 const LeftArrow = () => {
   const {scrollPrev} = React.useContext(VisibilityContext);
   return (
@@ -113,7 +117,8 @@ const Card = ({item, itemId, onClick}) => {
   );
 };
 
-const MainCourseList = (props: any) => {
+const MainCourseList = () => {
+  const {myCourses}: any = useSelector<RootState>((state) => state.lms);
   const [selected, setSelected] = React.useState([]);
 
   const isItemSelected = (id) => !!selected.find((el) => el === id);
@@ -129,14 +134,14 @@ const MainCourseList = (props: any) => {
 
   return (
     <ScrollMenu
-      LeftArrow={() => (props?.items.length ? LeftArrow() : <></>)}
-      RightArrow={() => (props?.items.length ? RightArrow() : <></>)}
+      LeftArrow={() => (myCourses?.length ? LeftArrow() : <></>)}
+      RightArrow={() => (myCourses?.length ? RightArrow() : <></>)}
       options={{
         ratio: 0.9,
         rootMargin: '5px',
         threshold: [0.01, 0.05, 0.5, 0.75, 0.95, 1],
       }}>
-      {props?.items.map((item) => (
+      {(myCourses || []).map((item) => (
         <Card
           item={item}
           key={item?._id}
