@@ -53,9 +53,28 @@ export function* getPageDetails({payload}: any): any {
   });
 }
 
+export function* getOneQuiz({payload}: any): any {
+  try {
+    const response = yield call(team_service.getOneQuiz, payload);
+    yield put({
+      type: TYPES.GET_ONE_QUIZ_SURVEY_SUCCESS,
+      payload: response?.data,
+    });
+
+    return Promise.resolve(response);
+  } catch (error) {
+    yield put({
+      type: TYPES.GET_ONE_QUIZ_SURVEY_FAILED,
+    });
+
+    return Promise.reject(error);
+  }
+}
+
 export default function* watcher() {
-  yield takeLatest(TYPES.LIST_FOLDERS_REQUEST, listFolders);
   yield takeLatest(TYPES.LIST_PAGES_REQUEST, listPages);
+  yield takeLatest(TYPES.LIST_FOLDERS_REQUEST, listFolders);
   yield takeLatest(TYPES.GET_ONE_FOLDER_REQUEST, getOneFolder);
+  yield takeLatest(TYPES.GET_ONE_QUIZ_SURVEY_REQUEST, getOneQuiz);
   yield takeLatest(TYPES.GET_PAGE_DETAILS_REQUEST, getPageDetails);
 }

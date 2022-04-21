@@ -47,7 +47,7 @@ const Team = (): ReactElement => {
         {(data || []).map((item) => {
           return (item?.boards || []).map((board: any) => {
             return (
-              <CardFolders>
+              <CardFolders key={board?._id}>
                 <TitleHeader>
                   <TitleLabel>{board?.board_name}</TitleLabel>
                   <EllipsisOutlined style={{fontSize: 35}} />

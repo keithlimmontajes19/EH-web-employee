@@ -80,10 +80,14 @@ const MainLayout = (): ReactElement => {
         <Sider width={200} collapsed={collapsed}>
           <Menu
             mode="inline"
-            defaultOpenKeys={['sub1']}
             defaultSelectedKeys={['1']}
             onSelect={(e: any) => setSelected(e?.key)}
-            style={{height: '100%', borderRight: 0}}>
+            style={{
+              borderRight: 0,
+              height: '100%',
+              background: '#fdfdfd',
+              boxShadow: '0px 0px 5px 3px rgba(43, 46, 74, 0.2);',
+            }}>
             <Menu.Item
               key="1"
               style={{marginTop: 48}}

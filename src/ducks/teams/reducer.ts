@@ -1,4 +1,4 @@
-import { TYPES } from './actionTypes';
+import {TYPES} from './actionTypes';
 
 const INITIAL_STATE = {
   folder: {
@@ -170,8 +170,73 @@ const reducer = (state = INITIAL_STATE, action) => {
         },
       };
 
+    /**
+     * QUIZ SURVEY
+     * POST
+     *  */
+    case TYPES.POST_QUIZ_SURVEY_REQUEST:
+      return {
+        ...state,
+        submitQuiz: {
+          loading: true,
+          modalShow: false,
+        },
+      };
+
+    case TYPES.POST_QUIZ_SURVEY_SUCCESS:
+      return {
+        ...state,
+        submitQuiz: {
+          loading: false,
+          modalShow: true,
+        },
+      };
+
+    case TYPES.POST_QUIZ_SURVEY_FAILED:
+      return {
+        ...state,
+        submitQuiz: {
+          loading: false,
+          modalShow: false,
+        },
+      };
+
+    /**
+     * QUIZ SURVEY
+     * GET
+     *  */
+    case TYPES.GET_ONE_QUIZ_SURVEY_REQUEST:
+      return {
+        ...state,
+        getOneQuiz: {
+          data: {},
+          loading: true,
+          error: false,
+        },
+      };
+
+    case TYPES.GET_ONE_QUIZ_SURVEY_SUCCESS:
+      return {
+        ...state,
+        getOneQuiz: {
+          data: action.payload,
+          loading: false,
+          error: false,
+        },
+      };
+
+    case TYPES.GET_ONE_QUIZ_SURVEY_FAILED:
+      return {
+        ...state,
+        getOneQuiz: {
+          data: {},
+          loading: false,
+          error: false,
+        },
+      };
+
     default:
-      return { ...state };
+      return {...state};
   }
 };
 
