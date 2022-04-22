@@ -2,7 +2,6 @@ import {ReactElement, useState} from 'react';
 
 /* styles and ant design */
 import {
-  BellOutlined,
   UserOutlined,
   TeamOutlined,
   HomeOutlined,
@@ -14,11 +13,25 @@ import {
 
 import {theme} from 'utils/colors';
 import {useHistory} from 'react-router-dom';
-import {Layout, Menu, Button, Row, Avatar, Col} from 'antd';
-import {HeaderStyled, StyledLayout, LayoutStyles, SearchInput} from './styled';
+import {Layout, Menu, Button, Avatar, Badge} from 'antd';
+import {
+  MenuStyles,
+  SearchInput,
+  HeaderStyled,
+  StyledLayout,
+  LayoutStyles,
+  ButtonStyles,
+  SearchStyles,
+  BellContainer,
+  CollapsedIcons,
+  AvatarContainer,
+  SearchContainer,
+} from './styled';
 
 /* components */
+import ICON_BELL from 'assets/icons/bell-blue.png';
 import NavigationContent from 'navigations/privateRoute';
+import IconImage from 'components/IconImage';
 
 const {Sider, Content} = Layout;
 
@@ -40,54 +53,39 @@ const MainLayout = (): ReactElement => {
   return (
     <StyledLayout>
       <HeaderStyled>
-        <Row style={{marginTop: 10}}>
-          <Button
-            style={{
-              border: 'none',
-              background: '#efeffe',
-              marginLeft: -35,
-              marginTop: 10,
-            }}
-            onClick={toggleCollapsed}>
-            {collapsed ? (
-              <MenuUnfoldOutlined style={{color: '#000', fontSize: 20}} />
-            ) : (
-              <MenuFoldOutlined style={{color: '#000', fontSize: 20}} />
-            )}
-          </Button>
+        <Button style={ButtonStyles} onClick={toggleCollapsed}>
+          {collapsed ? (
+            <MenuUnfoldOutlined style={CollapsedIcons} />
+          ) : (
+            <MenuFoldOutlined style={CollapsedIcons} />
+          )}
+        </Button>
 
-          <div style={{display: 'flex', flex: 1}}>
-            <SearchInput
-              placeholder="Search for anything"
-              prefix={
-                <SearchOutlined style={{color: '#635FFA', fontSize: 18}} />
-              }
-            />
-          </div>
-          <BellOutlined
-            style={{
-              fontSize: 18,
-              marginTop: 15,
-              marginRight: 10,
-              color: '#635FFA',
-            }}
+        <SearchContainer>
+          <SearchInput
+            placeholder="Search for anything"
+            prefix={<SearchOutlined style={SearchStyles} />}
           />
+        </SearchContainer>
+
+        <BellContainer>
+          <Badge dot={true}>
+            <IconImage width={19} height={22} source={ICON_BELL} />
+          </Badge>
+        </BellContainer>
+
+        <AvatarContainer>
           <Avatar size={50} icon={<UserOutlined />} />
-        </Row>
+        </AvatarContainer>
       </HeaderStyled>
 
       <Layout>
         <Sider width={200} collapsed={collapsed}>
           <Menu
             mode="inline"
+            style={MenuStyles}
             defaultSelectedKeys={['1']}
-            onSelect={(e: any) => setSelected(e?.key)}
-            style={{
-              borderRight: 0,
-              height: '100%',
-              background: '#fdfdfd',
-              boxShadow: '0px 0px 5px 3px rgba(43, 46, 74, 0.2);',
-            }}>
+            onSelect={(e: any) => setSelected(e?.key)}>
             <Menu.Item
               key="1"
               style={{marginTop: 48}}

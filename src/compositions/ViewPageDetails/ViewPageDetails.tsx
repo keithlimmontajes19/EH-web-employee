@@ -31,6 +31,21 @@ const ViewPageDetails = (): ReactElement => {
     page_details: {data},
   }: any = useSelector<RootState>((state) => state.team);
 
+  const quizzes = () => {
+    return (data?.items || []).map((quiz) => {
+      // switch (quiz?.quiz_survey_type) {
+      //   case 'survey':
+      //   case 'single_choice':
+      //     return <TeamQuizSingleChoice quiz={quiz} id={data?._id} />;
+      //   case 'multiple_choice':
+      //     return <TeamQuizMultipleChoice quiz={quiz} id={data?._id} />;
+      //   default:
+      //     return <></>;
+      // }
+      return <TeamQuizSingleChoice quiz={quiz} id={data?._id} />;
+    });
+  };
+
   const header = () => {
     if (data?.videoURL) {
       return <ImageComponent data={data} />;
@@ -47,20 +62,6 @@ const ViewPageDetails = (): ReactElement => {
     } else {
       return data?.details && <RenderHtml source={data?.details} />;
     }
-  };
-
-  const quizzes = () => {
-    return (data?.items || []).map((quiz) => {
-      switch (quiz?.quiz_survey_type) {
-        case 'survey':
-        case 'single_choice':
-          return <TeamQuizSingleChoice quiz={quiz} id={data?._id} />;
-        case 'multiple_choice':
-          return <TeamQuizMultipleChoice quiz={quiz} id={data?._id} />;
-        default:
-          return <></>;
-      }
-    });
   };
 
   return (

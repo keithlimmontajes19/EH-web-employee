@@ -1,11 +1,13 @@
 import {ReactElement, useEffect} from 'react';
 
-import {Container} from './styled';
-import {Row, Col} from 'antd';
+import {useDispatch} from 'react-redux';
 
 import {getMyCourses} from 'ducks/lms/actionCreator';
-import {useDispatch} from 'react-redux';
+import {getDashboard} from 'ducks/dashboard/actionCreator';
+import {getLeaderboards} from 'ducks/leaderboard/actionCreator';
 import {getAnnouncements} from 'ducks/announcement/actionCreator';
+
+import {Container, FlexWrap, SubContainer} from './styled';
 
 import Label from 'components/Label';
 import Rewards from 'compositions/Rewards';
@@ -17,28 +19,28 @@ const Home = (): ReactElement => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getMyCourses();
+    dispatch(getMyCourses());
+    dispatch(getDashboard());
     dispatch(getAnnouncements());
+    dispatch(getLeaderboards());
   }, []);
 
   return (
     <Container>
-      <Row gutter={16} style={{padding: 20}}>
-        <Col span={10}>
+      <FlexWrap>
+        <SubContainer>
           <Leaderboard />
           <Label bottom={35} />
           <Announcement />
-        </Col>
-        <Col span={12}>
-          <Rewards />
-        </Col>
-      </Row>
-
+        </SubContainer>
+        <Rewards />
+      </FlexWrap>
       <Label size={25} bold="bold" bottom={20} left={20}>
         Main Courses
       </Label>
-
-      <MainCourseList />
+      <SubContainer>
+        <MainCourseList />
+      </SubContainer>
     </Container>
   );
 };

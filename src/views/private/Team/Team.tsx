@@ -1,4 +1,4 @@
-import {ReactElement, useEffect} from 'react';
+import {ReactElement} from 'react';
 
 import {
   FlexWrap,
@@ -12,10 +12,7 @@ import {
 
 /* reducer action */
 import {RootState} from 'ducks/store';
-import {EllipsisOutlined} from '@ant-design/icons';
-import {useSelector, useDispatch} from 'react-redux';
-import {getDashboard} from 'ducks/dashboard/actionCreator';
-import {getAnnouncements} from 'ducks/announcement/actionCreator';
+import {useSelector} from 'react-redux';
 
 import Loading from 'components/Loading';
 import IconImage from 'components/IconImage';
@@ -24,15 +21,9 @@ import FolderDetail from 'compositions/FolderDetail';
 import ANNOUNCEMENT from 'assets/icons/announcement.png';
 
 const Team = (): ReactElement => {
-  const dispatch = useDispatch();
   const {data, loading}: any = useSelector<RootState>(
     (state) => state.dashboard,
   );
-
-  useEffect(() => {
-    dispatch(getDashboard());
-    dispatch(getAnnouncements());
-  }, []);
 
   const content = () => {
     return (
@@ -50,7 +41,6 @@ const Team = (): ReactElement => {
               <CardFolders key={board?._id}>
                 <TitleHeader>
                   <TitleLabel>{board?.board_name}</TitleLabel>
-                  <EllipsisOutlined style={{fontSize: 35}} />
                 </TitleHeader>
                 <div
                   style={{

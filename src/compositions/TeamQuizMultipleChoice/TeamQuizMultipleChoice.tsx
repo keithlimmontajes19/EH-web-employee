@@ -30,9 +30,7 @@ const TeamQuizMultipleChoice = ({item, quiz, id}: PropsType): ReactElement => {
   // }, [submitQuiz]);
 
   // const submitQuiz: any = useSelector<any>((state) => state.team.submitQuiz);
-  const {data, loading}: any = useSelector<any>(
-    (state) => state.team.getOneQuiz,
-  );
+  const {states, loading}: any = useSelector<any>((state) => state.team);
 
   const checkIfArrayExist = (name: any) => {
     return selected.includes(name);
@@ -92,7 +90,9 @@ const TeamQuizMultipleChoice = ({item, quiz, id}: PropsType): ReactElement => {
         );
       })}
 
-      <StyledStart disabled={data ? true : false}>Submit</StyledStart>
+      <StyledStart disabled={states?.getOneQuiz?.data ? true : false}>
+        Submit
+      </StyledStart>
     </>
   );
 };

@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import {theme} from 'utils/colors';
 import {Layout, Input} from 'antd';
 
-const {Header} = Layout;
-
 export const Container = styled.div``;
 export const Logostyles = {
   width: 150,
@@ -19,10 +17,13 @@ export const LogoContainer = {
 export const MainLayoutStyles = {minHeight: '100vh'};
 export const Siderstyles = {background: theme.WHITE};
 
-export const HeaderStyled = styled(Header)`
-  background: #efeffe;
+export const HeaderStyled = styled.div`
+  flex: 1;
+  display: flex;
+  padding: 10px;
+  min-height: 50px;
   border-radius: 0px;
-  min-height: 70px;
+  background: #efeffe;
   box-shadow: 0px 4px 5px 1px rgba(99, 95, 250, 0.15);
 `;
 
@@ -62,3 +63,33 @@ export const SearchInput = styled(Input)`
   border-radius: 16px;
   margin-left: 160px;
 `;
+
+export const ButtonStyles = {
+  marginTop: 5,
+  border: 'none',
+  background: '#efeffe',
+};
+
+export const CollapsedIcons = {color: '#000', fontSize: 20};
+export const SearchStyles = {color: theme.LINK_TEXT, fontSize: 18};
+
+export const SearchContainer = styled.div`
+  flex: 1;
+  display: flex;
+`;
+
+export const BellContainer = styled.div`
+  margin: 10px;
+  margin-right: 35px;
+`;
+
+export const AvatarContainer = styled.div`
+  margin-right: 35px;
+`;
+
+export const MenuStyles = {
+  borderRight: 0,
+  height: '100%',
+  background: '#fdfdfd',
+  boxShadow: '0px 0px 5px 3px rgba(43, 46, 74, 0.2);',
+};

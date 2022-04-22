@@ -2,6 +2,11 @@ import React, {Fragment} from 'react';
 import type {PropsType} from './types';
 import {useHistory} from 'react-router-dom';
 
+import {
+  NameStyled,
+  NameContainer,
+  FolderContainer,
+} from 'compositions/FolderDetail/styled';
 import {Row, Col} from 'antd';
 import {MainContainer} from './styled';
 
@@ -29,18 +34,12 @@ const PagesDetail = ({data}: PropsType): any => {
                   history.push('/team/detail');
                 }}
                 style={{
+                  width: 120,
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'center',
                 }}>
                 <MainContainer>
-                  <div
-                    style={{
-                      marginLeft: '35%',
-                      marginRight: '50%',
-                      marginTop: '30%',
-                      justifyContent: 'center',
-                    }}>
+                  <div style={FolderContainer}>
                     <IconImage
                       width={33}
                       height={41}
@@ -48,13 +47,10 @@ const PagesDetail = ({data}: PropsType): any => {
                     />
                   </div>
                 </MainContainer>
-                <p
-                  style={{
-                    textAlign: 'center',
-                    marginLeft: 30,
-                  }}>
-                  {item?.title}
-                </p>
+
+                <div style={NameContainer}>
+                  <NameStyled>{item?.title}</NameStyled>
+                </div>
               </div>
             </Col>
           </Row>

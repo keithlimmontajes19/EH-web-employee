@@ -12,13 +12,13 @@ import LoginForm from 'compositions/LoginForm';
 
 const Login = (): ReactElement => {
   return (
-    <Row gutter={24} style={RowContainer}>
+    <div style={RowContainer}>
       <SubLogoContainer>
         <FormContainer>
           <LoginForm />
         </FormContainer>
       </SubLogoContainer>
-    </Row>
+    </div>
   );
 };
 

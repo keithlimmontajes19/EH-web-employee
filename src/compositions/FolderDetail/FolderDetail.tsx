@@ -2,7 +2,14 @@ import {ReactElement, useState} from 'react';
 import type {PropsType} from './types';
 
 import {Row, Col} from 'antd';
-import {MainContainer, TextStyled, TextContainer} from './styled';
+import {
+  TextStyled,
+  NameStyled,
+  MainContainer,
+  TextContainer,
+  NameContainer,
+  FolderContainer,
+} from './styled';
 
 import IconImage from 'components/IconImage';
 import FOLDER from 'assets/icons/folder-icon.png';
@@ -17,28 +24,19 @@ const FolderDetail = ({item}: PropsType): ReactElement => {
         <Col span={20}>
           <div
             style={{
+              width: 120,
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center',
             }}>
             <MainContainer>
-              <div
-                style={{
-                  marginLeft: '35%',
-                  marginRight: '50%',
-                  marginTop: '30%',
-                  justifyContent: 'center',
-                }}>
-                <IconImage source={FOLDER} height={33} width={33} />
+              <div style={FolderContainer}>
+                <IconImage source={FOLDER} height={33} width={41} />
               </div>
             </MainContainer>
-            <span
-              style={{
-                textAlign: 'center',
-                marginLeft: 40,
-              }}>
-              {item?.item_name}
-            </span>
+
+            <div style={NameContainer}>
+              <NameStyled>{item?.item_name}</NameStyled>
+            </div>
           </div>
         </Col>
       </Row>

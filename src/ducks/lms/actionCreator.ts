@@ -1,10 +1,8 @@
 import {TYPES} from './actionTypes';
-import {store} from 'ducks/store';
 
-export const getMyCourses = () =>
-  store.dispatch({
-    type: TYPES.GET_COURSES_LIST_REQUEST,
-  });
+export const getMyCourses = () => ({
+  type: TYPES.GET_COURSES_LIST_REQUEST,
+});
 
 export const getCurriculum = (payload) => ({
   type: TYPES.GET_COURSES_CURICULUM_REQUEST,

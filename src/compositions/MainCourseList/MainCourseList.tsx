@@ -118,7 +118,7 @@ const Card = ({item, itemId, onClick}) => {
 };
 
 const MainCourseList = () => {
-  const {myCourses}: any = useSelector<RootState>((state) => state.lms);
+  const {data}: any = useSelector<RootState>((state) => state.lms);
   const [selected, setSelected] = React.useState([]);
 
   const isItemSelected = (id) => !!selected.find((el) => el === id);
@@ -134,14 +134,14 @@ const MainCourseList = () => {
 
   return (
     <ScrollMenu
-      LeftArrow={() => (myCourses?.length ? LeftArrow() : <></>)}
-      RightArrow={() => (myCourses?.length ? RightArrow() : <></>)}
+      LeftArrow={() => (data?.length ? LeftArrow() : <></>)}
+      RightArrow={() => (data?.length ? RightArrow() : <></>)}
       options={{
         ratio: 0.9,
         rootMargin: '5px',
         threshold: [0.01, 0.05, 0.5, 0.75, 0.95, 1],
       }}>
-      {(myCourses || []).map((item) => (
+      {(data || []).map((item) => (
         <Card
           item={item}
           key={item?._id}

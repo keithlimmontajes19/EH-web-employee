@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {theme} from 'utils/colors';
 
 export const Container = styled.div`
   margin-left: 40%;
@@ -12,7 +13,7 @@ export const CardStyled = styled.div`
   padding: 24px;
   background: #e0dffe;
   border-radius: 25px;
-  margin-right: 42px;
+  margin-right: 20px;
   margin-bottom: 42px;
   box-shadow: 0px 5px 20px -5px rgba(43, 46, 74, 0.2);
 `;
@@ -32,22 +33,22 @@ export const LabelStyled = styled.span`
 
 export const CardFolders = styled.div`
   width: 600px;
+  padding: 27;
+  background: ${theme.WHITE};
   min-height: 452px;
   max-height: 452px;
   margin-bottom: 42px;
-  margin-right: 43px;
-  background: #fff;
+  margin-right: 20px;
   border-radius: 25px;
-  padding: 27;
   box-shadow: 0px 5px 20px -5px rgba(43, 46, 74, 0.2);
 `;
 
 export const FlexWrap = styled.div`
   flex: 1;
+  padding: 27;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  padding: 27;
 `;
 
 export const TitleHeader = styled.div`
@@ -74,7 +75,7 @@ export const FolderContainer = styled.div`
   height: 105px;
   width: 105px;
   bottom: 25.1%;
-  background: #ffffff;
+  background: ${theme.WHITE};
   border-radius: 15px;
   margin-top: 32px;
   margin-left: 25px;
@@ -87,7 +88,7 @@ export const FolderContainer = styled.div`
 `;
 
 export const MainContainer = styled.div`
-  background: #ffffff;
+  background: ${theme.WHITE};
   box-shadow: 0px 5px 20px rgba(43, 46, 74, 0.2);
   height: 105px;
   width: 105px;

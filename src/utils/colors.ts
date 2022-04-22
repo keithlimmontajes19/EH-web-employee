@@ -16,4 +16,6 @@ export const theme = {
   LINK_TEXT: '#635FFA',
   LIGHT_GRAY: '#A9AEB2',
   SEMI_BLACK: '#757789',
+  COINS_GREEN: '#edf8fd',
+  MEDAL_PINK: '#f7f1fe',
 };

@@ -14,7 +14,7 @@ import {theme} from 'utils/colors';
 import {useDispatch, useSelector} from 'react-redux';
 import {postQuizAction, getOneQuiz} from 'ducks/teams/actionCreator';
 
-const TeamQuizSingleChoice = ({item, quiz, id}: PropsType): ReactElement => {
+const TeamQuizSingleChoice = ({quiz, id}: PropsType): ReactElement => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState('');
   // const [modal, setModal] = useState(false);
@@ -30,10 +30,7 @@ const TeamQuizSingleChoice = ({item, quiz, id}: PropsType): ReactElement => {
   // }, [submitQuiz]);
 
   // const submitQuiz: any = useSelector<any>((state) => state.team.submitQuiz);
-  const {data, loading}: any = useSelector<any>(
-    (state) => state.team.getOneQuiz,
-  );
-
+  const states: any = useSelector<any>((state) => state.team);
   const renderItem = (value) => {
     return (
       <ChoicesContainer
@@ -61,7 +58,9 @@ const TeamQuizSingleChoice = ({item, quiz, id}: PropsType): ReactElement => {
         );
       })}
 
-      <StyledStart disabled={data ? true : false}>Submit</StyledStart>
+      <StyledStart disabled={states?.getOneQuiz?.dat ? true : false}>
+        Submit
+      </StyledStart>
     </Fragment>
   );
 };
