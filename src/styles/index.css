@@ -18,3 +18,7 @@
   position: absolute;
   border-right: 0px solid #1890ff;
 }
+
+.ant-tooltip-inner span {
+  color: #fff !important;
+}
