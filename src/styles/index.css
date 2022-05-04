@@ -22,3 +22,5 @@
 .ant-tooltip-inner span {
   color: #fff !important;
 }
+
+@import '~gleap/build/index.min.css';

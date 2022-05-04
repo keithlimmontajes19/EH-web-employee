@@ -94,7 +94,7 @@ const MainLayout = (): ReactElement => {
                 <HomeOutlined
                   style={{
                     fontSize: 20,
-                    marginTop: 5,
+                    marginTop: collapsed ? 6 : 0,
                     color: colorCondition('1'),
                   }}
                 />
@@ -117,7 +117,7 @@ const MainLayout = (): ReactElement => {
                 <PlaySquareOutlined
                   style={{
                     fontSize: 20,
-                    marginTop: 5,
+                    marginTop: collapsed ? 6 : 0,
                     color: colorCondition('2'),
                   }}
                 />
@@ -139,7 +139,7 @@ const MainLayout = (): ReactElement => {
                 <TeamOutlined
                   style={{
                     fontSize: 20,
-                    marginTop: 5,
+                    marginTop: collapsed ? 6 : 0,
                     color: colorCondition('3'),
                   }}
                 />
