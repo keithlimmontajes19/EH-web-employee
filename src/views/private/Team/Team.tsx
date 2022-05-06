@@ -20,6 +20,8 @@ import PagesDetail from 'compositions/PagesDetail';
 import FolderDetail from 'compositions/FolderDetail';
 import ANNOUNCEMENT from 'assets/icons/announcement.png';
 
+import Announcement from 'compositions/Announcement';
+
 const Team = (): ReactElement => {
   const {data, loading}: any = useSelector<RootState>(
     (state) => state.dashboard,
@@ -28,12 +30,7 @@ const Team = (): ReactElement => {
   const content = () => {
     return (
       <FlexWrap>
-        <CardStyled>
-          <Container>
-            <IconImage source={ANNOUNCEMENT} height={124} width={124} />
-          </Container>
-          <LabelStyled>No Announcement</LabelStyled>
-        </CardStyled>
+        <Announcement />
 
         {(data || []).map((item) => {
           return (item?.boards || []).map((board: any) => {

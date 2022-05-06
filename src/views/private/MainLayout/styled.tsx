@@ -88,8 +88,8 @@ export const AvatarContainer = styled.div`
 `;
 
 export const MenuStyles = {
-  borderRight: 0,
-  height: '100%',
+  minHeight: '100%',
   background: '#fdfdfd',
+  borderRight: '2px solid #f5f5fd',
   boxShadow: '0px 0px 5px 3px rgba(43, 46, 74, 0.2);',
 };

@@ -41,3 +41,22 @@ export const CardFolders = styled.div`
   padding: 27;
   box-shadow: 0px 5px 20px -5px rgba(43, 46, 74, 0.2);
 `;
+
+export const CarouselContainer = styled.div`
+  width: 600px;
+  max-height: 452px;
+  padding: 30px;
+  background: #e0dffe;
+  border-radius: 25px;
+  margin-right: 42px;
+  margin-bottom: 42px;
+  box-shadow: 0px 5px 20px -5px rgba(43, 46, 74, 0.2);
+`;
+
+export const TextStyled = styled.p`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  color: #635ffa;
+`;

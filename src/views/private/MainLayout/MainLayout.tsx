@@ -53,14 +53,6 @@ const MainLayout = (): ReactElement => {
   return (
     <StyledLayout>
       <HeaderStyled>
-        <Button style={ButtonStyles} onClick={toggleCollapsed}>
-          {collapsed ? (
-            <MenuUnfoldOutlined style={CollapsedIcons} />
-          ) : (
-            <MenuFoldOutlined style={CollapsedIcons} />
-          )}
-        </Button>
-
         <SearchContainer>
           <SearchInput
             placeholder="Search for anything"
@@ -80,7 +72,11 @@ const MainLayout = (): ReactElement => {
       </HeaderStyled>
 
       <Layout>
-        <Sider width={200} collapsed={collapsed}>
+        <Sider
+          width={200}
+          collapsed={collapsed}
+          onMouseOver={() => setCollapsed(false)}
+          onMouseLeave={() => setCollapsed(true)}>
           <Menu
             mode="inline"
             style={MenuStyles}
