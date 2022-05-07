@@ -42,9 +42,9 @@ const Announcement = (props) => {
 
   const textImageVideo = (item) => {
     if (item?.imageURL) {
-      return <ImageComponent />;
+      return <ImageComponent data={item?.imageURL} />;
     } else if (item?.videoURL) {
-      return <VideoComponent />;
+      return <VideoComponent data={item?.videoURL} />;
     } else {
       return <p>{item?.description}</p>;
     }

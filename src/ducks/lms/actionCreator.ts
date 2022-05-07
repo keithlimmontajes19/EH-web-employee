@@ -40,3 +40,13 @@ export const getLessonId = (payload) => ({
   type: TYPES.ID_GET_LESSON_REQUEST,
   payload,
 });
+
+export const postNextProgress = (payload) => ({
+  type: TYPES.POST_NEXT_LESSON_REQUEST,
+  payload,
+});
+
+export const postQuizResults = (payload) => ({
+  type: TYPES.POST_QUIZ_REQUEST,
+  payload,
+});

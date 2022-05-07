@@ -58,5 +58,5 @@ export const TextStyled = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 25px;
-  color: #635ffa;
+  color: #000;
 `;

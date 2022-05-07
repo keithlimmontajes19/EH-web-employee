@@ -15,7 +15,7 @@ import VideoComponent from 'compositions/VideoComponent';
 import CurriculumLayout from 'compositions/CurriculumLayout';
 import IntroductionComponent from 'compositions/IntroductionComponent';
 
-const ContentCurriculum = (): ReactElement => {
+const ContentCurriculum = ({lesson}: any): ReactElement => {
   const dispatch = useDispatch();
 
   const [id, setid] = useState('');
@@ -34,9 +34,9 @@ const ContentCurriculum = (): ReactElement => {
   const header = (type, data) => {
     switch (type) {
       case 'image':
-        return <ImageComponent data={data} />;
+        return <ImageComponent data={data?.preview?.ref} />;
       case 'video':
-        return <VideoComponent data={data} />;
+        return <VideoComponent data={data?.preview?.ref} />;
       default:
         return <TextComponent data={data} />;
     }
@@ -46,7 +46,14 @@ const ContentCurriculum = (): ReactElement => {
     if (type === 'quiz') {
       return <QuizStepper data={data} />;
     } else {
-      return <CurriculumLayout data={data} type={type} />;
+      return (
+        <CurriculumLayout
+          data={data}
+          type={type}
+          lesson={contents}
+          topic={lessonDetails}
+        />
+      );
     }
   };
 

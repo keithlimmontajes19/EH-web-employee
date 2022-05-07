@@ -24,6 +24,10 @@ const INITIAL_STATE = {
   },
   topicId: null,
   lessonId: null,
+  quizResults: {
+    data: {},
+    loading: false,
+  },
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -195,6 +199,36 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         lessonId: action.payload,
+      };
+
+    /**
+     * POST QUIZ RESULTS  REDUCER
+     * */
+    case TYPES.POST_QUIZ_REQUEST:
+      return {
+        ...state,
+        quizResults: {
+          data: {},
+          loading: true,
+        },
+      };
+
+    case TYPES.POST_QUIZ_SUCCESS:
+      return {
+        ...state,
+        quizResults: {
+          data: action.payload,
+          loading: false,
+        },
+      };
+
+    case TYPES.POST_QUIZ_FAILED:
+      return {
+        ...state,
+        quizResults: {
+          data: {},
+          loading: false,
+        },
       };
 
     default:

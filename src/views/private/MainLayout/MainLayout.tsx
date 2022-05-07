@@ -75,8 +75,8 @@ const MainLayout = (): ReactElement => {
         <Sider
           width={200}
           collapsed={collapsed}
-          onMouseOver={() => setCollapsed(false)}
-          onMouseLeave={() => setCollapsed(true)}>
+          //onMouseOver={() => setCollapsed(false)}
+        >
           <Menu
             mode="inline"
             style={MenuStyles}
@@ -149,6 +149,15 @@ const MainLayout = (): ReactElement => {
                 Team
               </span>
             </Menu.Item>
+
+            <div
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                width: '100%',
+                height: '50vh',
+                cursor: 'pointer',
+              }}
+            />
           </Menu>
         </Sider>
 

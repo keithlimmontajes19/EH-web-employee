@@ -12,11 +12,7 @@ const ImageComponent = (props: PropsType): ReactElement => {
       width="100.4%"
       height={316}
       preview={false}
-      // TO DO uncomment code
-      // src={data?.ref ? data?.ref : NO_IMAGE}
-      src={
-        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      }
+      src={data ? data : NO_IMAGE}
     />
   );
 };

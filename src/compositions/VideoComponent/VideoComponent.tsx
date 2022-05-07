@@ -7,8 +7,13 @@ import {Player, BigPlayButton} from 'video-react';
 import './style.css';
 
 const VideoComponent = (props: PropsType): ReactElement => {
+  const {data} = props;
+
   return (
-    <Player src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4">
+    <Player
+      src={data || ''}
+      // src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4">
+    >
       <BigPlayButton position="center" />
     </Player>
   );

@@ -13,8 +13,12 @@ import {Menu} from 'antd';
 import {theme} from 'utils/colors';
 import {CaretRightOutlined} from '@ant-design/icons';
 
+import {
+  getTopicID,
+  getLessonId,
+  postNextProgress,
+} from 'ducks/lms/actionCreator';
 import {useDispatch} from 'react-redux';
-import {getTopicID, getLessonId} from 'ducks/lms/actionCreator';
 
 const {SubMenu} = Menu;
 const SidebarCurriculum = (props: PropsType): ReactElement => {
@@ -27,6 +31,7 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
 
   const {lesson} = props;
   const [selected, setSelected] = useState('1');
+  const [lessonIndex, setLessonIndex] = useState<string | number>(-1);
 
   const colorCondition = (key: string) => {
     return selected === key ? theme.WHITE : theme.BLACK;
@@ -49,9 +54,16 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
       <Menu
         mode="inline"
         defaultSelectedKeys={['1']}
-        style={{background: theme.SUB_LAYOUT}}
+        openKeys={[lessonIndex.toString()]}
         onSelect={(e) => setSelected(e?.key)}
+        style={{background: theme.SUB_LAYOUT}}
         expandIcon={(e) => <CaretRightOutlined rotate={e.isOpen ? 90 : 0} />}>
+        {/**
+         * =================
+         * DEFAULT Sidebar
+         * Introduction Menu
+         * =================
+         */}
         <Menu.Item
           key={'1'}
           onClick={() => {
@@ -63,61 +75,106 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
           <StyledLabel color={colorCondition('1')}>Introduction</StyledLabel>
         </Menu.Item>
 
-        {(lesson.data || []).map((item) => {
-          const stats = item?.stats;
+        {/**
+         * ===============
+         * LESSON Sidebar
+         * Lessons Menu
+         * ===============
+         */}
+        {(lesson?.data || [])
+          .sort((a, b) => a?.position - b?.position)
+          .map((lessonContent, itemIndex) => {
+            const stats = lessonContent?.stats;
 
-          return item?.contents.length > 0 ? (
-            <SubMenu
-              key={item?.title}
-              onTitleClick={() => {
-                setTopicId(null);
-                setLessonId(item?._id);
-                localStorage.setItem('topicId', '');
-                localStorage.setItem('lessonId', item?._id);
-              }}
-              title={
-                <StyledLabel color={colorCondition(item?.title)}>
-                  {item?.title}
-                  <SubLabel color={colorCondition(item?.title)}>
-                    {checkNullUndefined(stats?.lesson, 'Lesson')}
-                    {checkNullUndefined(stats?.topic, 'Topic')}
-                    {checkNullUndefined(stats?.quiz, 'Quiz')}
-                  </SubLabel>
+            return lessonContent?.contents.length > 0 ? (
+              <SubMenu
+                key={itemIndex}
+                onTitleClick={(e) => {
+                  setTopicId(null);
+                  setLessonIndex(e?.key);
+                  setLessonId(lessonContent?._id);
+                  localStorage.setItem('topicId', '');
+                  localStorage.setItem('lessonId', lessonContent?._id);
+                }}
+                title={
+                  <StyledLabel color={colorCondition(lessonContent?.title)}>
+                    {lessonContent?.title}
+                    <SubLabel color={colorCondition(lessonContent?.title)}>
+                      {checkNullUndefined(stats?.lesson, 'Lesson')}
+                      {checkNullUndefined(stats?.topic, 'Topic')}
+                      {checkNullUndefined(stats?.quiz, 'Quiz')}
+                    </SubLabel>
+                  </StyledLabel>
+                }>
+                {/**
+                 * ==================
+                 * TOPIC Sidebar
+                 * Topic Menu
+                 * ==================
+                 */}
+                {(lessonContent?.contents || [])
+                  .sort((a, b) => a?.position - b?.position)
+                  .map((topicContent, topicIndex) => {
+                    const firstIndex = () => {
+                      return (
+                        (lessonIndex === '0' && topicIndex === 0) ||
+                        topicContent?.progress?.started
+                      );
+                    };
+
+                    const updateFirstLesson = () =>
+                      setTimeout(() => {
+                        dispatch(
+                          postNextProgress({
+                            started: true,
+                            completed: false,
+                            details: topicContent?.progress?.details,
+                          }),
+                        );
+                      }, 500);
+
+                    return (
+                      <Menu.Item
+                        style={{
+                          opacity: firstIndex() ? 1 : 0.3,
+                        }}
+                        disabled={firstIndex() ? false : true}
+                        key={topicContent?.title}
+                        onClick={() => {
+                          updateFirstLesson();
+                          setTopicId(topicContent?._id);
+                          setLessonId(lessonContent?._id);
+
+                          localStorage.setItem('lessonId', lessonContent?._id);
+                          localStorage.setItem('topicId', topicContent?._id);
+                        }}>
+                        <MenuLabel color={colorCondition(topicContent?.title)}>
+                          {topicContent?.title}
+                          <MenuSublabel
+                            color={subColorCondition(topicContent?.title)}>
+                            {topicContent?.description}
+                          </MenuSublabel>
+                        </MenuLabel>
+                      </Menu.Item>
+                    );
+                  })}
+              </SubMenu>
+            ) : (
+              <Menu.Item
+                key={itemIndex}
+                onClick={(e) => {
+                  setTopicId(null);
+                  setLessonIndex(e?.key);
+                  setLessonId(lessonContent?._id);
+                  localStorage.setItem('topicId', '');
+                  localStorage.setItem('lessonId', lessonContent?._id);
+                }}>
+                <StyledLabel color={colorCondition(lessonContent?.title)}>
+                  {lessonContent?.title}
                 </StyledLabel>
-              }>
-              {(item?.contents || []).map((value) => (
-                <Menu.Item
-                  key={value?.title}
-                  onClick={() => {
-                    setTopicId(value?._id);
-                    setLessonId(item?._id);
-                    localStorage.setItem('lessonId', item?._id);
-                    localStorage.setItem('topicId', value?._id);
-                  }}>
-                  <MenuLabel color={colorCondition(value?.title)}>
-                    {value?.title}
-                    <MenuSublabel color={subColorCondition(value?.title)}>
-                      {value.description}
-                    </MenuSublabel>
-                  </MenuLabel>
-                </Menu.Item>
-              ))}
-            </SubMenu>
-          ) : (
-            <Menu.Item
-              key={item?.title}
-              onClick={() => {
-                setTopicId(null);
-                setLessonId(item?._id);
-                localStorage.setItem('topicId', '');
-                localStorage.setItem('lessonId', item?._id);
-              }}>
-              <StyledLabel color={colorCondition(item?.title)}>
-                {item?.title}
-              </StyledLabel>
-            </Menu.Item>
-          );
-        })}
+              </Menu.Item>
+            );
+          })}
       </Menu>
     </MenuContainer>
   );

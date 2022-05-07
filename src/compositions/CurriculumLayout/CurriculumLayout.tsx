@@ -10,7 +10,19 @@ import {
 } from './styled';
 import RenderHtml from 'components/RenderHtml';
 
-const CurriculumLayout = ({data, type, onClick}: PropsType): ReactElement => {
+const CurriculumLayout = ({
+  data,
+  type,
+  topic,
+  lesson,
+  onClick,
+}: PropsType): ReactElement => {
+  const lessonLength = (lesson?.data?.contents || []).length;
+  const findIndex = (lesson?.data?.contents || []).findIndex(
+    (x) => x?._id === topic?.data?._id,
+  );
+
+  console.log(lessonLength, findIndex);
   return (
     <Fragment>
       <SubContainer>

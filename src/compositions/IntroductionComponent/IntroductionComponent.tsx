@@ -31,11 +31,7 @@ const IntroductionComponent = ({curriculum}: any): ReactElement => {
         width="100%"
         height={316}
         preview={false}
-        // TO DO uncomment code
-        // src={curriculum?.preview?.ref ? curriculum?.preview?.ref : NO_IMAGE}
-        src={
-          'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-        }
+        src={curriculum?.preview?.ref ? curriculum?.preview?.ref : NO_IMAGE}
       />
       <SubContainer>
         <TitleStyled>{curriculum?.title}</TitleStyled>
@@ -89,7 +85,9 @@ const IntroductionComponent = ({curriculum}: any): ReactElement => {
         </RenderContainer>
       </SubContainer>
 
-      <StyledButton>Start Course</StyledButton>
+      {curriculum?.progress?.status === 'new' && (
+        <StyledButton>Start Course</StyledButton>
+      )}
     </Fragment>
   );
 };

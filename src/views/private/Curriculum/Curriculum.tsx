@@ -26,7 +26,7 @@ const Curriculum = (): ReactElement => {
         <SidebarCurriculum lesson={lesson} />
       </Col>
       <Col span={19} style={{background: '#fff', marginTop: -20}}>
-        <ContentCurriculum />
+        <ContentCurriculum lesson={lesson} />
       </Col>
     </Row>
   );

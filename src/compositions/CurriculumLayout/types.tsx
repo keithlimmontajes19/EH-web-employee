@@ -3,4 +3,6 @@ export type PropsType = {
   data?: any;
   type?: string;
   onClick?: any;
+  lesson?: any;
+  topic?: any;
 };
