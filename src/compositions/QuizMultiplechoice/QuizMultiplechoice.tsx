@@ -1,11 +1,12 @@
-import {ReactElement, useState} from 'react';
+import {ReactElement, useState, useEffect} from 'react';
 import type {PropsType} from './types';
 
 import {theme} from 'utils/colors';
+import {setQuizId} from 'utils/helpers';
 import {FlexWrapContainer, TextContainer} from './styled';
 import {TitleStyled, QuestionStyled} from 'compositions/QuizStepper/styled';
 
-const QuizMultiplechoice = ({item}: PropsType): ReactElement => {
+const QuizMultiplechoice = ({item, submit}: PropsType): ReactElement => {
   const [selected, setSelected] = useState([]);
 
   const checkIfArrayExist = (name: any) => {
@@ -33,6 +34,16 @@ const QuizMultiplechoice = ({item}: PropsType): ReactElement => {
     const type2 = checkIfArrayExist(name) ? theme.WHITE : theme.LINK_TEXT;
     return type === 1 ? type1 : type2;
   };
+
+  useEffect(() => {
+    if (item) {
+      setQuizId(item?._id);
+    }
+  }, []);
+
+  useEffect(() => {
+    submit(selected);
+  }, [selected]);
 
   return (
     <>

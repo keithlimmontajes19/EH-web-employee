@@ -46,7 +46,13 @@ const ContentCurriculum = (props: PropsType): ReactElement => {
 
   const body = (data, type) => {
     if (type === 'quiz') {
-      return <QuizStepper data={data} />;
+      return (
+        <QuizStepper
+          data={data}
+          selected={selected}
+          setSelected={setSelected}
+        />
+      );
     } else {
       return (
         <CurriculumLayout

@@ -53,3 +53,16 @@ export const ButtonBackStyles = {
   border: 'none',
   background: '#635FFA',
 };
+
+export const ProgressContainer = styled.div`
+  width: 471px;
+  min-height: 294px;
+  padding: 27px 48px;
+  background: #fff;
+  border-radius: 25px;
+  margin-top: 150px;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 0px 5px 3px rgba(43, 46, 74, 0.2);
+`;

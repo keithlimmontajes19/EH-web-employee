@@ -1,12 +1,23 @@
-import {Fragment, ReactElement, useState} from 'react';
+import {Fragment, ReactElement, useState, useEffect} from 'react';
 import type {PropsType} from './types';
 
 import {theme} from 'utils/colors';
+import {setQuizId} from 'utils/helpers';
 import {ChoicesContainer} from './styled';
 import {TitleStyled, QuestionStyled} from 'compositions/QuizStepper/styled';
 
-const QuizSingleChoice = ({item}: PropsType): ReactElement => {
+const QuizSingleChoice = ({item, submit}: PropsType): ReactElement => {
   const [selected, setSelected] = useState('');
+
+  useEffect(() => {
+    if (item) {
+      setQuizId(item?._id);
+    }
+  }, []);
+
+  useEffect(() => {
+    submit(selected);
+  }, [selected]);
 
   const renderItem = (value) => {
     return (
