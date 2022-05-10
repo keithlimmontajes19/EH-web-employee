@@ -5,4 +5,8 @@ export type PropsType = {
   onClick?: any;
   lesson?: any;
   topic?: any;
+  selected?: any;
+  setSelected?: any;
+  lessonIndex?: any;
+  setLessonIndex?: any;
 };

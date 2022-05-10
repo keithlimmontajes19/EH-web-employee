@@ -1,4 +1,5 @@
 import {Fragment, ReactElement, useEffect, useState} from 'react';
+import type {PropsType} from './types';
 import {Container} from './styled';
 
 /* reducer action */
@@ -15,9 +16,10 @@ import VideoComponent from 'compositions/VideoComponent';
 import CurriculumLayout from 'compositions/CurriculumLayout';
 import IntroductionComponent from 'compositions/IntroductionComponent';
 
-const ContentCurriculum = ({lesson}: any): ReactElement => {
-  const dispatch = useDispatch();
+const ContentCurriculum = (props: PropsType): ReactElement => {
+  const {selected, setSelected, lessonIndex, setLessonIndex} = props;
 
+  const dispatch = useDispatch();
   const [id, setid] = useState('');
   const {topicId, lessonId, curriculum, contents, lessonDetails}: any =
     useSelector<RootState>((state) => state.lms);
@@ -52,6 +54,10 @@ const ContentCurriculum = ({lesson}: any): ReactElement => {
           type={type}
           lesson={contents}
           topic={lessonDetails}
+          selected={selected}
+          setSelected={setSelected}
+          lessonIndex={lessonIndex}
+          setLessonIndex={setLessonIndex}
         />
       );
     }

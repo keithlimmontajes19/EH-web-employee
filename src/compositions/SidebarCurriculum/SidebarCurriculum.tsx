@@ -1,4 +1,4 @@
-import {ReactElement, useEffect, useState} from 'react';
+import {ReactElement, useEffect} from 'react';
 import type {PropsType} from './types';
 
 import {
@@ -22,6 +22,8 @@ import {useDispatch} from 'react-redux';
 
 const {SubMenu} = Menu;
 const SidebarCurriculum = (props: PropsType): ReactElement => {
+  const {selected, setSelected, lessonIndex, setLessonIndex} = props;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,8 +32,6 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
   }, []);
 
   const {lesson} = props;
-  const [selected, setSelected] = useState('1');
-  const [lessonIndex, setLessonIndex] = useState<string | number>(-1);
 
   const colorCondition = (key: string) => {
     return selected === key ? theme.WHITE : theme.BLACK;
@@ -53,6 +53,7 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
       <TitleStyled>Curriculum</TitleStyled>
       <Menu
         mode="inline"
+        selectedKeys={[selected]}
         defaultSelectedKeys={['1']}
         openKeys={[lessonIndex.toString()]}
         onSelect={(e) => setSelected(e?.key)}
@@ -91,6 +92,7 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
                 key={itemIndex}
                 onTitleClick={(e) => {
                   setTopicId(null);
+                  setSelected(null);
                   setLessonIndex(e?.key);
                   setLessonId(lessonContent?._id);
                   localStorage.setItem('topicId', '');
@@ -135,11 +137,11 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
 
                     return (
                       <Menu.Item
+                        key={topicContent?.title}
+                        disabled={firstIndex() ? false : true}
                         style={{
                           opacity: firstIndex() ? 1 : 0.3,
                         }}
-                        disabled={firstIndex() ? false : true}
-                        key={topicContent?.title}
                         onClick={() => {
                           updateFirstLesson();
                           setTopicId(topicContent?._id);

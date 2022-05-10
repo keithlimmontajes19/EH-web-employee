@@ -1,4 +1,4 @@
-import {ReactElement} from 'react';
+import React from 'react';
 
 import {
   Container,
@@ -15,7 +15,6 @@ import ANNOUNCEMENT from 'assets/icons/announcement.png';
 import {RootState} from 'ducks/store';
 import {useSelector} from 'react-redux';
 
-// requires a loader
 import {
   CarouselProvider,
   Slider,
@@ -23,7 +22,6 @@ import {
   ButtonBack,
   ButtonNext,
 } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import VideoComponent from 'compositions/VideoComponent';
 import ImageComponent from 'compositions/ImageComponent';

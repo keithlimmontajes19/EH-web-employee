@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect} from 'react';
+import React, {ReactElement, useEffect, useState} from 'react';
 import {Row, Col} from 'antd';
 
 /* composition */
@@ -20,13 +20,27 @@ const Curriculum = (): ReactElement => {
 
   const {lesson}: any = useSelector<RootState>((state) => state.lms);
 
+  const [selected, setSelected] = useState('1');
+  const [lessonIndex, setLessonIndex] = useState<string | number>(-1);
+
   const content = (
     <Row>
       <Col span={5} style={{marginTop: -20, marginLeft: -20}}>
-        <SidebarCurriculum lesson={lesson} />
+        <SidebarCurriculum
+          lesson={lesson}
+          selected={selected}
+          setSelected={setSelected}
+          lessonIndex={lessonIndex}
+          setLessonIndex={setLessonIndex}
+        />
       </Col>
       <Col span={19} style={{background: '#fff', marginTop: -20}}>
-        <ContentCurriculum lesson={lesson} />
+        <ContentCurriculum
+          selected={selected}
+          setSelected={setSelected}
+          lessonIndex={lessonIndex}
+          setLessonIndex={setLessonIndex}
+        />
       </Col>
     </Row>
   );

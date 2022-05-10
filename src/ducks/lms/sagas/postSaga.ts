@@ -2,7 +2,6 @@ import {takeLatest, put, call} from 'redux-saga/effects';
 import {TYPES} from '../actionTypes';
 
 import lms_service from 'api/services/lms_service';
-// import LocalStorage from '@react-native-async-storage/async-storage';
 
 export const quizId = async () => await localStorage.getItem('quizId');
 export const topicId = async () => await localStorage.getItem('topicId');
