@@ -106,8 +106,8 @@ const LoginForm = (): ReactElement => {
 
         <InputContaier>
           <LabelStyled>
-            <StyledTextlink>
-              <Link to="/forgot">Log in as Organization Administrator</Link>
+            <StyledTextlink href="https://admin.huee.io/">
+              Log in as Organization Administrator
             </StyledTextlink>
           </LabelStyled>
         </InputContaier>
