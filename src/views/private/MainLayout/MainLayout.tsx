@@ -1,4 +1,4 @@
-import {ReactElement, useState} from 'react';
+import {ReactElement, useEffect, useState} from 'react';
 
 /* styles and ant design */
 import {
@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 
 import {theme} from 'utils/colors';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import {Layout, Menu, Button, Avatar, Badge} from 'antd';
 import {
   MenuStyles,
@@ -37,12 +37,21 @@ const {Sider, Content} = Layout;
 
 const MainLayout = (): ReactElement => {
   const history = useHistory();
+  const location = useLocation();
   const [selected, setSelected] = useState('1');
   const [collapsed, setCollapsed] = useState(false);
 
   const colorCondition = (key: string) => {
     return selected === key ? theme.WHITE : theme.BLACK;
   };
+
+  useEffect(()=>{
+    const strRoute = location.pathname;
+    const arrRegex = [/home/g,/learn/g, /team/g];
+    arrRegex.forEach((rgx, i) => {
+      if(rgx.test(strRoute)) setSelected((i+1).toString())
+    })
+  },[location])
 
   const pushHistory = (route: string) => {
     history.push(route);
@@ -84,7 +93,7 @@ const MainLayout = (): ReactElement => {
             onSelect={(e: any) => setSelected(e?.key)}>
             <Menu.Item
               key="1"
-              style={{marginTop: 48}}
+              style={{marginTop: 48, background: selected === '1' ? '#635ffa88' : 'none'}}
               onClick={() => pushHistory('/home')}
               icon={
                 <HomeOutlined
@@ -108,6 +117,7 @@ const MainLayout = (): ReactElement => {
 
             <Menu.Item
               key="2"
+              style={{background: selected === '2' ? '#635ffa88' : 'none'}}
               onClick={() => pushHistory('/learn')}
               icon={
                 <PlaySquareOutlined
@@ -130,6 +140,7 @@ const MainLayout = (): ReactElement => {
 
             <Menu.Item
               key="3"
+              style={{background: selected === '3' ? '#635ffa88' : 'none'}}
               onClick={() => pushHistory('/team')}
               icon={
                 <TeamOutlined

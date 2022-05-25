@@ -1,14 +1,16 @@
-import {ReactElement, useEffect} from 'react';
+import {ReactElement, useEffect, useState} from 'react';
 import {TextStyled, SubText} from './styled';
 
 /* reducer action */
 import {RootState} from 'ducks/store';
 import {useSelector} from 'react-redux';
+import { Progress } from 'antd';
 
 const QuizProgress = ({setProgress}: any): ReactElement => {
   const {data, loading}: any = useSelector<RootState>(
-    (states) => states.lms.quizResults,
+    (states) => states.lms.quizResults
   );
+  const [mockProgress, setMockProgress] = useState(0);
 
   const percentage = () => {
     const points = data?.data?.correctAnswerCount || 0;
@@ -19,11 +21,20 @@ const QuizProgress = ({setProgress}: any): ReactElement => {
   };
 
   useEffect(() => {
-    if (!loading) {
-      setTimeout(() => {
-        setProgress('results');
-      }, 2000);
-    }
+    let count = 0;
+    const timer = setInterval(()=>{
+      if(count >= 100) clearInterval(timer);
+      setMockProgress(count)
+      count++;
+    }, 20)
+  }, [])
+  
+  useEffect(() => {
+    // if (!loading) {
+    //   setTimeout(() => {
+    //     setProgress('results');
+    //   }, 2000);
+    // }
   }, [loading]);
 
   return (
@@ -34,8 +45,21 @@ const QuizProgress = ({setProgress}: any): ReactElement => {
         Results are being recorded.
       </SubText>
 
-      <br />
-      <br />
+      <Progress
+        strokeWidth={8}
+        strokeColor={{
+          '0%': '#4AB9E7',
+          '25%': '#635FFA',
+          '50%':'#AB70F1',
+          '75%':'#FF755B',
+          '100%':'#FF4545'
+        }}
+        trailColor='#A2A1BD'
+        showInfo={false}
+        style={{height:40, top: -10, padding: '0 20px'}}
+        percent={mockProgress}
+      />
+
       <SubText>{percentage() * 100} %</SubText>
     </>
   );

@@ -37,7 +37,7 @@ const IntroductionComponent = ({curriculum}: any): ReactElement => {
         <TitleStyled>{curriculum?.title}</TitleStyled>
         <Row>
           <Col span={10}>
-            <Row>
+            <Row align='middle'>
               <IconImage width={10} height={12} source={USER_LOGO} />
               <AuthorStyled>
                 {curriculum?.instructor?.title} {curriculum?.instructor?.name}
@@ -45,7 +45,7 @@ const IntroductionComponent = ({curriculum}: any): ReactElement => {
             </Row>
           </Col>
           <Col span={12}>
-            <Row>
+            <Row align='middle'>
               <RatingStar count={1} outOf={1} />
               <RatingText>{curriculum?.averageUserRating || 1}</RatingText>
             </Row>
@@ -54,13 +54,13 @@ const IntroductionComponent = ({curriculum}: any): ReactElement => {
 
         <Row style={{marginTop: 24}}>
           <Col span={10}>
-            <Row>
+            <Row align='middle'>
               <IconImage width={20} height={14} source={BOOK_LOGO} />
               <IconText>{curriculum?.stats?.lesson || 0} Lessons</IconText>
             </Row>
           </Col>
           <Col span={10}>
-            <Row>
+            <Row align='middle'>
               <IconImage width={18} height={14} source={PENCIL_LOGO} />
               <IconText>{curriculum?.stats?.quiz || 0} Quiz</IconText>
             </Row>
@@ -68,13 +68,13 @@ const IntroductionComponent = ({curriculum}: any): ReactElement => {
         </Row>
         <Row style={{marginTop: 24}}>
           <Col span={10}>
-            <Row>
+            <Row align='middle'>
               <IconImage width={18} height={18} source={TIME_LOGO} />
               <IconText>{curriculum?.stats?.topic || 0} Topics</IconText>
             </Row>
           </Col>
           <Col span={10}>
-            <Row>
+            <Row align='middle'>
               <IconImage width={20} height={16} source={YOUTUBE_LOGO} />
               <IconText>{curriculum?.stats?.video || 0} Videos</IconText>
             </Row>
