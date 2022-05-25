@@ -14,6 +14,7 @@ export const SubContainer = styled.div`
 `;
 
 export const TitleStyled = styled.p`
+  font-family: 'Red Hat Display', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
@@ -23,11 +24,12 @@ export const TitleStyled = styled.p`
 `;
 
 export const AuthorStyled = styled.p`
+  font-family: 'DM Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 100%;
-  color: #635ffa;
+  color: #4C48B;
   flex: none;
   order: 1;
   flex-grow: 0;
@@ -35,11 +37,12 @@ export const AuthorStyled = styled.p`
 `;
 
 export const IconText = styled.p`
+font-family: 'DM Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
-  color: #2b2e4a;
+  color: #A2A1BD;
   flex: none;
   order: 1;
   flex-grow: 0;
@@ -48,11 +51,12 @@ export const IconText = styled.p`
 `;
 
 export const RatingText = styled.span`
+  font-family: 'DM Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;
-  color: #2b2e4a;
+  color: #4C4B7B;
   opacity: 0.5;
   margin-left: 7px;
   margin-top: 3px;
@@ -60,6 +64,12 @@ export const RatingText = styled.span`
 
 export const RenderContainer = styled.div`
   margin-top: 31px;
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    color: #4C4B7B;
+  }
 `;
 
 export const StyledButton = styled(Button)`

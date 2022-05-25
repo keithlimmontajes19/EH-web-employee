@@ -34,7 +34,7 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
   const {lesson} = props;
 
   const colorCondition = (key: string) => {
-    return selected === key ? theme.WHITE : theme.BLACK;
+    return selected === key ? theme.WHITE : theme.GRAY;
   };
 
   const subColorCondition = (key: string) => {
@@ -57,7 +57,7 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
         defaultSelectedKeys={['1']}
         openKeys={[lessonIndex.toString()]}
         onSelect={(e) => setSelected(e?.key)}
-        style={{background: theme.SUB_LAYOUT}}
+        style={{background: theme.SUB_LAYOUT, paddingRight: 8}}
         expandIcon={(e) => <CaretRightOutlined rotate={e.isOpen ? 90 : 0} />}>
         {/**
          * =================
@@ -92,12 +92,13 @@ const SidebarCurriculum = (props: PropsType): ReactElement => {
                 key={itemIndex}
                 onTitleClick={(e) => {
                   setTopicId(null);
-                  setSelected(null);
+                  setSelected(lessonContent?._id);
                   setLessonIndex(e?.key);
                   setLessonId(lessonContent?._id);
                   localStorage.setItem('topicId', '');
                   localStorage.setItem('lessonId', lessonContent?._id);
                 }}
+                className={selected === lessonContent?._id ? 'active-ant-menu-submenu' : 'inactive-ant-menu-submenu'}
                 title={
                   <StyledLabel color={colorCondition(lessonContent?.title)}>
                     {lessonContent?.title}

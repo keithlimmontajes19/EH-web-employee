@@ -1,3 +1,4 @@
+import { Button, Row } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -19,14 +20,15 @@ export const SubContainer = styled.div`
 `;
 
 export const TitleStyled = styled.p`
+  font-family: 'Red Hat Display', sans-serif;
   line-height: 30px;
   font-weight: 700;
   font-size: 25px;
-  color: #2b2e4a;
-  opacity: 0.2;
+  color: #A2A1BD;
 `;
 
 export const QuestionStyled = styled.p`
+  font-family: 'Red Hat Display', sans-serif;
   font-style: normal;
   line-height: 28px;
   font-weight: 700;
@@ -43,16 +45,45 @@ export const ButtonNextStyles = {
   fontWeight: 700,
 };
 
-export const ButtonBackStyles = {
-  width: 168,
-  height: 48,
-  borderRadius: 8,
-  fontSize: 16,
-  fontWeight: 700,
-  color: '#fff',
-  border: 'none',
-  background: '#635FFA',
-};
+export const ButtonRow = styled(Row)`
+  &:hover {
+    button {
+      background: #635FFA;
+      color: #fff;
+      border: none;
+    }
+  }
+
+  .next-button {
+    width: 168px;
+    height: 48px;
+    color: #635FFA;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    
+    &:hover {
+      background: #fff;
+      color: #635FFA;
+    }
+  }
+
+  .back-button {
+    width: 168px;
+    height: 48px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    background: #635FFA;
+
+    &:hover {
+      background: #fff;
+      color: #635FFA;
+    }
+  }
+`
 
 export const ProgressContainer = styled.div`
   width: 471px;

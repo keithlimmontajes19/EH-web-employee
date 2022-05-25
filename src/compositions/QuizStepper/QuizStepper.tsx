@@ -4,11 +4,11 @@ import type {PropsType} from './types';
 import {
   Container,
   SubContainer,
-  ButtonNextStyles,
-  ButtonBackStyles,
   ProgressContainer,
+  ButtonRow,
+  ButtonNextStyles,
 } from './styled';
-import {Button, Col} from 'antd';
+import {Button, Col, Row} from 'antd';
 
 /* quiz forms */
 import QuizSort from 'compositions/QuizSort';
@@ -131,21 +131,21 @@ const QuizStepper = ({
             </Col>
           ) : (
             isProgress === null && (
-              <Col offset={15} style={{marginTop: 49}}>
+              <ButtonRow justify='end' style={{marginTop: 49}}>
                 <Button
-                  style={ButtonBackStyles}
+                  className='back-button'
                   onClick={() => setActive(active - 1)}>
                   Back
                 </Button>
                 <Button
-                  style={ButtonNextStyles}
+                  className='next-button'
                   onClick={() => {
                     submitAnswer();
                     setActive(active + 1);
                   }}>
                   Next
                 </Button>
-              </Col>
+              </ButtonRow>
             )
           )}
         </Container>

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div``;
 export const TextStyled = styled.p`
+  font-family: 'Red Hat Display', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 40px;
@@ -21,26 +22,6 @@ export const SubText = styled.p`
   margin-top: -20px;
 `;
 
-export const ButtonNextStyles = {
-  width: 250,
-  height: 48,
-  color: '#635FFA',
-  borderRadius: 8,
-  fontSize: 16,
-  fontWeight: 700,
-};
-
-export const ButtonBackStyles = {
-  width: 250,
-  height: 48,
-  borderRadius: 8,
-  fontSize: 16,
-  fontWeight: 700,
-  color: '#fff',
-  border: 'none',
-  background: '#635FFA',
-};
-
 export const ButtonContainer = styled.div`
   position: absolute;
   left: 70%;
@@ -49,4 +30,42 @@ export const ButtonContainer = styled.div`
   bottom: 4.59%;
   display: flex;
   flex-direction: row;
+
+  &:hover {
+    button {
+      background: #635FFA;
+      color: #fff;
+      border: none;
+    }
+  }
+
+  .next-button {
+    width: 250px;
+    height: 48px;
+    color: #635FFA;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    
+    &:hover {
+      background: #fff;
+      color: #635FFA;
+    }
+  }
+
+  .back-button {
+    width: 250;
+    height: 48px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    background: #635FFA;
+
+    &:hover {
+      background: #fff;
+      color: #635FFA;
+    }
+  }
 `;

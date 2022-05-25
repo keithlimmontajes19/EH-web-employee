@@ -6,8 +6,6 @@ import {
   SubText,
   TextStyled,
   ButtonContainer,
-  ButtonNextStyles,
-  ButtonBackStyles,
 } from './styled';
 
 /* reducer action */
@@ -47,7 +45,7 @@ const QuizResults = ({
 
       <ButtonContainer>
         <Button
-          style={ButtonBackStyles}
+          className='back-button'
           onClick={() => {
             setActive(0);
             setProgress(null);
@@ -56,7 +54,7 @@ const QuizResults = ({
         </Button>
 
         <Button
-          style={ButtonNextStyles}
+          className='next-button'
           onClick={() => {
             setActive(1);
             setProgress(null);

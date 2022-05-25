@@ -37,7 +37,8 @@ export const StyledLayout = styled(Layout).attrs(() => ({
 
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     min-height: 50px;
-    background: #635ffa;
+    background: #635ffa88;
+    color: black;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
   }

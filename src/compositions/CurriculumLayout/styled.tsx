@@ -5,9 +5,16 @@ export const SubContainer = styled.div`
   margin-top: 35px;
   margin-left: 40px;
   background: #fff;
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    color: #4C4B7B;
+  }
 `;
 
 export const TitleStyled = styled.p`
+  font-family: 'Red Hat Display', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 25px;
