@@ -6,37 +6,35 @@ import {
   TeamOutlined,
   HomeOutlined,
   SearchOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   PlaySquareOutlined,
 } from '@ant-design/icons';
+import ICON_BELL from 'assets/icons/bell-blue.png';
 
-import {theme} from 'utils/colors';
-import {useHistory} from 'react-router-dom';
-import {Layout, Menu, Button, Avatar, Badge} from 'antd';
 import {
   MenuStyles,
   SearchInput,
   HeaderStyled,
   StyledLayout,
   LayoutStyles,
-  ButtonStyles,
   SearchStyles,
   BellContainer,
-  CollapsedIcons,
   AvatarContainer,
   SearchContainer,
 } from './styled';
+import {theme} from 'utils/colors';
+import {useHistory} from 'react-router-dom';
+import {Layout, Menu, Avatar, Badge} from 'antd';
 
 /* components */
-import ICON_BELL from 'assets/icons/bell-blue.png';
-import NavigationContent from 'navigations/privateRoute';
 import IconImage from 'components/IconImage';
+import NavigationContent from 'navigations/privateRoute';
+import PopoverProfile from 'compositions/PopoverProfile';
 
 const {Sider, Content} = Layout;
 
 const MainLayout = (): ReactElement => {
   const history = useHistory();
+
   const [selected, setSelected] = useState('1');
   const [collapsed, setCollapsed] = useState(false);
 
@@ -44,11 +42,7 @@ const MainLayout = (): ReactElement => {
     return selected === key ? theme.WHITE : theme.BLACK;
   };
 
-  const pushHistory = (route: string) => {
-    history.push(route);
-  };
-
-  const toggleCollapsed = () => setCollapsed(!collapsed);
+  const pushHistory = (route: string) => history.push(route);
 
   return (
     <StyledLayout>
@@ -66,22 +60,20 @@ const MainLayout = (): ReactElement => {
           </Badge>
         </BellContainer>
 
-        <AvatarContainer>
-          <Avatar size={50} icon={<UserOutlined />} />
-        </AvatarContainer>
+        <PopoverProfile name="Keith Lim Montajes" organization="Organization">
+          <AvatarContainer>
+            <Avatar size={50} icon={<UserOutlined />} />
+          </AvatarContainer>
+        </PopoverProfile>
       </HeaderStyled>
 
       <Layout>
-        <Sider
-          width={200}
-          collapsed={collapsed}
-          //onMouseOver={() => setCollapsed(false)}
-        >
+        <Sider width={200} collapsed={collapsed}>
           <Menu
             mode="inline"
             style={MenuStyles}
             defaultSelectedKeys={['1']}
-            onSelect={(e: any) => setSelected(e?.key)}>
+            onSelect={(e) => setSelected(e?.key)}>
             <Menu.Item
               key="1"
               style={{marginTop: 48}}

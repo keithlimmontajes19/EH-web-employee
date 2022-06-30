@@ -5,6 +5,10 @@ import Home from 'views/private/Home';
 import Team from 'views/private/Team';
 import Learn from 'views/private/Learn';
 import Curriculum from 'views/private/Curriculum';
+
+import ProfileUser from 'compositions/ProfileUser';
+import ProfileAccount from 'compositions/ProfileAccount';
+import ProfileOrg from 'compositions/ProfileOrganization';
 import ViewPageDetails from 'compositions/ViewPageDetails';
 
 const Navigation = () => {
@@ -16,6 +20,9 @@ const Navigation = () => {
       <Route exact path="/learn" component={Learn} />
       <Route exact path="/learn/curriculum" component={Curriculum} />
       <Route exact path="/team/detail" component={ViewPageDetails} />
+      <Route exact path="/profile/user" component={ProfileUser} />
+      <Route exact path="/profile/account" component={ProfileAccount} />
+      <Route exact path="/profile/organization" component={ProfileOrg} />
       <Redirect to="/" />
     </Switch>
   );
