@@ -67,9 +67,11 @@ const LoginForm = (): ReactElement => {
   return (
     <Container>
       <FlexRow>
-        <IconImage source={LOGO} height={100} width={150} />
+        <div style={{ marginTop: 50 }}>
+          <IconImage source={LOGO} height={100} width={150} />
+        </div>
       </FlexRow>
-      <TitleStyled>Welcome back</TitleStyled>
+      <TitleStyled style ={{ marginTop: 20 }}>Welcome back</TitleStyled>
 
       <Form
         form={form}
