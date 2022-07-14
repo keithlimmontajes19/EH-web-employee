@@ -15,7 +15,7 @@ const App = () => {
     <Provider store={store}>
       {/* TO DO: error in persist gate */}
       {/* <PersistGate loading={null} persistor={persist}> */}
-      <Layout />
+      <Layout/>
       {/* </PersistGate> */}
     </Provider>
   );

@@ -3,16 +3,21 @@ import {theme} from 'utils/colors';
 import {Input, Button} from 'antd';
 
 export const Container = styled.div`
-  padding: 30px;
+  display: flex-box;
+  //padding: 30px;
+  padding: 1.875rem;
   align-content: center;
   align-items: center;
   overflow: hidden;
-  margin-left: 50px;
-  margin-right: 50px;
-  overflow: hidden;
+  margin: auto 50px;
+  //margin-left: 50px;
+  //margin-right: 50px;
 `;
 
 export const StyledInput: any = styled<any>(Input)`
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);
   border-radius: 550px;
@@ -23,6 +28,9 @@ export const StyledInput: any = styled<any>(Input)`
 `;
 
 export const StyledPassword = styled(Input.Password)`
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);
   border-radius: 550px;
@@ -49,10 +57,11 @@ export const SignupContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 233px;
+  margin-top: 225px;
 `;
 
 export const StyledTextlink = styled.a`
+  font-family: 'DM Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -84,7 +93,8 @@ export const FlexRow = styled.div`
 `;
 
 export const TitleStyled = styled.div`
-  font-style: normal;
+  font-family: 'Red Hat Display', sans-serif;
+  font-style: bold;
   font-weight: 700;
   font-size: 40px;
   line-height: 50px;
@@ -97,9 +107,9 @@ export const TitleStyled = styled.div`
       #ab70f1 48.02%,
       #ff755b 72.88%,
       #ff4545 93.67%
-    );
+    );  
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: #4C4B7B;
   background-clip: text;
   text-fill-color: transparent;
   margin-top: 50px;
