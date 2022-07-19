@@ -1,5 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
-import { logger } from 'redux-logger';
+import { configureStore } from '@reduxjs/toolkit';
 
 import createSagaMiddleware from 'redux-saga';
 import rootReducers from './rootReducer';
@@ -28,10 +27,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducers);
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
 
-const store = createStore(
-  persistedReducer,
-  applyMiddleware(...middlewares),
-);
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares)
+})
 
 const persist = persistStore(store);
 
