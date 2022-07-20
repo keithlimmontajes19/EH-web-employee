@@ -7,6 +7,9 @@ const baseQuery = fetchBaseQuery({
     const accessToken = getState().auth.accessToken
 
     if (accessToken) {
+      headers.set("Accept", "*/*")
+      headers.set("Accept-Encoding", "gzip, deflate, br")
+      headers.set("Connection", "keep-alive")
       headers.set("Authorization", `Bearer ${accessToken}`)
     }
 
