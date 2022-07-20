@@ -1,25 +1,23 @@
-import {ReactElement} from 'react';
+import {useNavigate} from 'react-router-dom'
+import {useSelector} from 'react-redux'
+import {selectAccessToken} from 'ducks/auth/authSlice'
 
-/* styles antd */
-import {SubLogoContainer, RowContainer, FormContainer} from './styled';
-import {Row} from 'antd';
+import {SubLogoContainer, RowContainer, FormContainer} from './styled'
 
-/* utils */
-import {} from 'utils/constants';
-
-/* component */
 import LoginForm from 'compositions/LoginForm';
 
-const Login = (): ReactElement => {
-  return (
-    <div style={RowContainer}>
-      <SubLogoContainer>
-        <FormContainer>
-          <LoginForm />
-        </FormContainer>
-      </SubLogoContainer>
-    </div>
-  );
-};
 
-export default Login;
+export default function Login() {
+  const navigate = useNavigate()
+  const accessToken = useSelector(selectAccessToken)
+
+  if (accessToken) navigate('/')
+
+  return <div style={RowContainer}>
+    <SubLogoContainer>
+      <FormContainer>
+        <LoginForm />
+      </FormContainer>
+    </SubLogoContainer>
+  </div>
+}

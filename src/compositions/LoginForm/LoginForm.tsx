@@ -40,7 +40,6 @@ const LoginForm = (): ReactElement => {
   const handlesubmit = async (values: never) => {
     try {
       const result = await login(values).unwrap()
-      console.log('here')
       dispatch(setCredentials(result))
     } catch (err) {
       console.log(err)

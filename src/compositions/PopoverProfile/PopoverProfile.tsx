@@ -1,5 +1,5 @@
 import {Fragment, ReactElement} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import type {PropsType} from './types';
 
 import {
@@ -16,10 +16,9 @@ import {Row, Col} from 'antd';
 import {POPOVER_PROFILE} from './data';
 
 const PopoverProfile = (props: PropsType): ReactElement => {
-  const history = useHistory();
-  const {children, src = '', name = '', organization = ''} = props;
+  const navigate = useNavigate();
 
-  const pushHistory = (route: string) => history.push(route);
+  const {children, src = '', name = '', organization = ''} = props;
 
   const content = () => {
     return (
@@ -28,7 +27,7 @@ const PopoverProfile = (props: PropsType): ReactElement => {
           <ContentContainer
             index={index}
             key={item.title}
-            onClick={() => pushHistory(item.url)}>
+            onClick={() => navigate(item.url)}>
             <StyledImage source={item.icon} />
             <StyledText>{item.title}</StyledText>
             <StyledDivider />
