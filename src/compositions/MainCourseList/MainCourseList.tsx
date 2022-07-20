@@ -15,7 +15,7 @@ import {
 import {Image} from 'antd';
 import {useDispatch} from 'react-redux';
 import {NO_IMAGE} from 'utils/constants';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {getCurriculum} from 'ducks/lms/actionCreator';
 
 /* components */
@@ -69,7 +69,7 @@ const RightArrow = () => {
 
 const Card = ({item, itemId, onClick}) => {
   const visibility = React.useContext(VisibilityContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   visibility.isItemVisible(itemId);
@@ -80,7 +80,7 @@ const Card = ({item, itemId, onClick}) => {
         onClick(visibility);
         dispatch(getCurriculum(item));
 
-        history.push('/learn/curriculum');
+        navigate('/learn/curriculum');
         localStorage.setItem('courseId', item?._id);
         localStorage.setItem('organizationId', item?.organizationId);
       }}
@@ -89,7 +89,8 @@ const Card = ({item, itemId, onClick}) => {
         width={380}
         height={180}
         preview={false}
-        src={item?.preview?.ref ? item?.preview?.ref : NO_IMAGE}
+        src={NO_IMAGE}
+        // src={item?.preview?.ref ? item?.preview?.ref : NO_IMAGE}
       />
       <TitleCourse>{item?.title}</TitleCourse>
       <FlexRow>
@@ -117,9 +118,12 @@ const Card = ({item, itemId, onClick}) => {
   );
 };
 
+import { useGetCoursesQuery } from 'ducks/courses/coursesApiSlice'
+
 const MainCourseList = () => {
-  const {data}: any = useSelector<RootState>((state) => state.lms);
+  // const {data}: any = useSelector<RootState>((state) => state.lms);
   const [selected, setSelected] = React.useState([]);
+  const {data} = useGetCoursesQuery()
 
   const isItemSelected = (id) => !!selected.find((el) => el === id);
   const handleClick = (id) => () => {

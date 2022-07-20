@@ -1,5 +1,6 @@
 import {ReactElement, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import {useLoginMutation} from 'ducks/auth/authApiSlice';
 
 /* styles antd */
 import {
@@ -25,16 +26,26 @@ import {rulesConfig} from 'utils/helpers';
 
 import LOGO from 'assets/icons/logo.png';
 import IconImage from 'components/IconImage';
+import {setCredentials} from 'ducks/auth/authSlice';
 
 const LoginForm = (): ReactElement => {
+  const [login, {isLoading}] = useLoginMutation()
+
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const {data, loading}: any = useSelector<RootState>(
     (state) => state.authentication,
   );
 
-  const handlesubmit = (values: never) => {
-    dispatch(postLogin(values));
+  const handlesubmit = async (values: never) => {
+    try {
+      const result = await login(values).unwrap()
+      dispatch(setCredentials(result))
+    } catch (err) {
+      console.log(err)
+    }
+
+    // dispatch(postLogin(values));
   };
 
   const setFormFields = (field: string, errors: string) => {

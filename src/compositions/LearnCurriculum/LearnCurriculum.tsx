@@ -1,6 +1,6 @@
 import {ReactElement} from 'react';
 import {useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 /* styled */
 import {
@@ -30,7 +30,7 @@ import IconImage from 'components/IconImage';
 import CircularProgress from 'components/CircularProgress';
 
 const LearnCurriculum = (): ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {ongoingCourses}: any = useSelector<RootState>((state) => state.lms);
@@ -47,7 +47,7 @@ const LearnCurriculum = (): ReactElement => {
             onClick={() => {
               dispatch(getCurriculum(item));
 
-              history.push('/learn/curriculum');
+              navigate('/learn/curriculum');
               localStorage.setItem('courseId', item?._id);
               localStorage.setItem('organizationId', item?.organizationId);
             }}>

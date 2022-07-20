@@ -1,9 +1,9 @@
-import {ReactElement} from 'react';
-import {useHistory} from 'react-router-dom';
+import {ReactElement} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 /* reducer action */
-import {RootState} from 'ducks/store';
-import {useSelector} from 'react-redux';
+import {RootState} from 'ducks/store'
+import {useSelector} from 'react-redux'
 
 import {
   Container,
@@ -12,20 +12,20 @@ import {
   ButtonStyled,
   ContentContainer,
 } from './styled';
-import {Row} from 'antd';
-import {theme} from 'utils/colors';
-import {ArrowLeftOutlined} from '@ant-design/icons';
+import {Row} from 'antd'
+import {theme} from 'utils/colors'
+import {ArrowLeftOutlined} from '@ant-design/icons'
 
 /* components */
-import RenderHtml from 'components/RenderHtml';
-import TextComponent from 'compositions/TextComponent';
-import ImageComponent from 'compositions/ImageComponent';
-import VideoComponent from 'compositions/VideoComponent';
-import TeamQuizSingleChoice from 'compositions/TeamQuizSingleChoice';
-import TeamQuizMultipleChoice from 'compositions/TeamQuizMultipleChoice';
+import RenderHtml from 'components/RenderHtml'
+import TextComponent from 'compositions/TextComponent'
+import ImageComponent from 'compositions/ImageComponent'
+import VideoComponent from 'compositions/VideoComponent'
+import TeamQuizSingleChoice from 'compositions/TeamQuizSingleChoice'
+import TeamQuizMultipleChoice from 'compositions/TeamQuizMultipleChoice'
 
 const ViewPageDetails = (): ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const {
     page_details: {data},
@@ -68,7 +68,7 @@ const ViewPageDetails = (): ReactElement => {
     <Container>
       <PageHeader>
         <Row>
-          <ButtonStyled onClick={() => history.goBack()}>
+          <ButtonStyled onClick={() => navigate(-1)}>
             <ArrowLeftOutlined
               style={{color: theme.WHITE, marginLeft: -5, fontSize: 18}}
               size={50}

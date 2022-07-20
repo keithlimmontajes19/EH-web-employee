@@ -1,24 +1,54 @@
-import React from 'react';
-import {Provider} from 'react-redux';
-import {store, persist} from 'ducks/store';
-import {PersistGate} from 'redux-persist/integration/react';
+import Gleap from 'gleap'
+import {useEffect} from 'react'
+import {Navigate, Routes, Route} from 'react-router-dom'
 
-import Gleap from 'gleap';
-import Layout from 'components/Layout';
+import Layout from './components/Layout'
+import RequireAuthentication from './components/RequireAuthentication'
+import Login from './views/public/Login'
+import Logout from './views/public/Logout'
+import MainLayout from './views/private/MainLayout'
+import Home from './views/private/Home'
+import Team from './views/private/Team'
+import Learn from './views/private/Learn'
+import Curriculum from './views/private/Curriculum'
+import ProfileUser from './compositions/ProfileUser'
+import ProfileAccount from './compositions/ProfileAccount'
+import ProfileOrg from './compositions/ProfileOrganization'
+import ViewPageDetails from './compositions/ViewPageDetails'
 
-const App = () => {
-  React.useEffect(() => {
-    Gleap.initialize('nBmAvOQGDtWWtYRtQAcvUTpuYVf7SUq9');
-  }, []);
+export default function App() {
+  useEffect(() => {
+    Gleap.initialize('nBmAvOQGDtWWtYRtQAcvUTpuYVf7SUq9')
+  }, [])
 
-  return (
-    <Provider store={store}>
-      {/* TO DO: error in persist gate */}
-      {/* <PersistGate loading={null} persistor={persist}> */}
-      <Layout />
-      {/* </PersistGate> */}
-    </Provider>
-  );
-};
+  return <Routes>
+    <Route path="/" element={<Layout />}>
+      {/* public routes */}
+      <Route path="login" element={<Login />} />
+      <Route path="logout" element={<Logout />} />
 
-export default App;
+      {/* protected routes */}
+      <Route element={<RequireAuthentication />}>
+        <Route element={<MainLayout />} >
+          <Route index element={<Home />} />
+          <Route path="team" element={<Team />} />
+          <Route path="learn">
+            <Route index element={<Learn />} />
+            <Route path="curriculum" element={<Curriculum />} />
+          </Route>
+          <Route path="team">
+            <Route path="detail" element={<ViewPageDetails />} />
+          </Route>
+          <Route path="profile">
+            <Route path="user" element={<ProfileUser />} />
+            <Route path="account" element={<ProfileAccount />} />
+            <Route path="organization" element={<ProfileOrg />} />
+          </Route>
+        </Route>
+      </Route>
+
+      {/* catch all route */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Route>
+  </Routes>
+}
