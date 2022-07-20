@@ -14,7 +14,7 @@ export default function MainLayoutSideNav() {
   const [selected, setSelected] = useState('1')
   const [collapsed, setCollapsed] = useState(false)
 
-  const colorCondition = useCallback((key) => selected === key ? theme.WHITE : theme.BLACK, [])
+  const colorCondition = (key) => selected === key ? theme.WHITE : theme.BLACK
 
   return <Sider width={200} collapsed={collapsed}>
     <Menu

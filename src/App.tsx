@@ -1,6 +1,6 @@
 import Gleap from 'gleap'
 import {useEffect} from 'react'
-import {Navigate, Routes, Route, Outlet} from 'react-router-dom'
+import {Navigate, Routes, Route} from 'react-router-dom'
 
 import Layout from './components/Layout'
 import RequireAuthentication from './components/RequireAuthentication'
@@ -30,14 +30,14 @@ export default function App() {
         <Route element={<MainLayout />} >
           <Route index element={<Home />} />
           <Route path="team" element={<Team />} />
-          <Route path="learn" element={<Outlet />}>
+          <Route path="learn">
             <Route index element={<Learn />} />
             <Route path="curriculum" element={<Curriculum />} />
           </Route>
-          <Route path="team" element={<Outlet />}>
+          <Route path="team">
             <Route path="detail" element={<ViewPageDetails />} />
           </Route>
-          <Route path="profile" element={<Outlet />}>
+          <Route path="profile">
             <Route path="user" element={<ProfileUser />} />
             <Route path="account" element={<ProfileAccount />} />
             <Route path="organization" element={<ProfileOrg />} />
