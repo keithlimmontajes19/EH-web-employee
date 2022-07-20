@@ -5,6 +5,7 @@ import {Navigate, Routes, Route} from 'react-router-dom'
 import Layout from './components/Layout'
 import RequireAuthentication from './components/RequireAuthentication'
 import Login from './views/public/Login'
+import Logout from './views/public/Logout'
 import MainLayout from './views/private/MainLayout'
 import Home from './views/private/Home'
 import Team from './views/private/Team'
@@ -24,6 +25,7 @@ export default function App() {
     <Route path="/" element={<Layout />}>
       {/* public routes */}
       <Route path="login" element={<Login />} />
+      <Route path="logout" element={<Logout />} />
 
       {/* protected routes */}
       <Route element={<RequireAuthentication />}>
