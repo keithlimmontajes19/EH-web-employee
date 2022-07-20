@@ -22,7 +22,7 @@ import {
   SearchContainer,
 } from './styled';
 import {theme} from 'utils/colors';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Layout, Menu, Avatar, Badge} from 'antd';
 
 /* components */
@@ -33,7 +33,7 @@ import PopoverProfile from 'compositions/PopoverProfile';
 const {Sider, Content} = Layout;
 
 const MainLayout = (): ReactElement => {
-  const history = useHistory();
+  const navigate = useNavigate()
 
   const [selected, setSelected] = useState('1');
   const [collapsed, setCollapsed] = useState(false);
@@ -42,7 +42,7 @@ const MainLayout = (): ReactElement => {
     return selected === key ? theme.WHITE : theme.BLACK;
   };
 
-  const pushHistory = (route: string) => history.push(route);
+  const pushHistory = (route: string) => navigate(route);
 
   return (
     <StyledLayout>
