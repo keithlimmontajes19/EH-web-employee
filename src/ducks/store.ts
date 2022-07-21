@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import rootReducers from './rootReducer';
 import rootSaga from './rootSaga';
+import {apiSlice} from './api/apiSlice';
 
 import { persistStore, persistReducer, createMigrate } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -25,7 +26,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 const sagaMiddleware = createSagaMiddleware();
-const middlewares = [sagaMiddleware];
+const middlewares = [sagaMiddleware, apiSlice.middleware];
 
 const store = configureStore({
   reducer: persistedReducer,
