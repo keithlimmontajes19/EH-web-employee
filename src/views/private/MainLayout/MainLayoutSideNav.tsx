@@ -1,5 +1,5 @@
-import {useCallback, useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import {useState} from 'react'
+import {useLocation, useNavigate} from 'react-router-dom'
 
 import {TeamOutlined, HomeOutlined, PlaySquareOutlined} from '@ant-design/icons'
 import {Layout, Menu} from 'antd'
@@ -8,22 +8,23 @@ import {MenuStyles} from './styled'
 
 const {Sider} = Layout
 
+const colorCondition = (pathname, key) => pathname === key ? theme.WHITE : theme.BLACK
+
 export default function MainLayoutSideNav() {
   const navigate = useNavigate()
+  const {pathname} = useLocation()
 
-  const [selected, setSelected] = useState('1')
   const [collapsed, setCollapsed] = useState(false)
-
-  const colorCondition = (key) => selected === key ? theme.WHITE : theme.BLACK
 
   return <Sider width={200} collapsed={collapsed}>
     <Menu
       mode="inline"
       style={MenuStyles}
-      defaultSelectedKeys={['1']}
-      onSelect={(e) => setSelected(e?.key)}>
+      defaultSelectedKeys={['/']}
+      selectedKeys={[pathname]}
+    >
       <Menu.Item
-        key="1"
+        key="/"
         style={{ marginTop: 48 }}
         onClick={() => navigate('/')}
         icon={
@@ -31,7 +32,7 @@ export default function MainLayoutSideNav() {
             style={{
               fontSize: 20,
               marginTop: collapsed ? 6 : 0,
-              color: colorCondition('1'),
+              color: colorCondition(pathname, '/'),
             }}
           />
         }>
@@ -40,21 +41,21 @@ export default function MainLayoutSideNav() {
             marginTop: 20,
             fontSize: 16,
             fontWeight: 700,
-            color: colorCondition('1'),
+            color: colorCondition(pathname, '/'),
           }}>
           Home
         </span>
       </Menu.Item>
 
       <Menu.Item
-        key="2"
+        key="/learn"
         onClick={() => navigate('/learn')}
         icon={
           <PlaySquareOutlined
             style={{
               fontSize: 20,
               marginTop: collapsed ? 6 : 0,
-              color: colorCondition('2'),
+              color: colorCondition(pathname, '/learn'),
             }}
           />
         }>
@@ -62,21 +63,21 @@ export default function MainLayoutSideNav() {
           style={{
             fontSize: 16,
             fontWeight: 700,
-            color: colorCondition('2'),
+            color: colorCondition(pathname, '/learn'),
           }}>
           Learn
         </span>
       </Menu.Item>
 
       <Menu.Item
-        key="3"
+        key="/team"
         onClick={() => navigate('/team')}
         icon={
           <TeamOutlined
             style={{
               fontSize: 20,
               marginTop: collapsed ? 6 : 0,
-              color: colorCondition('3'),
+              color: colorCondition(pathname, '/team'),
             }}
           />
         }>
@@ -84,7 +85,7 @@ export default function MainLayoutSideNav() {
           style={{
             fontSize: 16,
             fontWeight: 700,
-            color: colorCondition('3'),
+            color: colorCondition(pathname, '/team'),
           }}>
           Team
         </span>
