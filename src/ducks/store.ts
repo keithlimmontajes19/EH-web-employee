@@ -8,7 +8,7 @@ import {apiSlice} from './api/apiSlice';
 import { persistStore, persistReducer, createMigrate } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const migrations: any = {
+const migrations = {
   1: (state) => {
     return {
       ...state
