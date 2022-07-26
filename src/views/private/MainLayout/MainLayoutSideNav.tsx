@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
 
 import {TeamOutlined, HomeOutlined, PlaySquareOutlined} from '@ant-design/icons'
@@ -14,14 +14,21 @@ export default function MainLayoutSideNav() {
   const navigate = useNavigate()
   const {pathname} = useLocation()
 
+  const [highlightedNavOption, setHighlightedNavOption] = useState('/')
   const [collapsed, setCollapsed] = useState(false)
+
+  useEffect(() => {
+    setHighlightedNavOption((current) => {
+      return ['/', '/learn', '/team'].includes(pathname) ? pathname : current
+    })
+  }, [pathname])
 
   return <Sider width={200} collapsed={collapsed}>
     <Menu
       mode="inline"
       style={MenuStyles}
       defaultSelectedKeys={['/']}
-      selectedKeys={[pathname]}
+      selectedKeys={[highlightedNavOption]}
     >
       <Menu.Item
         key="/"
@@ -32,7 +39,7 @@ export default function MainLayoutSideNav() {
             style={{
               fontSize: 20,
               marginTop: collapsed ? 6 : 0,
-              color: colorCondition(pathname, '/'),
+              color: colorCondition(highlightedNavOption, '/'),
             }}
           />
         }>
@@ -41,7 +48,7 @@ export default function MainLayoutSideNav() {
             marginTop: 20,
             fontSize: 16,
             fontWeight: 700,
-            color: colorCondition(pathname, '/'),
+            color: colorCondition(highlightedNavOption, '/'),
           }}>
           Home
         </span>
@@ -55,7 +62,7 @@ export default function MainLayoutSideNav() {
             style={{
               fontSize: 20,
               marginTop: collapsed ? 6 : 0,
-              color: colorCondition(pathname, '/learn'),
+              color: colorCondition(highlightedNavOption, '/learn'),
             }}
           />
         }>
@@ -63,7 +70,7 @@ export default function MainLayoutSideNav() {
           style={{
             fontSize: 16,
             fontWeight: 700,
-            color: colorCondition(pathname, '/learn'),
+            color: colorCondition(highlightedNavOption, '/learn'),
           }}>
           Learn
         </span>
@@ -77,7 +84,7 @@ export default function MainLayoutSideNav() {
             style={{
               fontSize: 20,
               marginTop: collapsed ? 6 : 0,
-              color: colorCondition(pathname, '/team'),
+              color: colorCondition(highlightedNavOption, '/team'),
             }}
           />
         }>
@@ -85,7 +92,7 @@ export default function MainLayoutSideNav() {
           style={{
             fontSize: 16,
             fontWeight: 700,
-            color: colorCondition(pathname, '/team'),
+            color: colorCondition(highlightedNavOption, '/team'),
           }}>
           Team
         </span>
