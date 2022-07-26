@@ -24,6 +24,8 @@ import {postLogin} from 'ducks/authentication/actionCreator';
 import {RootState} from 'ducks/store';
 import {rulesConfig} from 'utils/helpers';
 
+import styles from './LoginForm.module.css';
+
 import LOGO from 'assets/icons/logo.png';
 import IconImage from 'components/IconImage';
 import {setCredentials} from 'ducks/auth/authSlice';
@@ -125,18 +127,14 @@ const LoginForm = (): ReactElement => {
 
         <InputContaier>
           <LabelStyled>
-            <StyledTextlink>
-              <Link to="/forgot">Forgot Password?</Link>
-            </StyledTextlink>
+            <Link to="/forgot" className={styles.link}>Forgot Password?</Link>
           </LabelStyled>
         </InputContaier>
 
         <SignupContainer>
           <LabelStyled>New on our platform?</LabelStyled>
           <LabelStyled>
-            <StyledTextlink>
-              <Link to="/">Create an account</Link>
-            </StyledTextlink>
+            <Link to="/" className={styles.link}>Create an account</Link>
           </LabelStyled>
         </SignupContainer>
       </Form>

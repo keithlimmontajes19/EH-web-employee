@@ -70,7 +70,6 @@ const QuizMultiplechoice = ({item, submit}: PropsType): ReactElement => {
       })}
     </>
   );
-  return <>3</>;
 };
 
 export default QuizMultiplechoice;
