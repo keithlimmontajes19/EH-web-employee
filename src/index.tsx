@@ -9,7 +9,7 @@ import {store, /*persist*/} from './ducks/store'
 import App from './App'
 
 /* styles */
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.min.css'
 import './styles/index.css'
 import 'react-circular-progressbar/dist/styles.css'
 import 'pure-react-carousel/dist/react-carousel.es.css'
