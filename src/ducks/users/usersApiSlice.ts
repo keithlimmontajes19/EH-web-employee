@@ -9,10 +9,19 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         const {_id: id} = result
         return [{type: 'Users', id}]
       }
+    }),
+    updateUserAvatar: builder.mutation<any, string>({
+      query: (userId) => ({
+        url: `/users/${userId}/avatar`,
+        method: 'PATCH'
+      }),
+      transformResponse: ({data}) => data
     })
   })
 })
 
+export const reloadUser = (userId) => usersApiSlice.util.invalidateTags([{type: 'Users', id: userId}])
 export const {
-  useGetSingleUserQuery
+  useGetSingleUserQuery,
+  useUpdateUserAvatarMutation,
 } = usersApiSlice

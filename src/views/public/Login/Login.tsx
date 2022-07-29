@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import {selectAccessToken} from 'ducks/auth/authSlice'
@@ -11,7 +12,7 @@ export default function Login() {
   const navigate = useNavigate()
   const accessToken = useSelector(selectAccessToken)
 
-  if (accessToken) navigate('/')
+  useEffect(() => {if (accessToken) navigate('/')}, [accessToken])
 
   return <div style={RowContainer}>
     <SubLogoContainer>

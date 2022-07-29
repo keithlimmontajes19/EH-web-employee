@@ -3,8 +3,8 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://engage-hub-platform-dev.herokuapp.com/api/v1',
   // credentials: 'include',
-  prepareHeaders: (headers, {getState}: any) => {
-    const accessToken = getState().auth.accessToken
+  prepareHeaders: (headers/*, {getState}: any*/) => {
+    const accessToken = localStorage.getItem('accessToken')
 
     if (accessToken) {
       headers.set("Accept", "*/*")

@@ -18,6 +18,7 @@ import ViewPageDetails from './compositions/ViewPageDetails'
 
 export default function App() {
   useEffect(() => {
+    // Gleap.disableConsoleLogOverwrite()
     Gleap.initialize('nBmAvOQGDtWWtYRtQAcvUTpuYVf7SUq9')
   }, [])
 

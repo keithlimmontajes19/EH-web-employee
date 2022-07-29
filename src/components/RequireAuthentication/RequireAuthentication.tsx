@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import {Navigate, Outlet, useLocation} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 
@@ -8,7 +9,7 @@ export default function RequireAuthentication() {
   const location = useLocation()
 
   const accessToken = localStorage.getItem('accessToken')
-  dispatch(setAccessToken({accessToken}))
+  useEffect(() => {dispatch(setAccessToken({accessToken}))}, [accessToken])
 
   return accessToken
     ? <Outlet />

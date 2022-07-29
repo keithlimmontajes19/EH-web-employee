@@ -30,6 +30,11 @@ import LOGO from 'assets/icons/logo.png';
 import IconImage from 'components/IconImage';
 import {setCredentials} from 'ducks/auth/authSlice';
 
+const INITIAL_VALUES = {
+  email: '',
+  password: '',
+};
+
 const LoginForm = (): ReactElement => {
   const [login, {isLoading}] = useLoginMutation()
 
@@ -57,11 +62,6 @@ const LoginForm = (): ReactElement => {
         errors: [errors],
       },
     ]);
-  };
-
-  const INITIAL_VALUES = {
-    email: '',
-    password: '',
   };
 
   useEffect(() => {

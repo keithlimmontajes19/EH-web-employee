@@ -15,6 +15,8 @@ import 'react-circular-progressbar/dist/styles.css'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 // import 'node_modules/video-react/dist/video-react.css'
 
+import './index.css'
+
 const root = document.getElementById('root')
 const content = <StrictMode>
   <Provider store={store}>

@@ -1,0 +1,11 @@
+.bb-feedback-button {
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+}
+
+.bb-feedback-dialog {
+  position: fixed;
+  left: 10px;
+  bottom: 100px;
+}
