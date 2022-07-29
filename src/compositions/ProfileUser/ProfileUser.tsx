@@ -1,4 +1,9 @@
-import {useState} from 'react';
+import axios from 'axios';
+import Gleap from 'gleap';
+
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import {
   StyledSave,
@@ -11,44 +16,79 @@ import {
   ButtonContainer,
   UploadContainer,
 } from './styled';
-import {Avatar} from 'antd';
+import {Avatar, Spin, message } from 'antd';
 import UploadButton from 'components/UploadButton';
 
+import { imageTypes } from 'utils/file-types';
 import USER_LOGO from 'assets/icons/profile-user.png';
-import {useGetSingleUserQuery} from 'ducks/users/usersApiSlice';
+import { reloadUser, useGetSingleUserQuery, useUpdateUserAvatarMutation } from 'ducks/users/usersApiSlice';
+
+import styles from './ProfileUser.module.css'
 
 export default function ProfileUser() {
-  const [fileId, setFileId] = useState('');
-  const [fileUrl, setFileUrl] = useState('');
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const {data: user} = useGetSingleUserQuery(localStorage.getItem('userId'))
+  const userId = localStorage.getItem('userId')
 
-  console.log('fileId uploaded:', fileId);
-  return <RowContainer>
-    <FlexContainer>
-      <StyledText>My Profile</StyledText>
-      <Avatar size={140} src={user?.profile?.avatar || USER_LOGO} style={{marginLeft: -5}} />
-      <UploadContainer>
-        <UploadButton
-          setFileId={setFileId}
-          setImageUrl={setFileUrl}
-          placeholder="Change Photo"
-        />
-      </UploadContainer>
+  if (!userId) navigate('/login')
 
-      <StyledLabel>First Name</StyledLabel>
-      <StyledInput />
+  const { data: user } = useGetSingleUserQuery(userId)
+  const [updateUserAvatar, { isLoading }] = useUpdateUserAvatarMutation()
 
-      <StyledLabel>Last Name</StyledLabel>
-      <StyledInput />
+  return <>
+    <RowContainer>
+      <FlexContainer>
+        <StyledText>My Profile</StyledText>
+        <Spin spinning={isLoading}>
+          <Avatar size={140} src={user?.profile?.avatar || USER_LOGO} />
+        </Spin>
+        <UploadContainer>
+          <input
+            id="user-profile-avatar-upload"
+            type="file"
+            style={{ display: 'none' }}
+            onChange={(event) => {
+              const file = event.target.files[0]
 
-      <StyledLabel style={{paddingLeft: 25}}>Phone Number </StyledLabel>
-      <StyledInput />
+              if (!file) return
+              if (!imageTypes.includes(file.type)) {
+                message.error('Unsupported file type.')
+                return
+              }
+
+              updateUserAvatar(userId)
+                .then((result: any) => {
+                  const url = result?.data?.updateUrl
+
+                  axios
+                    .put(url, file, { headers: { 'Content-Type': '' } })
+                    .then(() => dispatch(reloadUser(userId)))
+                })
+            }}
+          />
+          <input
+            type="button"
+            className={styles['upload-button']}
+            value="Change Photo"
+            onClick={() => { document.getElementById('user-profile-avatar-upload').click() }}
+          />
+        </UploadContainer>
+
+        <StyledLabel>First Name</StyledLabel>
+        <StyledInput />
+
+        <StyledLabel>Last Name</StyledLabel>
+        <StyledInput />
+
+        <StyledLabel style={{ paddingLeft: 25 }}>Phone Number </StyledLabel>
+        <StyledInput />
+      </FlexContainer>
 
       <ButtonContainer>
         <StyledCancel>CANCEL</StyledCancel>
         <StyledSave>SAVE</StyledSave>
       </ButtonContainer>
-    </FlexContainer>
-  </RowContainer>
+    </RowContainer>
+  </>
 }

@@ -8,7 +8,7 @@ import {apiSlice} from './api/apiSlice';
 import { persistStore, persistReducer, createMigrate } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const migrations: any = {
+const migrations = {
   1: (state) => {
     return {
       ...state
@@ -30,7 +30,7 @@ const middlewares = [sagaMiddleware, apiSlice.middleware];
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(middlewares)
 })
 
 const persist = persistStore(store);

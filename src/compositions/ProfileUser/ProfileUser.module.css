@@ -1,0 +1,17 @@
+.upload-button {
+  font-family: Didact Gothic;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  color: #7890ff;
+  text-decoration: underline;
+  border: none;
+}
+
+.upload-button:hover,
+.upload-button:active {
+  cursor: pointer;
+  opacity: 0.60;
+}
