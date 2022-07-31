@@ -1,4 +1,5 @@
 import {ReactElement, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {useLoginMutation} from 'ducks/auth/authApiSlice';
 
@@ -28,7 +29,6 @@ import styles from './LoginForm.module.css';
 
 import LOGO from 'assets/icons/logo.png';
 import IconImage from 'components/IconImage';
-import {setCredentials} from 'ducks/auth/authSlice';
 
 const INITIAL_VALUES = {
   email: '',
@@ -36,9 +36,10 @@ const INITIAL_VALUES = {
 };
 
 const LoginForm = (): ReactElement => {
+  const navigate = useNavigate()
+
   const [login, {isLoading}] = useLoginMutation()
 
-  const dispatch = useDispatch();
   const [form] = Form.useForm();
   const {data, loading}: any = useSelector<RootState>(
     (state) => state.authentication,
@@ -47,7 +48,8 @@ const LoginForm = (): ReactElement => {
   const handlesubmit = async (values: never) => {
     try {
       const result = await login(values).unwrap()
-      dispatch(setCredentials(result))
+
+      navigate('/')
     } catch (err) {
       console.log(err)
     }

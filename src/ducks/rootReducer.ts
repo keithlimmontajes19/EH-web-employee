@@ -1,7 +1,6 @@
 import {combineReducers} from 'redux';
 
 import {apiSlice} from './api/apiSlice';
-import {authSliceReducer} from './auth/authSlice';
 
 import lms from './lms/reducer';
 import team from './teams/reducer';
@@ -14,7 +13,6 @@ import authentication from './authentication/reducer';
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
-  auth: authSliceReducer,
   lms,
   team,
   alert,

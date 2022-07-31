@@ -3,14 +3,17 @@ import styled from 'styled-components';
 export const FlexContainer = styled.div`
   flex: 1;
   display: flex;
+  align-items: center;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 `;
 
 export const RowContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
 
 export const UploadContainer = styled.div`
@@ -19,12 +22,12 @@ export const UploadContainer = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: right;
-  align-items: right;
-  margin-top: 50px;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  order: 1;
+  flex: 0 1 auto;
+  align-self: flex-end;
+  margin-right: 10%;
+  margin-top: 10%;
+  margin-bottom: 7%;
 `;
 
 export const StyledText = styled.p`

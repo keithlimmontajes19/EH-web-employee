@@ -83,12 +83,12 @@ export default function ProfileUser() {
 
         <StyledLabel style={{ paddingLeft: 25 }}>Phone Number </StyledLabel>
         <StyledInput />
-      </FlexContainer>
 
-      <ButtonContainer>
-        <StyledCancel>CANCEL</StyledCancel>
-        <StyledSave>SAVE</StyledSave>
-      </ButtonContainer>
+        <ButtonContainer>
+          <StyledCancel>CANCEL</StyledCancel>
+          <StyledSave>SAVE</StyledSave>
+        </ButtonContainer>
+      </FlexContainer>
     </RowContainer>
   </>
 }

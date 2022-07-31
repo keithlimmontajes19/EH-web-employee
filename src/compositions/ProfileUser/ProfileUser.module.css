@@ -8,6 +8,7 @@
   color: #7890ff;
   text-decoration: underline;
   border: none;
+  background-color: unset;
 }
 
 .upload-button:hover,
