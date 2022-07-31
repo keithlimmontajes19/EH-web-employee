@@ -16,7 +16,25 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH'
       }),
       transformResponse: ({data}) => data
-    })
+    }),
+    updateUserProfile: builder.mutation<any, any>({
+      query: ({userId, profile}) => ({
+        url: `/users/${userId}`,
+        method: 'PATCH',
+        body: {...profile}
+      }),
+      invalidatesTags: (result, error, arg) => [
+        {type: 'Users', id: arg.userId}
+      ],
+      onQueryStarted({userId, profile}, {dispatch, queryFulfilled}) {
+        const patchResult = dispatch(
+          usersApiSlice.util.updateQueryData('getSingleUser', userId, (user) => {
+            Object.assign(user, profile)
+          })
+        )
+        queryFulfilled.catch(patchResult.undo)
+      }
+    }),
   })
 })
 
@@ -24,4 +42,5 @@ export const reloadUser = (userId) => usersApiSlice.util.invalidateTags([{type: 
 export const {
   useGetSingleUserQuery,
   useUpdateUserAvatarMutation,
+  useUpdateUserProfileMutation
 } = usersApiSlice

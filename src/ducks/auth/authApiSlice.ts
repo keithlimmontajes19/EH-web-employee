@@ -7,6 +7,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: '/auth/login',
         method: 'POST',
         body: {...credentials}
+      }),
+      transformResponse: (({userId, accessToken, refreshToken}) => {
+        localStorage.setItem('userId', userId)
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
       })
     })
   })

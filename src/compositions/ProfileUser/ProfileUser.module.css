@@ -1,3 +1,72 @@
+.form-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-profile__label {
+  width: 100%;
+  text-align: left;
+
+  color: #4c4b7b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  margin-top: 38px;
+  margin-bottom: 17px;
+  padding-left: 10px;
+}
+
+.form-profile__input {
+  height: 48px;
+  opacity: 0.5;
+  width: 410px;
+  padding: 10px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-sizing: border-box;
+  border: 1px solid #635ffa;
+}
+
+.form-profile__button-container {
+  width: 200%;
+  text-align: right;
+  margin-top: 30%;
+  margin-left: 50%;
+  margin-bottom: 10%;
+}
+
+.form-profile__button-cancel {
+  border: none;
+  color: #635ffa;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: right;
+  margin-right: 20px;
+  background: transparent;
+}
+
+.form-profile__button-save {
+  width: 166px;
+  height: 48px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ab70f1 2.6%, #635ffa 47.4%, #4ab9e7 100%);
+  border: none;
+}
+
+.form-profile__button-cancel:hover,
+.form-profile__button-cancel:active,
+.form-profile__button-save:hover,
+.form-profile__button-save:active {
+  cursor: pointer;
+  opacity: 80%;
+}
+
 .upload-button {
   font-family: Didact Gothic;
   font-style: normal;
@@ -8,6 +77,7 @@
   color: #7890ff;
   text-decoration: underline;
   border: none;
+  background-color: unset;
 }
 
 .upload-button:hover,
