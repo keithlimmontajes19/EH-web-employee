@@ -6,7 +6,9 @@
   list-style: none;
   overflow-x: hidden;
   cursor: grab;
-  scroll-behavior: smooth;
+
+  /* currently broken on chrome */
+  /* scroll-behavior: smooth; */
 
   margin: 0;
   padding: 0;
