@@ -1,0 +1,49 @@
+.item {
+  height: 130px;
+  min-width: 220px;
+
+  margin: 0 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #d7edf6;
+  border-radius: 15px;
+
+  font-family: 'Red Hat Display';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+
+  color: #A2A1BD;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.item>div {
+  margin: 0 10px;
+}
+
+.item-icon {
+  color: #4c4b7b;
+}
+
+.item-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-description__count {
+  color: #4c4b7b;
+}
+
+.item-description__title {
+  color: #a2a1bd;
+}

@@ -1,0 +1,16 @@
+.home-info {
+  padding: 16px 16px 0;
+}
+
+.home-info__items {
+  list-style: none;
+  overflow-x: hidden;
+  cursor: grab;
+  scroll-behavior: smooth;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  justify-content: space-between;
+}
