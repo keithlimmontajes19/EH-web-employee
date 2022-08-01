@@ -15,6 +15,9 @@ import Leaderboard from 'compositions/Leaderboard';
 import Announcement from 'compositions/Announcement';
 import MainCourseList from 'compositions/MainCourseList';
 
+import HomeHeader from './HomeHeader/HomeHeader';
+import HomeInfo from './HomeInfo/HomeInfo';
+
 const Home = (): ReactElement => {
   const dispatch = useDispatch();
 
@@ -27,6 +30,8 @@ const Home = (): ReactElement => {
 
   return (
     <Container>
+      <HomeHeader />
+      <HomeInfo />
       <FlexWrap>
         <SubContainer>
           <Leaderboard />
