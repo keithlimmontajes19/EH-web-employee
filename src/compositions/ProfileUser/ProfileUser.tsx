@@ -65,7 +65,7 @@ export default function ProfileUser() {
         const url = result?.data?.updateUrl
 
         axios
-          .put(url, file, { headers: { 'Content-Type': '' } })
+          .put(url, file, { headers: { 'Content-Type': file.type } })
           .then(() => dispatch(reloadUser(userId)))
       })
   }, [])
@@ -75,7 +75,8 @@ export default function ProfileUser() {
       <FlexContainer>
         <StyledText>My Profile</StyledText>
         <Spin spinning={isLoadingUpdateUserAvatar}>
-          <Avatar size={140} src={user?.profile?.avatar || USER_LOGO} />
+          {user?.profile?.avatar && <Avatar size={140} src={user?.profile?.avatar} />}
+          {!user?.profile?.avatar && <Avatar size={140} style={{fontSize: 64}}>{user?.profile?.firstName[0]}</Avatar>}
         </Spin>
         <UploadContainer>
           <input
