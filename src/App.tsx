@@ -15,6 +15,7 @@ import ProfileUser from './compositions/ProfileUser'
 import ProfileAccount from './compositions/ProfileAccount'
 import ProfileOrg from './compositions/ProfileOrganization'
 import ViewPageDetails from './compositions/ViewPageDetails'
+import {ForgotPassword} from 'compositions/ForgotPassword'
 
 export default function App() {
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function App() {
       {/* public routes */}
       <Route path="login" element={<Login />} />
       <Route path="logout" element={<Logout />} />
+      <Route path="forgot-password" element={<ForgotPassword />} />
 
       {/* protected routes */}
       <Route element={<RequireAuthentication />}>

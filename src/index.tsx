@@ -2,6 +2,9 @@ import {StrictMode} from 'react'
 import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+
+import {QueryClient, QueryClientProvider} from 'react-query'
+
 // import {PersistGate} from 'redux-persist/integration/react'
 
 import {store, /*persist*/} from './ducks/store'
@@ -17,18 +20,21 @@ import 'pure-react-carousel/dist/react-carousel.es.css'
 
 import './index.css'
 
+const queryClient = new QueryClient()
 const root = document.getElementById('root')
 const content = <StrictMode>
-  <Provider store={store}>
-    {/* TO DO: error in persist gate */}
-    {/* <PersistGate loading={null} persistor={persist}> */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<App />} />
-        </Routes>
-      </BrowserRouter>
-    {/* </PersistGate> */}
-  </Provider>
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      {/* TO DO: error in persist gate */}
+      {/* <PersistGate loading={null} persistor={persist}> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/*" element={<App />} />
+          </Routes>
+        </BrowserRouter>
+      {/* </PersistGate> */}
+    </Provider>
+  </QueryClientProvider>
 </StrictMode>
 
 render(content, root)

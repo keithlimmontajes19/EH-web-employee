@@ -1,0 +1,11 @@
+.background {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(286.97deg, #4AB9E7 -18.23%, #635FFA 13.58%, #AB70F1 42.75%, #FF755B 89.54%, #FF4545 114.06%);
+}
+
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

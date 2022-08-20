@@ -1,7 +1,8 @@
-import {ReactElement, useEffect} from 'react';
+import {ReactElement} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import {useLoginMutation} from 'ducks/auth/authApiSlice';
+import {useMutation} from 'react-query'
+import {login} from 'api/authAPI'
 
 /* styles antd */
 import {
@@ -16,13 +17,10 @@ import {
   StyledPassword,
   SignupContainer,
 } from './styled';
-import {Form, Modal, Spin} from 'antd';
+import {Form} from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
 
 /* redux actions helpers */
-import {useSelector, useDispatch} from 'react-redux';
-import {postLogin} from 'ducks/authentication/actionCreator';
-import {RootState} from 'ducks/store';
 import {rulesConfig} from 'utils/helpers';
 
 import styles from './LoginForm.module.css';
@@ -30,54 +28,37 @@ import styles from './LoginForm.module.css';
 import LOGO from 'assets/icons/logo.png';
 import IconImage from 'components/IconImage';
 
-const INITIAL_VALUES = {
-  email: '',
-  password: '',
-};
-
 const LoginForm = (): ReactElement => {
+  const loginMutation = useMutation(login, {
+    onSuccess: ({data}) => {
+      const {accessToken, refreshToken, userId} = data
+      localStorage.setItem('accessToken', accessToken)
+      localStorage.setItem('refreshToken', refreshToken)
+      localStorage.setItem('userId', userId)
+    },
+    onError: (err: any) => {
+      if (err.response) {
+        return err.response.data.message
+      }
+
+      return err.message
+    }
+  })
+
   const navigate = useNavigate()
-
-  const [login, {isLoading}] = useLoginMutation()
-
-  const [form] = Form.useForm();
-  const {data, loading}: any = useSelector<RootState>(
-    (state) => state.authentication,
-  );
+  const [form] = Form.useForm()
 
   const handlesubmit = async (values: never) => {
-    try {
-      const result = await login(values).unwrap()
-
-      navigate('/')
-    } catch (err) {
-      console.log(err)
-    }
-
-    // dispatch(postLogin(values));
-  };
+    await loginMutation.mutateAsync(values)
+    if (!loginMutation.isError) navigate('/')
+  }
 
   const setFormFields = (field: string, errors: string) => {
-    form.setFields([
-      {
-        name: field,
-        errors: [errors],
-      },
-    ]);
-  };
-
-  useEffect(() => {
-    const email = form.getFieldValue('email');
-    const password = form.getFieldValue('password');
-
-    if (!data?.success && email.length) {
-      setFormFields('email', data?.message);
-    }
-
-    if (!data?.success && password.length) {
-      setFormFields('password', data?.message);
-    }
-  }, [data]);
+    form.setFields([{
+      name: field,
+      errors: [errors],
+    }])
+  }
 
   return (
     <Container>
@@ -91,7 +72,10 @@ const LoginForm = (): ReactElement => {
         layout="vertical"
         requiredMark={false}
         onFinish={handlesubmit}
-        initialValues={INITIAL_VALUES}>
+        initialValues={{
+          email: '',
+          password: ''
+        }}>
         <Form.Item name="email" rules={rulesConfig('Email is required.')}>
           <StyledInput
             type="email"
@@ -115,7 +99,7 @@ const LoginForm = (): ReactElement => {
         <StyledButton
           size="large"
           onClick={() => form.submit()}
-          loading={loading}>
+          loading={loginMutation.isLoading}>
           Sign In
         </StyledButton>
 
@@ -129,7 +113,7 @@ const LoginForm = (): ReactElement => {
 
         <InputContaier>
           <LabelStyled>
-            <Link to="/forgot" className={styles.link}>Forgot Password?</Link>
+            <Link to="/forgot-password" className={styles.link}>Forgot Password?</Link>
           </LabelStyled>
         </InputContaier>
 
@@ -141,7 +125,7 @@ const LoginForm = (): ReactElement => {
         </SignupContainer>
       </Form>
     </Container>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm
