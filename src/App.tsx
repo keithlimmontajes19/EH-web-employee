@@ -1,6 +1,6 @@
 import Gleap from 'gleap'
 import {useEffect} from 'react'
-import {Navigate, Routes, Route, Outlet} from 'react-router-dom'
+import {Navigate, Routes, Route} from 'react-router-dom'
 
 import Layout from './components/Layout'
 import RequireAuthentication from './components/RequireAuthentication'

@@ -12,8 +12,8 @@ export function EnterOTP() {
   const navigate = useNavigate()
 
   const verifyOTPMutation = useMutation(verifyOTP, {
-    onSuccess: (data: any) => {
-      const {accessToken, refreshToken, userId} = data
+    onSuccess: (response) => {
+      const {accessToken, refreshToken, userId} = response.data
       localStorage.setItem('accessToken', accessToken)
       localStorage.setItem('refreshToken', refreshToken)
       localStorage.setItem('userId', userId)
@@ -44,9 +44,11 @@ export function EnterOTP() {
           className={`${styles.textInput}`}
           type="text"
           placeholder="Enter OTP"
-          value={otpCode}
+          value={Number(otpCode) || null}
           onChange={(e) => {
-            setOTPCode(Number(e.target.value) || null)
+            setOTPCode(() => {
+              return Number(e.target.value) || null
+            })
           }}
         />
         <button
