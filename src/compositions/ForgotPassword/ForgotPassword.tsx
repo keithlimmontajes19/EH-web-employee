@@ -10,7 +10,7 @@ export function ForgotPassword() {
       <h1 className={`${styles.title}`}>Forgot Password</h1>
       <p className={`${styles.instruction}`}>Please enter the address associated with your account.</p>
       <form className={`${styles.form}`}  onSubmit={(e) => e.preventDefault()}>
-        <input className={`${styles.textInput}`} type="text" placeholder="Email Address" />
+        <input className={`${styles.textInput}`} type="email" placeholder="Email Address" />
         <button className={`${styles.submitButton}`} type="submit">SUBMIT</button>
         <Link to="/login" className={styles.cancel}>CANCEL</Link>
       </form>
