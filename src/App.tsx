@@ -16,6 +16,8 @@ import ProfileAccount from './compositions/ProfileAccount'
 import ProfileOrg from './compositions/ProfileOrganization'
 import ViewPageDetails from './compositions/ViewPageDetails'
 import {ForgotPassword} from 'compositions/ForgotPassword'
+import {EnterOTP} from 'compositions/EnterOTP'
+import {ResetPassword} from 'compositions/ResetPassword'
 
 export default function App() {
   useEffect(() => {
@@ -28,7 +30,12 @@ export default function App() {
       {/* public routes */}
       <Route path="login" element={<Login />} />
       <Route path="logout" element={<Logout />} />
-      <Route path="forgot-password" element={<ForgotPassword />} />
+
+      <Route path="forgot-password">
+        <Route index element={<ForgotPassword />} />
+        <Route path="otp" element={<EnterOTP />} />
+        <Route path="reset" element={<ResetPassword />} />
+      </Route>
 
       {/* protected routes */}
       <Route element={<RequireAuthentication />}>
