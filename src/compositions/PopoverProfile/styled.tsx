@@ -28,6 +28,9 @@ export const StyledText = styled.span`
 
 export const ContentContainer: any = styled.div`
   margin-top: ${(props: any) => (props.index === 0 ? 10 : 12)}px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const StyledImage: any = styled.img.attrs((props: any) => ({
