@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const baseURL = process.env.REACT_APP_BASE_API_URL || 'https://engage-hub-platform-dev.herokuapp.com/api/v1'
+// const baseURL = process.env.REACT_APP_BASE_API_URL || 'https://engage-hub-platform-dev.herokuapp.com/api/v1'
+const baseURL = 'https://engage-hub-platform-dev.herokuapp.com/api/v1'
 
 export const authAPI = axios.create({
   baseURL: `${baseURL}/auth`,
