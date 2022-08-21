@@ -17,21 +17,36 @@ import {
   UploadContainer,
 } from './styled'
 
+import {useQuery, useMutation, useQueryClient} from 'react-query'
+import {updateUserProfile, updateUserAvatar, getUser} from 'api/usersAPI'
+
 import styles from './ProfileUser.module.css'
 import USER_LOGO from 'assets/icons/profile-user.png'
 import {Avatar, Spin, message} from 'antd'
 import {imageTypes} from 'utils/file-types'
 
 export default function ProfileUser() {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
   const userId = localStorage.getItem('userId')
   if (!userId) navigate('/logout')
 
-  const {data: user} = useGetSingleUserQuery(userId)
-  const [updateUserAvatar, {isLoading: isLoadingUpdateUserAvatar}] = useUpdateUserAvatarMutation()
-  const [updateUserProfile, {isLoading: isLoadingUpdateUserProfile}] = useUpdateUserProfileMutation()
+  const {isLoading, isError, error, data: user} = useQuery(`users/${userId}`, getUser, {
+    select: response => response.data.data
+  })
+
+  const updateUserAvatarMutation = useMutation(updateUserAvatar, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(`users/${userId}`)
+    }
+  })
+
+  const updateUserProfileMutation = useMutation(updateUserProfile, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(`users/${userId}`)
+    }
+  })
 
   const onFormProfileSubmit = useCallback((event) => {
     event.preventDefault()
@@ -42,7 +57,7 @@ export default function ProfileUser() {
       .filter(([, v]) => v)
       .reduce((current, value) => ({...current, [value[0]]: value[1]}), {})
 
-    updateUserProfile({userId, profile})
+    updateUserProfileMutation.mutateAsync({userId, body: profile})
       .then(() => {
         event.target.reset()
       })
@@ -60,21 +75,22 @@ export default function ProfileUser() {
       return
     }
 
-    updateUserAvatar(userId)
+    updateUserAvatarMutation.mutateAsync({userId})
       .then((result: any) => {
-        const url = result?.data?.updateUrl
+        const url = result?.data?.data?.uploadUrl
 
-        axios
-          .put(url, file, { headers: { 'Content-Type': file.type } })
-          .then(() => dispatch(reloadUser(userId)))
+        axios.put(url, file, { headers: { 'Content-Type': file.type } })
+        queryClient.invalidateQueries(`users/${userId}`)
       })
   }, [])
+
+  console.log(updateUserProfileMutation.isLoading)
 
   return <>
     <RowContainer>
       <FlexContainer>
         <StyledText>My Profile</StyledText>
-        <Spin spinning={isLoadingUpdateUserAvatar}>
+        <Spin spinning={updateUserAvatarMutation.isLoading}>
           {user?.profile?.avatar && <Avatar size={140} src={user?.profile?.avatar} />}
           {!user?.profile?.avatar && <Avatar size={140} style={{fontSize: 64}}>{user?.profile?.firstName[0]}</Avatar>}
         </Spin>
@@ -122,8 +138,8 @@ export default function ProfileUser() {
           />
 
           <div className={styles['form-profile__button-container']}>
-            <button className={styles['form-profile__button-cancel']} type="reset">CANCEL</button>
-            <button className={styles['form-profile__button-save']} type="submit">SAVE <Spin spinning={isLoadingUpdateUserProfile}></Spin></button>
+            <button className={styles['form-profile__button-cancel']} type="reset" onClick={() => navigate(-1)}>CANCEL</button>
+            <button className={styles['form-profile__button-save']} type="submit">SAVE <Spin spinning={updateUserProfileMutation.isLoading} /></button>
           </div>
         </form>
       </FlexContainer>

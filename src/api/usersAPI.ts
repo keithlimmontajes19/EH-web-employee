@@ -18,6 +18,32 @@ export const updateUserProfile = async function({userId, body}) {
   return data
 }
 
+export const updateUserAvatar = async function({userId}) {
+  const accessToken = localStorage.getItem('accessToken')
+
+  const data = await usersAPI.put(`/${userId}/avatar`, {}, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  })
+
+  return data
+}
+
+export const getUser = async function() {
+  const accessToken = localStorage.getItem('accessToken')
+  const userId = localStorage.getItem('userId')
+
+  const data = await usersAPI.get(`/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  })
+
+  return data
+}
+
+
 export const getUserOrganizations = async function() {
   const accessToken = localStorage.getItem('accessToken')
   const userId = localStorage.getItem('userId')
