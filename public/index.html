@@ -126,6 +126,15 @@
         font-weight: 400;
         src: url(fonts/Zocial.ttf) format('truetype');
       }
+
+      /*
+        fix weird behavior on firefox browsers that adds a extra white background below
+        the viewport
+      */
+      html,
+      body {
+        overflow: hidden;
+      }
     </style>
   </head>
 
