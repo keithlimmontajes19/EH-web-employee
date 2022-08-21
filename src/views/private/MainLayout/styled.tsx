@@ -76,15 +76,24 @@ export const SearchStyles = {color: theme.LINK_TEXT, fontSize: 18};
 export const SearchContainer = styled.div`
   flex: 1;
   display: flex;
+  align-self: center;
 `;
 
 export const BellContainer = styled.div`
   margin: 10px;
   margin-right: 35px;
+  align-self: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const AvatarContainer = styled.div`
   margin-right: 35px;
+  align-self: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const MenuStyles = {
