@@ -30,8 +30,8 @@ const Home = (): ReactElement => {
 
   return (
     <Container>
-      <HomeHeader />
-      <HomeInfo />
+      {/* <HomeHeader /> */}
+      {/* <HomeInfo /> */}
       <FlexWrap>
         <SubContainer>
           <Leaderboard />
