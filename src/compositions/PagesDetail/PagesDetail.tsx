@@ -22,40 +22,46 @@ const PagesDetail = ({data}: PropsType): any => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const renderItem = (item) => {
+    return (
+      <Row>
+        <Col span={20}>
+          <div
+            onClick={() => {
+              navigate('/team/detail');
+              dispatch(getPageDetails(item));
+            }}
+            style={{
+              width: 120,
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+            <MainContainer>
+              <div style={FolderContainer}>
+                <IconImage
+                  width={33}
+                  height={41}
+                  source={
+                    item?.type || item?.item_type === 'page' ? PAGE : QUIZ
+                  }
+                />
+              </div>
+            </MainContainer>
+
+            <div style={NameContainer}>
+              <NameStyled>{item?.title || item?.item_name}</NameStyled>
+            </div>
+          </div>
+        </Col>
+      </Row>
+    );
+  };
+
   return (
     <Fragment>
-      {(data || []).map((item: any) => {
-        return (
-          <Row>
-            <Col span={20}>
-              <div
-                onClick={() => {
-                  dispatch(getPageDetails(item));
-                  navigate('/team/detail');
-                }}
-                style={{
-                  width: 120,
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}>
-                <MainContainer>
-                  <div style={FolderContainer}>
-                    <IconImage
-                      width={33}
-                      height={41}
-                      source={item?.type ? QUIZ : PAGE}
-                    />
-                  </div>
-                </MainContainer>
-
-                <div style={NameContainer}>
-                  <NameStyled>{item?.title}</NameStyled>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        );
-      })}
+      {Array.isArray(data)
+        ? (data || []).map((item) => renderItem(item))
+        : renderItem(data)}
     </Fragment>
   );
 };

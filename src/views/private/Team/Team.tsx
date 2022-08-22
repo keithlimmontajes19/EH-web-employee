@@ -49,7 +49,8 @@ const Team = (): ReactElement => {
                   <FlexWrap>
                     {(board?.board_items || []).map((x) => {
                       if (x?.item_type === 'page') {
-                        return <PagesDetail data={x?.item_pages} />;
+                        // <PagesDetail data={x?.item_pages} /> will check further
+                        return <PagesDetail data={x} />;
                       } else {
                         return <FolderDetail item={x} />;
                       }
