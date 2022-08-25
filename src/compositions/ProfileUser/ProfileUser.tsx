@@ -1,14 +1,6 @@
 import axios from 'axios'
 import {useCallback} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
-
-import {
-  reloadUser,
-  useGetSingleUserQuery,
-  useUpdateUserAvatarMutation,
-  useUpdateUserProfileMutation
-} from 'ducks/users/usersApiSlice'
 
 import {
   StyledText,
@@ -21,7 +13,6 @@ import {useQuery, useMutation, useQueryClient} from 'react-query'
 import {updateUserProfile, updateUserAvatar, getUser} from 'api/usersAPI'
 
 import styles from './ProfileUser.module.css'
-import USER_LOGO from 'assets/icons/profile-user.png'
 import {Avatar, Spin, message} from 'antd'
 import {imageTypes} from 'utils/file-types'
 
@@ -38,6 +29,7 @@ export default function ProfileUser() {
 
   const updateUserAvatarMutation = useMutation(updateUserAvatar, {
     onSuccess: async () => {
+      // do nothing because the endpoint will return a presignedUploadUrl
       await queryClient.invalidateQueries(`users/${userId}`)
     }
   })
@@ -50,15 +42,18 @@ export default function ProfileUser() {
 
   const onFormProfileSubmit = useCallback((event) => {
     event.preventDefault()
-    // const profile = Object.fromEntries(new FormData(event.target))
 
     const profile = Array
       .from(new FormData(event.target))
       .filter(([, v]) => v)
       .reduce((current, value) => ({...current, [value[0]]: value[1]}), {})
 
+    // remove this in the future
+    // we need a way to set the country and phone number
+    profile['country'] = 'usa'
+
     updateUserProfileMutation.mutateAsync({userId, body: profile})
-      .then(() => {
+      .then(async () => {
         event.target.reset()
       })
       .catch(() => {
@@ -71,20 +66,21 @@ export default function ProfileUser() {
 
     if (!file) return
     if (!imageTypes.includes(file.type)) {
-      message.error('Unsupported file type.')
+      message.error('Unsupported file type.', 3)
       return
     }
 
     updateUserAvatarMutation.mutateAsync({userId})
-      .then((result: any) => {
+      .then(async (result: any) => {
         const url = result?.data?.data?.uploadUrl
 
-        axios.put(url, file, { headers: { 'Content-Type': file.type } })
-        queryClient.invalidateQueries(`users/${userId}`)
+        await axios.put(url, file, { headers: { 'Content-Type': file.type } })
+
+        setTimeout(async () => {
+          await queryClient.invalidateQueries(`users/${userId}`)
+        }, 1000)
       })
   }, [])
-
-  console.log(updateUserProfileMutation.isLoading)
 
   return <>
     <RowContainer>
@@ -116,7 +112,8 @@ export default function ProfileUser() {
             className={styles['form-profile__input']}
             type="text"
             name="firstName"
-            placeholder={user?.profile?.firstName}
+            defaultValue={user?.profile?.firstName}
+            placeholder="First Name"
           />
 
           <label htmlFor="lastName" className={styles['form-profile__label']}>Last Name</label>
@@ -125,7 +122,8 @@ export default function ProfileUser() {
             className={styles['form-profile__input']}
             type="text"
             name="lastName"
-            placeholder={user?.profile?.lastName}
+            defaultValue={user?.profile?.lastName}
+            placeholder="Last Name"
           />
 
           <label htmlFor="phoneNumber" className={styles['form-profile__label']}>Phone Number</label>
@@ -134,7 +132,8 @@ export default function ProfileUser() {
             className={styles['form-profile__input']}
             type="text"
             name="phoneNumber"
-            placeholder={user?.profile?.phoneNumber}
+            defaultValue={user?.profile?.phoneNumber}
+            placeholder="Phone Number"
           />
 
           <div className={styles['form-profile__button-container']}>

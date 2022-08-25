@@ -10,7 +10,6 @@ export const RowContainer = {
 };
 
 export const SubLogoContainer = styled.div`
-  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -27,8 +26,6 @@ export const SubLogoContainer = styled.div`
 export const SublogoStyles = {height: '100%', width: '100%'};
 export const FormContainer = styled.div`
   width: 550px;
-  height: 801px;
-  overflow: hidden;
   margin-top: 111px;
   margin-right: 146px;
   background: #ffffff;

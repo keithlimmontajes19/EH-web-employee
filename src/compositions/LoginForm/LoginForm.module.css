@@ -7,3 +7,7 @@
   color: #635ffa;
   margin-top: 10px;
 }
+
+.error {
+  color: red;
+}

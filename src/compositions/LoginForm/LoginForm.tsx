@@ -1,8 +1,11 @@
-import {ReactElement} from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {useMutation} from 'react-query'
 import {login} from 'api/authAPI'
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons'
 
 /* styles antd */
 import {
@@ -28,7 +31,11 @@ import styles from './LoginForm.module.css';
 import LOGO from 'assets/icons/logo.png';
 import IconImage from 'components/IconImage';
 
-const LoginForm = (): ReactElement => {
+export default function LoginForm() {
+  const navigate = useNavigate()
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
   const loginMutation = useMutation(login, {
     onSuccess: ({data}) => {
       const {accessToken, refreshToken, userId} = data
@@ -37,20 +44,28 @@ const LoginForm = (): ReactElement => {
       localStorage.setItem('userId', userId)
     },
     onError: (err: any) => {
-      if (err.response) {
-        return err.response.data.message
-      }
-
-      return err.message
+      setIsSubmitted(true)
+      return err.response.data
     }
   })
 
-  const navigate = useNavigate()
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    const refreshToken = localStorage.getItem('refreshToken')
+    const userId = localStorage.getItem('userId')
+
+    if (accessToken && refreshToken && userId) navigate('/')
+  }, [])
+
   const [form] = Form.useForm()
 
   const handlesubmit = async (values: never) => {
-    await loginMutation.mutateAsync(values)
-    if (!loginMutation.isError) navigate('/')
+    try {
+      await loginMutation.mutateAsync(values)
+      navigate('/')
+    } catch (err) {
+      // do nothing
+    }
   }
 
   const setFormFields = (field: string, errors: string) => {
@@ -81,7 +96,10 @@ const LoginForm = (): ReactElement => {
             type="email"
             size="large"
             placeholder="Input Email"
-            onChange={() => setFormFields('email', '')}
+            onChange={() => {
+              setFormFields('email', '')
+              setIsSubmitted(false)
+            }}
           />
         </Form.Item>
 
@@ -89,12 +107,19 @@ const LoginForm = (): ReactElement => {
           <StyledPassword
             size="large"
             placeholder="Input Password"
-            onChange={() => setFormFields('password', '')}
+            onChange={() => {
+              setFormFields('password', '')
+              setIsSubmitted(false)
+            }}
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
           />
         </Form.Item>
+
+        {isSubmitted && loginMutation.isError && !loginMutation.isLoading && <p className={`${styles.error}`}>
+          <span><FontAwesomeIcon icon={faExclamationCircle} /></span>&nbsp;{loginMutation.error.response.data.message.toString()}
+        </p>}
 
         <StyledButton
           size="large"
@@ -127,5 +152,3 @@ const LoginForm = (): ReactElement => {
     </Container>
   )
 }
-
-export default LoginForm
