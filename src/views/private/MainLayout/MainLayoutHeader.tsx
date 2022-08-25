@@ -1,3 +1,6 @@
+import {useQuery} from 'react-query'
+import {useNavigate} from 'react-router-dom'
+import {getUser} from 'api/usersAPI'
 import {SearchOutlined, UserOutlined} from '@ant-design/icons'
 import {Avatar, Badge} from 'antd'
 import {AvatarContainer, BellContainer, HeaderStyled, SearchContainer, SearchInput, SearchStyles} from './styled'
@@ -10,6 +13,15 @@ import PopoverProfile from 'compositions/PopoverProfile'
 import styles from './MainLayoutHeader.module.css'
 
 export default function MainLayoutHeader() {
+  const navigate = useNavigate()
+
+  const userId = localStorage.getItem('userId')
+  if (!userId) navigate('/logout')
+
+  const {isLoading, isError, error, data: user} = useQuery(`users/${userId}`, getUser, {
+    select: response => response.data.data
+  })
+
   return <HeaderStyled>
     <img className={`${styles.companyLogo}`} src={premierAutomotiveLogo} />
 
@@ -26,9 +38,12 @@ export default function MainLayoutHeader() {
       </Badge>
     </BellContainer>
 
-    <PopoverProfile name="Keith Lim Montajes" organization="Organization">
+    <PopoverProfile name={`${user?.profile?.firstName} ${user?.profile?.lastName}`} organization="Organization" src={user?.profile?.avatar || <UserOutlined />}>
       <AvatarContainer>
-        <Avatar size={50} icon={<UserOutlined />} />
+        <Avatar
+          size={50}
+          src={user?.profile?.avatar || <UserOutlined />}
+        />
       </AvatarContainer>
     </PopoverProfile>
   </HeaderStyled>

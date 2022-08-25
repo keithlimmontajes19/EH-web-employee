@@ -43,6 +43,19 @@ export const getUser = async function() {
   return data
 }
 
+export const getSingleUserFactory = async function(userId) {
+  return async function() {
+    const accessToken = localStorage.getItem('accessToken')
+
+    const data = await usersAPI.get(`/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+
+    return data
+  }
+}
 
 export const getUserOrganizations = async function() {
   const accessToken = localStorage.getItem('accessToken')
