@@ -61,16 +61,19 @@ export default function ProfileUser() {
 
     if (!file) return
     if (!imageTypes.includes(file.type)) {
-      message.error('Unsupported file type.')
+      message.error('Unsupported file type.', 3)
       return
     }
 
     updateUserAvatarMutation.mutateAsync({userId})
-      .then((result: any) => {
+      .then(async (result: any) => {
         const url = result?.data?.data?.uploadUrl
 
-        axios.put(url, file, { headers: { 'Content-Type': file.type } })
-        queryClient.invalidateQueries(`users/${userId}`)
+        await axios.put(url, file, { headers: { 'Content-Type': file.type } })
+
+        setTimeout(async () => {
+          await queryClient.invalidateQueries(`users/${userId}`)
+        }, 1000)
       })
   }, [])
 
