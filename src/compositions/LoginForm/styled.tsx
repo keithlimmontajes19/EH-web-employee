@@ -3,13 +3,13 @@ import {theme} from 'utils/colors';
 import {Input, Button} from 'antd';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 30px;
   align-content: center;
   align-items: center;
-  overflow: hidden;
   margin-left: 50px;
   margin-right: 50px;
-  overflow: hidden;
 `;
 
 export const StyledInput: any = styled<any>(Input)`

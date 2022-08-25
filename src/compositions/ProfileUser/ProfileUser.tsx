@@ -1,14 +1,6 @@
 import axios from 'axios'
 import {useCallback} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
-
-import {
-  reloadUser,
-  useGetSingleUserQuery,
-  useUpdateUserAvatarMutation,
-  useUpdateUserProfileMutation
-} from 'ducks/users/usersApiSlice'
 
 import {
   StyledText,
@@ -21,7 +13,6 @@ import {useQuery, useMutation, useQueryClient} from 'react-query'
 import {updateUserProfile, updateUserAvatar, getUser} from 'api/usersAPI'
 
 import styles from './ProfileUser.module.css'
-import USER_LOGO from 'assets/icons/profile-user.png'
 import {Avatar, Spin, message} from 'antd'
 import {imageTypes} from 'utils/file-types'
 
@@ -50,7 +41,6 @@ export default function ProfileUser() {
 
   const onFormProfileSubmit = useCallback((event) => {
     event.preventDefault()
-    // const profile = Object.fromEntries(new FormData(event.target))
 
     const profile = Array
       .from(new FormData(event.target))
@@ -83,8 +73,6 @@ export default function ProfileUser() {
         queryClient.invalidateQueries(`users/${userId}`)
       })
   }, [])
-
-  console.log(updateUserProfileMutation.isLoading)
 
   return <>
     <RowContainer>
