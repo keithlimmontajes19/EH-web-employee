@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {useMutation} from 'react-query'
@@ -34,6 +34,8 @@ import IconImage from 'components/IconImage';
 export default function LoginForm() {
   const navigate = useNavigate()
 
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
   const loginMutation = useMutation(login, {
     onSuccess: ({data}) => {
       const {accessToken, refreshToken, userId} = data
@@ -42,6 +44,7 @@ export default function LoginForm() {
       localStorage.setItem('userId', userId)
     },
     onError: (err: any) => {
+      setIsSubmitted(true)
       return err.response.data
     }
   })
@@ -72,8 +75,6 @@ export default function LoginForm() {
     }])
   }
 
-  if (loginMutation.isError) console.log(loginMutation.error)
-
   return (
     <Container>
       <FlexRow>
@@ -95,7 +96,10 @@ export default function LoginForm() {
             type="email"
             size="large"
             placeholder="Input Email"
-            onChange={() => setFormFields('email', '')}
+            onChange={() => {
+              setFormFields('email', '')
+              setIsSubmitted(false)
+            }}
           />
         </Form.Item>
 
@@ -103,14 +107,17 @@ export default function LoginForm() {
           <StyledPassword
             size="large"
             placeholder="Input Password"
-            onChange={() => setFormFields('password', '')}
+            onChange={() => {
+              setFormFields('password', '')
+              setIsSubmitted(false)
+            }}
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
           />
         </Form.Item>
 
-        {loginMutation.isError && !loginMutation.isLoading && <p className={`${styles.error}`}>
+        {isSubmitted && loginMutation.isError && !loginMutation.isLoading && <p className={`${styles.error}`}>
           <span><FontAwesomeIcon icon={faExclamationCircle} /></span>&nbsp;{loginMutation.error.response.data.message.toString()}
         </p>}
 
