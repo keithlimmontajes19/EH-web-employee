@@ -6,6 +6,7 @@ import {Avatar, Badge} from 'antd'
 import {AvatarContainer, BellContainer, HeaderStyled, SearchContainer, SearchInput, SearchStyles} from './styled'
 
 import premierAutomotiveLogo from 'assets/images/premier-automotive-logo.png'
+import USER_ICON from 'assets/images/user-icon.png'
 import ICON_BELL from 'assets/icons/bell-blue.png'
 import IconImage from 'components/IconImage'
 import PopoverProfile from 'compositions/PopoverProfile'
@@ -38,11 +39,12 @@ export default function MainLayoutHeader() {
       </Badge>
     </BellContainer>
 
-    <PopoverProfile name={`${user?.profile?.firstName} ${user?.profile?.lastName}`} organization="Organization" src={user?.profile?.avatar || <UserOutlined />}>
+    <PopoverProfile name={`${user?.profile?.firstName} ${user?.profile?.lastName}`} organization="Organization" src={user?.profile?.avatar || USER_ICON}>
       <AvatarContainer>
         <Avatar
           size={50}
-          src={user?.profile?.avatar || <UserOutlined />}
+          icon={<UserOutlined />}
+          src={user?.profile?.avatar}
         />
       </AvatarContainer>
     </PopoverProfile>

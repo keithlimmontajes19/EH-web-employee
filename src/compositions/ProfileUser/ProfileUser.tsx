@@ -29,6 +29,7 @@ export default function ProfileUser() {
 
   const updateUserAvatarMutation = useMutation(updateUserAvatar, {
     onSuccess: async () => {
+      // do nothing because the endpoint will return a presignedUploadUrl
       await queryClient.invalidateQueries(`users/${userId}`)
     }
   })
@@ -47,8 +48,12 @@ export default function ProfileUser() {
       .filter(([, v]) => v)
       .reduce((current, value) => ({...current, [value[0]]: value[1]}), {})
 
+    // remove this in the future
+    // we need a way to set the country and phone number
+    profile['country'] = 'usa'
+
     updateUserProfileMutation.mutateAsync({userId, body: profile})
-      .then(() => {
+      .then(async () => {
         event.target.reset()
       })
       .catch(() => {
@@ -107,7 +112,8 @@ export default function ProfileUser() {
             className={styles['form-profile__input']}
             type="text"
             name="firstName"
-            placeholder={user?.profile?.firstName}
+            defaultValue={user?.profile?.firstName}
+            placeholder="First Name"
           />
 
           <label htmlFor="lastName" className={styles['form-profile__label']}>Last Name</label>
@@ -116,7 +122,8 @@ export default function ProfileUser() {
             className={styles['form-profile__input']}
             type="text"
             name="lastName"
-            placeholder={user?.profile?.lastName}
+            defaultValue={user?.profile?.lastName}
+            placeholder="Last Name"
           />
 
           <label htmlFor="phoneNumber" className={styles['form-profile__label']}>Phone Number</label>
@@ -125,7 +132,8 @@ export default function ProfileUser() {
             className={styles['form-profile__input']}
             type="text"
             name="phoneNumber"
-            placeholder={user?.profile?.phoneNumber}
+            defaultValue={user?.profile?.phoneNumber}
+            placeholder="Phone Number"
           />
 
           <div className={styles['form-profile__button-container']}>
