@@ -13,7 +13,7 @@ export const POPOVER_PROFILE = [
   {
     title: 'My Organization',
     icon: ORGANIZATION_PROFILE_ICON,
-    url: '/profile/organization',
+    url: '/organizations',
   },
   {title: 'Log Out', icon: LOGOUT_PROFILE_ICON, url: '/logout'},
 ];

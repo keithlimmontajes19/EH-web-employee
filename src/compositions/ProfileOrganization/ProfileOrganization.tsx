@@ -19,7 +19,7 @@ export default function ProfileOrganization() {
       <h2 className={`${styles.title}`}>My Organizations</h2>
     </div>
     <div className={`${styles.organizationsContainer}`}>
-      {!isLoading && organizations.map((organization) => <div className={`${styles.organizationContainer}`}>
+      {!isLoading && organizations.map((organization) => <div className={`${styles.organizationContainer}`} onClick={() => navigate(`${organization._id}`)}>
         <img
           className={`${styles.organizationAvatar} ${!organization.avatar && styles.scaleDown}`}
           src={!isLoading && organization.avatar || ORGANIZATION_ICON}
