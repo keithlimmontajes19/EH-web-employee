@@ -52,7 +52,10 @@ export default function App() {
           <Route path="profile">
             <Route path="user" element={<ProfileUser />} />
             <Route path="account" element={<ProfileAccount />} />
-            <Route path="organization" element={<ProfileOrg />} />
+            <Route path="organization">
+              <Route index element={<ProfileOrg />} />
+              <Route path=":organizationId" element={<div />} />
+            </Route>
           </Route>
         </Route>
       </Route>

@@ -1,55 +1,31 @@
-import {Fragment, ReactElement} from 'react';
+import {useNavigate} from 'react-router'
+import {useQuery} from 'react-query'
+import {getUserOrganizations} from 'api/usersAPI'
+import ORGANIZATION_ICON from 'assets/icons/organization.png'
+import styles from './ProfileOrganization.module.css'
 
-import {
-  Container,
-  StyledName,
-  StyledTitle,
-  StyledMembers,
-  StyledDetails,
-  UserContainer,
-  StyledPosition,
-  StyledSubtitle,
-} from './styled';
-import {Row, Col} from 'antd';
-import Avatar from 'components/Avatar/Avatar';
-import ORG_IMAGE from 'assets/icons/organization.png';
+export default function ProfileOrganization() {
+  const navigate = useNavigate()
 
-const ProfileOrganization = (): ReactElement => {
-  return (
-    <Fragment>
-      <Container>
-        <Row gutter={24}>
-          <Col>
-            <Avatar size={100} icon={ORG_IMAGE} />
-          </Col>
+  const userId = localStorage.getItem('userId')
+  if (!userId) navigate('/logout')
 
-          <Col>
-            <StyledTitle>Sample Team Name</StyledTitle>
-            <StyledSubtitle>Members: 50</StyledSubtitle>
-          </Col>
+  const {isLoading, isError, error, data: organizations} = useQuery(`users/${userId}/organizations`, getUserOrganizations, {
+    select: response => response.data.data
+  })
 
-          <StyledDetails>
-            Sample Organization Name Sample Organization Name Sample
-            Organization Name Sample Organization Name Sample Organization Name
-            Sample Organization Name
-          </StyledDetails>
-        </Row>
-      </Container>
-
-      <UserContainer>
-        <StyledMembers>Members</StyledMembers>
-        <Row gutter={100}>
-          {[1, 2, 3, 4].map((item) => (
-            <Col key={item}>
-              <Avatar size={150} height={66} width={51} />
-              <StyledName>Keith Montajes</StyledName>
-              <StyledPosition>Positision</StyledPosition>
-            </Col>
-          ))}
-        </Row>
-      </UserContainer>
-    </Fragment>
-  );
-};
-
-export default ProfileOrganization;
+  return <div className={`${styles.container}`}>
+    <div className={`${styles.header}`}>
+      <h2 className={`${styles.title}`}>My Organizations</h2>
+    </div>
+    <div className={`${styles.organizationsContainer}`}>
+      {!isLoading && organizations.map((organization) => <div className={`${styles.organizationContainer}`}>
+        <img
+          className={`${styles.organizationAvatar} ${!organization.avatar && styles.scaleDown}`}
+          src={!isLoading && organization.avatar || ORGANIZATION_ICON}
+        />
+        <h3 className={`${styles.organizationName}`}>{organization.name}</h3>
+      </div>)}
+    </div>
+  </div>
+}
