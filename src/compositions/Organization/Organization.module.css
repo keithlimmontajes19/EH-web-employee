@@ -1,0 +1,55 @@
+.container {
+  margin: 0;
+}
+
+.header {
+  background: #635FFA;
+  height: 282px;
+  border-radius: 0px 0px 15px 15px;
+
+  padding: 28px 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.organizationProfile {
+  display: flex;
+  gap: 28px;
+}
+
+.organizationAvatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: silver;
+}
+
+.organizationInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.organizationName {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  margin: 0;
+}
+
+.organizationMembersCount {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  margin: 0;
+}
+
+.organizationDescription {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 29px;
+}
