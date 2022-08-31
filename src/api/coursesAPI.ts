@@ -18,16 +18,32 @@ export const getCourses = async function() {
   return data
 }
 
-export const getSingleCourse = async function({_id}) {
-  const accessToken = localStorage.getItem('accessToken')
+export const getSingleCourseFactory = function(courseId) {
+  return async () => {
+    const accessToken = localStorage.getItem('accessToken')
 
-  const data = await coursesAPI.get(`/${_id}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
-  })
+    const data = await coursesAPI.get(`/${courseId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
 
-  return data
+    return data
+  }
+}
+
+export const getCourseLessonsFactory = function(courseId) {
+  return async () => {
+    const accessToken = localStorage.getItem('accessToken')
+
+    const data = await coursesAPI.get(`/${courseId}/lessons`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+
+    return data
+  }
 }
 
 export default coursesAPI
