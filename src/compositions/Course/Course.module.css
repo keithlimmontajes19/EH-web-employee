@@ -1,0 +1,87 @@
+.courseContainer {
+  width: 100%;
+}
+
+.coursePreview {
+  width: 100%;
+  height: 316px;
+  object-fit: fill;
+}
+
+.courseInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.courseTitle {
+  color: #4c4b7b;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.courseStats {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.courseStat {
+  flex: 1 1 auto;
+  width: 50%;
+  color: #a2a1bd;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.statsIcon {
+  width: 12px;
+  height: 12px;
+  vertical-align: baseline;
+  margin-right: 4px;
+}
+
+.courseDescription {
+  margin-top: 16px;
+
+  color: #4c4b7b;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.startCourseContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 40px;
+  margin-top: 160px;
+}
+
+.startCourse {
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+
+  width: 240px;
+  height: 48px;
+  border-radius: 8px;
+  padding: 15px 56px;
+  background: linear-gradient(90deg, #AB70F1 2.6%, #635FFA 47.4%, #4AB9E7 100%);
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+
+.startCourse:hover,
+.startCourse:active {
+  background: white;
+  color: #40A9FF;
+  border: 1px solid #40A9FF;
+  cursor: pointer;
+}

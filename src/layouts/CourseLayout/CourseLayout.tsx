@@ -37,11 +37,11 @@ export function CourseLayout() {
               navigate(`lessons/${lesson._id}`)
             }}
           >
-            asdfasdf
+            {lesson.title}
           </li>
         })}
       </ol>
     </div>
-    <Outlet />
+    <Outlet context={{lessons: isLoading ? [] : lessons, setSelected}}/>
   </div>
 }
