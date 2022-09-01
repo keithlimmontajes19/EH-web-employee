@@ -40,6 +40,11 @@
   cursor: pointer;
 }
 
+.expandLesson {
+  vertical-align: top;
+  margin-right: 4px;
+}
+
 .selected {
   background: #a3a2ef;
   border-radius: 0 30px 30px 0;

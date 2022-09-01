@@ -1,3 +1,5 @@
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCaretDown, faCaretRight} from '@fortawesome/free-solid-svg-icons'
 import {useState} from 'react'
 import {useNavigate, useParams, Outlet} from 'react-router'
 import {useQuery} from 'react-query'
@@ -9,6 +11,7 @@ export function CourseLayout() {
   const navigate = useNavigate()
   const {courseId} = useParams()
   const [selected, setSelected] = useState('introduction')
+  const [expandedLesson, setExpandedLesson] = useState([])
 
   const {isLoading, isError, error, data: lessons} = useQuery(`courses/${courseId}/lessons`, getCourseLessonsFactory(courseId), {
     select: response => response.data.data
@@ -32,12 +35,26 @@ export function CourseLayout() {
           return <li
             key={lesson._id}
             className={`${styles.lesson} ${selected === lesson._id ? styles.selected : ''}`}
-            onClick={() => {
-              setSelected(lesson._id)
-              navigate(`lessons/${lesson._id}`)
-            }}
           >
-            {lesson.title}
+            <div>
+              <span
+                className={styles.expandLesson}
+                onClick={() => {
+                  if (expandedLesson.includes(lesson._id)) setExpandedLesson((prev) => prev.filter((lessonId) => lessonId !== lesson._id))
+                  else setExpandedLesson((prev) => [...prev, lesson._id])
+                }}
+              >
+                <FontAwesomeIcon icon={!expandedLesson.includes(lesson._id) ? faCaretRight : faCaretDown}/>
+              </span>
+              <span
+                onClick={() => {
+                  setSelected(lesson._id)
+                  navigate(`lessons/${lesson._id}`)
+                }}
+              >
+                {lesson.title}
+              </span>
+            </div>
           </li>
         })}
       </ol>
