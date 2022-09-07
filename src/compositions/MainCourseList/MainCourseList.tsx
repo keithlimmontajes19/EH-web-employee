@@ -1,5 +1,8 @@
-import React from 'react';
-import {ScrollMenu, VisibilityContext} from 'react-horizontal-scrolling-menu';
+import React from 'react'
+import {ScrollMenu, VisibilityContext} from 'react-horizontal-scrolling-menu'
+import {useGetUserCourses} from 'api/usersAPI'
+
+import styles from './MainCourseList.module.css'
 
 import {
   FlexRow,
@@ -11,26 +14,22 @@ import {
   FlexContainer,
   ImageContainer,
   RatingContainer,
-} from './styled';
+} from './styled'
 import {Image} from 'antd';
-import {useDispatch} from 'react-redux';
-import {NO_IMAGE} from 'utils/constants';
-import {useNavigate} from 'react-router-dom';
-import {getCurriculum} from 'ducks/lms/actionCreator';
+import {useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {getCurriculum} from 'ducks/lms/actionCreator'
 
 /* components */
-import IconImage from 'components/IconImage';
-import RatingStar from 'components/RatingStar';
-import USER_LOGO from 'assets/images/user-icon.png';
-import LEFT_ARROW from 'assets/icons/left-icon.png';
-import RIGHT_ARROW from 'assets/icons/right-icon.png';
-
-/* recuer action */
-import {RootState} from 'ducks/store';
-import {useSelector} from 'react-redux';
+import IconImage from 'components/IconImage'
+import RatingStar from 'components/RatingStar'
+import USER_LOGO from 'assets/images/user-icon.png'
+import LEFT_ARROW from 'assets/icons/left-icon.png'
+import RIGHT_ARROW from 'assets/icons/right-icon.png'
+import NO_IMAGE from 'assets/images/no-image.png'
 
 const LeftArrow = () => {
-  const {scrollPrev} = React.useContext(VisibilityContext);
+  const {scrollPrev} = React.useContext(VisibilityContext)
   return (
     <div
       onClick={() => scrollPrev()}
@@ -80,7 +79,7 @@ const Card = ({item, itemId, onClick}) => {
         onClick(visibility);
         dispatch(getCurriculum(item));
 
-        navigate('/learn/curriculum');
+        navigate(`/learn/${itemId}`);
         localStorage.setItem('courseId', item?._id);
         localStorage.setItem('organizationId', item?.organizationId);
       }}
@@ -89,8 +88,8 @@ const Card = ({item, itemId, onClick}) => {
         width={380}
         height={180}
         preview={false}
-        src={NO_IMAGE}
-        // src={item?.preview?.ref ? item?.preview?.ref : NO_IMAGE}
+        src={item.preview || NO_IMAGE}
+        style={{objectFit: 'cover', borderTopLeftRadius: '12px', borderTopRightRadius: '12px'}}
       />
       <TitleCourse>{item?.title}</TitleCourse>
       <FlexRow>
@@ -118,12 +117,11 @@ const Card = ({item, itemId, onClick}) => {
   );
 };
 
-import { useGetCoursesQuery } from 'ducks/courses/coursesApiSlice'
-
 const MainCourseList = () => {
-  // const {data}: any = useSelector<RootState>((state) => state.lms);
-  const [selected, setSelected] = React.useState([]);
-  const {data} = useGetCoursesQuery()
+  const userId = localStorage.getItem('userId')
+
+  const [selected, setSelected] = React.useState([])
+  const {isLoading, isError, error, courses, tag} = useGetUserCourses(userId)
 
   const isItemSelected = (id) => !!selected.find((el) => el === id);
   const handleClick = (id) => () => {
@@ -136,22 +134,26 @@ const MainCourseList = () => {
     );
   };
 
+
+
   return (
     <ScrollMenu
-      LeftArrow={() => (data?.length ? LeftArrow() : <></>)}
-      RightArrow={() => (data?.length ? RightArrow() : <></>)}
+      LeftArrow={() => (courses?.length ? LeftArrow() : <></>)}
+      RightArrow={() => (courses?.length ? RightArrow() : <></>)}
       options={{
         ratio: 0.9,
         rootMargin: '5px',
         threshold: [0.01, 0.05, 0.5, 0.75, 0.95, 1],
       }}>
-      {(data || []).map((item) => (
-        <Card
-          item={item}
-          key={item?._id}
-          itemId={item?._id}
-          onClick={handleClick(item?._id)}
-        />
+      {(!isLoading && !isError && courses || []).map((item) => (
+        <div className={styles.courseCard}>
+          <Card
+            item={item}
+            key={item?._id}
+            itemId={item?._id}
+            onClick={handleClick(item?._id)}
+          />
+        </div>
       ))}
     </ScrollMenu>
   );

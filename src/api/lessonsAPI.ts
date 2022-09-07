@@ -1,11 +1,13 @@
 import {useQuery} from 'react-query'
 import axios from 'axios'
 
-const baseURL = process.env.REACT_APP_BASE_API_URL || 'http://localhost:8080/api/v1'
+const baseURL = process.env.REACT_APP_BASE_API_URL
 
 export const lessonsAPI = axios.create({
   baseURL: `${baseURL}`,
 })
+
+export default lessonsAPI
 
 export function useGetAllLessons() {
   const tag = '/lessons'
@@ -23,7 +25,7 @@ export function useGetAllLessons() {
   }
 
   const {isLoading, isError, error, data: lessons} = useQuery(tag, getAllLessons, {
-    select: response => response.data
+    select: response => response.data.data
   })
 
   return {isLoading, isError, error, lessons, tag}
@@ -50,5 +52,3 @@ export function useGetSingleLesson(lessonId) {
 
   return {isLoading, isError, error, lesson, tag}
 }
-
-export default lessonsAPI

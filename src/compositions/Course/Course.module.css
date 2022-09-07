@@ -8,6 +8,11 @@
   object-fit: fill;
 }
 
+.noCoursePreview {
+  object-fit: none;
+  background: silver;
+}
+
 .courseInfo {
   display: flex;
   flex-direction: column;
