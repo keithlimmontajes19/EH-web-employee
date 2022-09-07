@@ -1,11 +1,14 @@
 import axios from 'axios'
 
-const baseURL = process.env.REACT_APP_BASE_API_URL || 'http://localhost:8080/api/v1'
+const baseURL = process.env.REACT_APP_BASE_API_URL
 
 export const coursesAPI = axios.create({
   baseURL: `${baseURL}/courses`,
 })
 
+export default coursesAPI
+
+// all methods below will be deprecated/deleted in the future
 export const getCourses = async function() {
   const accessToken = localStorage.getItem('accessToken')
 
@@ -45,5 +48,3 @@ export const getCourseLessonsFactory = function(courseId) {
     return data
   }
 }
-
-export default coursesAPI

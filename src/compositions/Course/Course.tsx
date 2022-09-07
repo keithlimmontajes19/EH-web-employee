@@ -8,6 +8,7 @@ import TOPICS_ICON from 'assets/icons/topics.png'
 import RATING_ICON from 'assets/icons/rating.png'
 import QUIZZES_ICON from 'assets/icons/quizzes.png'
 import VIDEOS_ICON from 'assets/icons/videos.png'
+import NO_IMAGE from 'assets/icons/no-image-icon.png'
 
 import styles from './Course.module.css'
 
@@ -21,7 +22,7 @@ export function Course() {
   })
 
   return (!isLoading && <div className={styles.courseContainer}>
-    <img className={styles.coursePreview}  src={course.preview} />
+    <img className={`${styles.coursePreview} ${!course.preview && styles.noCoursePreview}`}  src={course.preview || NO_IMAGE} />
     <div className={styles.courseInfo}>
       <h3 className={styles.courseTitle}>{course.title}</h3>
       <div className={styles.courseStats}>

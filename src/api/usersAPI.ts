@@ -1,11 +1,33 @@
+import {useCallback, useState, useEffect} from 'react'
+import {useQuery} from 'react-query'
 import axios from 'axios'
 
-const baseURL = process.env.REACT_APP_BASE_API_URL || 'http://localhost:8080/api/v1'
+const baseURL = process.env.REACT_APP_BASE_API_URL
 
 export const usersAPI = axios.create({
   baseURL: `${baseURL}/users`,
 })
 
+export default usersAPI
+
+export function useGetUserCourses(userId) {
+  const [tag, setTag] = useState('')
+
+  useEffect(() => {
+    setTag(`/${userId}/courses`)
+  }, [userId])
+
+  const getUserCourses = async () => {
+    const accessToken = localStorage.getItem('accessToken')
+    return await usersAPI.get(tag, {headers: {Authorization: `Bearer ${accessToken}`}})
+  }
+
+  const {isLoading, isError, error, data: courses} = useQuery(tag, getUserCourses, {select: response => response.data.data})
+
+  return {isLoading, isError, error, courses, tag}
+}
+
+// all methods below will be deprecated/deleted in the future
 export const updateUserProfile = async function({userId, body}) {
   const accessToken = localStorage.getItem('accessToken')
 
@@ -82,5 +104,3 @@ export const getUserCourses = async function() {
 
   return data
 }
-
-export default usersAPI
