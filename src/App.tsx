@@ -10,7 +10,7 @@ import MainLayout from './views/private/MainLayout'
 import Home from './views/private/Home'
 import Team from './views/private/Team'
 import Learn from './views/private/Learn'
-import Curriculum from './views/private/Curriculum'
+// import Curriculum from './views/private/Curriculum'
 import ProfileUser from './compositions/ProfileUser'
 import ProfileAccount from './compositions/ProfileAccount'
 import ProfileOrg from './compositions/ProfileOrganization'
@@ -19,6 +19,9 @@ import {ForgotPassword} from 'compositions/ForgotPassword'
 import {EnterOTP} from 'compositions/EnterOTP'
 import {ResetPassword} from 'compositions/ResetPassword'
 import {Organization} from 'compositions/Organization'
+import {CourseLayout} from 'layouts/CourseLayout'
+import {Course} from 'compositions/Course'
+import {Lesson} from 'compositions/Lesson'
 
 export default function App() {
   useEffect(() => {
@@ -45,7 +48,13 @@ export default function App() {
           <Route path="team" element={<Team />} />
           <Route path="learn">
             <Route index element={<Learn />} />
-            <Route path="curriculum" element={<Curriculum />} />
+            <Route path=":courseId" element={<CourseLayout />}>
+              <Route index element={<Course />} />
+              <Route path="lessons">
+                <Route path=":lessonId" element={<Lesson />}/>
+                <Route path="contents"></Route>
+              </Route>
+            </Route>
           </Route>
           <Route path="team">
             <Route path="detail" element={<ViewPageDetails />} />

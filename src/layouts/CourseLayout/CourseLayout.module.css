@@ -1,0 +1,51 @@
+.course {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidenav {
+  height: 100vh;
+  color: #eeeefa;
+}
+
+.title {
+  color: #635ffa;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 24px;
+}
+
+.curriculum {
+  padding: 0;
+}
+
+.curriculum li {
+  list-style-type: none;
+}
+
+.lesson {
+  width: 230px;
+  height: 38px;
+  color: #4c4b7b;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.lesson:hover {
+  cursor: pointer;
+}
+
+.expandLesson {
+  vertical-align: top;
+  margin-right: 4px;
+}
+
+.selected {
+  background: #a3a2ef;
+  border-radius: 0 30px 30px 0;
+}

@@ -1,3 +1,4 @@
+import {useNavigate} from 'react-router'
 import {useQuery} from 'react-query'
 import {getUserCourses} from 'api/usersAPI'
 import noImage from 'assets/images/no-image.png'
@@ -7,6 +8,8 @@ import CircularProgress from 'components/CircularProgress'
 import Loading from 'components/Loading'
 
 export function MyCourses() {
+  const navigate = useNavigate()
+
   const {isLoading, isError, error, data: response} = useQuery('user_courses', getUserCourses, {
     select: response => response.data
   })
@@ -24,7 +27,7 @@ export function MyCourses() {
             <span className={`${styles.instructorName}`}>{course.instructor.title} {course.instructor.name}</span>
           </div>
         </div>
-        <div className={`${styles.courseProgress}`}>
+        <div className={`${styles.courseProgress}`} onClick={() => {navigate(`${course._id}`)}}>
           <CircularProgress status={'ongoing'} percent={50} />
         </div>
       </div>
