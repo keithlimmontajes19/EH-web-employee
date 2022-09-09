@@ -23,7 +23,7 @@ export default function MainLayoutSideNav() {
     })
   }, [pathname])
 
-  return <Sider width={200} collapsed={collapsed}>
+  return <Sider collapsed={collapsed}>
     <Menu
       mode="inline"
       style={MenuStyles}

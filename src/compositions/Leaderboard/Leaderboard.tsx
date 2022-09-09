@@ -7,6 +7,8 @@ import {Container, SubContainer, TextStyled} from './styled';
 
 import IconImage from 'components/IconImage';
 
+import styles from './Leaderboard.module.css'
+
 const Leaderboard = (): ReactElement => {
   const navigate = useNavigate();
 
@@ -15,14 +17,16 @@ const Leaderboard = (): ReactElement => {
       <Row gutter={16}>
         {ICONS_HOMESCREEN.map((item) => {
           return (
-            <SubContainer
-              key={item?.title}
-              onClick={() => navigate(item?.url)}>
-              <div style={{marginLeft: 'auto', marginRight: 'auto'}}>
-                <IconImage source={item?.icon} height={item?.height} />
-              </div>
-              <TextStyled>{item?.title}</TextStyled>
-            </SubContainer>
+            <div className={`${styles.link} ${item.disabled && styles.disabled}`}>
+              <SubContainer
+                key={item?.title}
+                onClick={() => navigate(item?.url)}>
+                <div style={{marginLeft: 'auto', marginRight: 'auto'}}>
+                  <IconImage source={item?.icon} height={item?.height}/>
+                </div>
+                <TextStyled>{item?.title}</TextStyled>
+              </SubContainer>
+            </div>
           );
         })}
       </Row>

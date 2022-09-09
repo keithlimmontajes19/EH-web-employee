@@ -11,13 +11,13 @@ const {Content} = Layout
 export default function MainLayout() {
   return <StyledLayout>
     <MainLayoutHeader />
-    <Layout>
-      <MainLayoutSideNav />
-      <Layout style={LayoutStyles}>
-        <Content>
-          <Outlet />
-        </Content>
+      <Layout>
+        <MainLayoutSideNav />
+        <Layout style={LayoutStyles}>
+          <Content>
+            <Outlet />
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
   </StyledLayout>
 }
