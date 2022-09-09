@@ -17,6 +17,7 @@ export const ICONS_HOMESCREEN = [
     url: '/',
     color: '#FF755B',
     height: 35,
+    disabled: true
   },
   {
     title: 'Intranet',
@@ -28,7 +29,7 @@ export const ICONS_HOMESCREEN = [
   {
     title: 'Profile',
     icon: USER,
-    url: '/',
+    url: '/profile/user',
     color: '#AB70F1',
     height: 35,
   },
