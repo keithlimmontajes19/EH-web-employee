@@ -1,9 +1,11 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCaretDown, faCaretRight} from '@fortawesome/free-solid-svg-icons'
 import {useState} from 'react'
-import {useNavigate, useParams, Outlet} from 'react-router'
+import {useLocation, useNavigate, useParams, Outlet} from 'react-router'
 import {useQuery} from 'react-query'
 import {getCourseLessonsFactory} from 'api/coursesAPI'
+
+import LessonContents from './LessonContents/LessonContents'
 
 import styles from './CourseLayout.module.css'
 
@@ -29,13 +31,13 @@ export function CourseLayout() {
             navigate(`/learn/${courseId}`)
           }}
         >
-          Introduction
+          <span style={{paddingLeft: '13px'}}>Introduction</span>
         </li>
         {!isLoading && lessons.map((lesson) => {
           return <>
             <li
               key={lesson._id}
-              className={`${styles.lesson} ${selected === lesson._id ? styles.selected : ''}`}
+              className={`${styles.lesson} ${selected === `lessons/${lesson._id}` ? styles.selected : ''}`}
             >
               <div>
                 <span
@@ -49,7 +51,7 @@ export function CourseLayout() {
                 </span>
                 <span
                   onClick={() => {
-                    setSelected(lesson._id)
+                    setSelected(`lessons/${lesson._id}`)
                     navigate(`lessons/${lesson._id}`)
                   }}
                 >
@@ -57,6 +59,7 @@ export function CourseLayout() {
                 </span>
               </div>
             </li>
+            {expandedLesson.includes(lesson._id) && <LessonContents key={`lessons/${lesson._id}/contents`} selected={selected} setSelected={setSelected} lessonId={lesson._id}/>}
           </>
         })}
       </ol>

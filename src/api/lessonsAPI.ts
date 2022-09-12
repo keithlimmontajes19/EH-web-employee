@@ -52,3 +52,25 @@ export function useGetSingleLesson(lessonId) {
 
   return {isLoading, isError, error, lesson, tag}
 }
+
+export function useGetLessonContents(lessonId) {
+  const tag = `/lessons/${lessonId}/contents`
+
+  const getLessonContents = async () => {
+    const accessToken = localStorage.getItem('accessToken')
+
+    const data = await lessonsAPI.get(tag, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+
+    return data
+  }
+
+  const {isLoading, isError, error, data: lessonContents} = useQuery(tag, getLessonContents, {
+    select: response => response.data.data
+  })
+
+  return {isLoading, isError, error, lessonContents, tag}
+}
