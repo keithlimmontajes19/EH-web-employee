@@ -32,30 +32,32 @@ export function CourseLayout() {
           Introduction
         </li>
         {!isLoading && lessons.map((lesson) => {
-          return <li
-            key={lesson._id}
-            className={`${styles.lesson} ${selected === lesson._id ? styles.selected : ''}`}
-          >
-            <div>
-              <span
-                className={styles.expandLesson}
-                onClick={() => {
-                  if (expandedLesson.includes(lesson._id)) setExpandedLesson((prev) => prev.filter((lessonId) => lessonId !== lesson._id))
-                  else setExpandedLesson((prev) => [...prev, lesson._id])
-                }}
-              >
-                <FontAwesomeIcon icon={!expandedLesson.includes(lesson._id) ? faCaretRight : faCaretDown}/>
-              </span>
-              <span
-                onClick={() => {
-                  setSelected(lesson._id)
-                  navigate(`lessons/${lesson._id}`)
-                }}
-              >
-                {lesson.title}
-              </span>
-            </div>
-          </li>
+          return <>
+            <li
+              key={lesson._id}
+              className={`${styles.lesson} ${selected === lesson._id ? styles.selected : ''}`}
+            >
+              <div>
+                <span
+                  className={styles.expandLesson}
+                  onClick={() => {
+                    if (expandedLesson.includes(lesson._id)) setExpandedLesson((prev) => prev.filter((lessonId) => lessonId !== lesson._id))
+                    else setExpandedLesson((prev) => [...prev, lesson._id])
+                  }}
+                >
+                  <FontAwesomeIcon icon={!expandedLesson.includes(lesson._id) ? faCaretRight : faCaretDown}/>
+                </span>
+                <span
+                  onClick={() => {
+                    setSelected(lesson._id)
+                    navigate(`lessons/${lesson._id}`)
+                  }}
+                >
+                  {lesson.title}
+                </span>
+              </div>
+            </li>
+          </>
         })}
       </ol>
     </div>
