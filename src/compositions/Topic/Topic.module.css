@@ -1,0 +1,30 @@
+.topicContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.topicPreview {
+  width: 100%;
+  height: 316px;
+  object-fit: fill;
+}
+
+.noTopicPreview {
+  object-fit: none;
+  background: silver;
+}
+
+.topicTitle {
+  color: #4c4b7b;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.topicDescription {
+  color: #4c4b7b;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+}

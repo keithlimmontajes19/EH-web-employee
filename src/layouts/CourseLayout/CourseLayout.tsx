@@ -1,6 +1,6 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCaretDown, faCaretRight} from '@fortawesome/free-solid-svg-icons'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useLocation, useNavigate, useParams, Outlet} from 'react-router'
 import {useQuery} from 'react-query'
 import {getCourseLessonsFactory} from 'api/coursesAPI'
@@ -11,23 +11,32 @@ import styles from './CourseLayout.module.css'
 
 export function CourseLayout() {
   const navigate = useNavigate()
+  const {pathname} = useLocation()
   const {courseId} = useParams()
-  const [selected, setSelected] = useState('introduction')
+  const [selected, setSelected] = useState('')
   const [expandedLesson, setExpandedLesson] = useState([])
 
   const {isLoading, isError, error, data: lessons} = useQuery(`courses/${courseId}/lessons`, getCourseLessonsFactory(courseId), {
     select: response => response.data.data
   })
 
+  useEffect(() => {
+    if (pathname.startsWith(`/learn/${courseId}/lessons`)) {
+      const result = pathname.split('/')[4]
+      setExpandedLesson([result])
+    }
+    setSelected(pathname)
+  }, [])
+
   return <div className={styles.course}>
     <div className={styles.sidenav}>
       <h3 className={styles.title}>Curriculum</h3>
       <ol className={styles.curriculum}>
         <li
-          key="introduction"
-          className={`${styles.lesson} ${selected === 'introduction' ? styles.selected : ''}`}
+          key={`/learn/${courseId}`}
+          className={`${styles.lesson} ${selected === `/learn/${courseId}` ? styles.selected : ''}`}
           onClick={() => {
-            setSelected('introduction')
+            setSelected(`/learn/${courseId}`)
             navigate(`/learn/${courseId}`)
           }}
         >
@@ -36,8 +45,8 @@ export function CourseLayout() {
         {!isLoading && lessons.map((lesson) => {
           return <>
             <li
-              key={lesson._id}
-              className={`${styles.lesson} ${selected === `lessons/${lesson._id}` ? styles.selected : ''}`}
+              key={`/lessons/${lesson._id}`}
+              className={`${styles.lesson} ${selected === `/learn/${courseId}/lessons/${lesson._id}` ? styles.selected : ''}`}
             >
               <div>
                 <span
@@ -51,7 +60,7 @@ export function CourseLayout() {
                 </span>
                 <span
                   onClick={() => {
-                    setSelected(`lessons/${lesson._id}`)
+                    setSelected(`/learn/${courseId}/lessons/${lesson._id}`)
                     navigate(`lessons/${lesson._id}`)
                   }}
                 >
@@ -59,7 +68,14 @@ export function CourseLayout() {
                 </span>
               </div>
             </li>
-            {expandedLesson.includes(lesson._id) && <LessonContents key={`lessons/${lesson._id}/contents`} selected={selected} setSelected={setSelected} lessonId={lesson._id}/>}
+            {expandedLesson.includes(lesson._id) && <LessonContents
+              key={`lessons/${lesson._id}/contents`}
+              selected={selected}
+              setSelected={setSelected} courseId={courseId}
+              expandedLesson={expandedLesson}
+              setExpandedLesson={setExpandedLesson}
+              lessonId={lesson._id}
+            />}
           </>
         })}
       </ol>

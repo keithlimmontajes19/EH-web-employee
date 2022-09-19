@@ -22,6 +22,7 @@ import {Organization} from 'compositions/Organization'
 import {CourseLayout} from 'layouts/CourseLayout'
 import {Course} from 'compositions/Course'
 import {Lesson} from 'compositions/Lesson'
+import LessonContent from 'compositions/LessonContent'
 
 export default function App() {
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function App() {
               <Route path="lessons">
                 <Route path=":lessonId" element={<Lesson />} />
               </Route>
-              <Route path="lessons/:lessonId/contents/:contentId" element={<div></div>} />
+              <Route path="lessons/:lessonId/contents/:contentId" element={<LessonContent />} />
             </Route>
           </Route>
           <Route path="team">
