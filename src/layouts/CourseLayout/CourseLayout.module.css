@@ -6,6 +6,7 @@
 .sidenav {
   height: 100vh;
   color: #eeeefa;
+  margin-right: 16px;
 }
 
 .title {
@@ -33,7 +34,6 @@
   line-height: 18px;
   display: flex;
   align-items: center;
-  padding-left: 16px;
 }
 
 .lesson:hover {
