@@ -1,4 +1,4 @@
-import {useParams, useOutletContext, useNavigate} from 'react-router'
+import {useParams} from 'react-router'
 import {useQuery} from 'react-query'
 import {getSingleCourseFactory} from 'api/coursesAPI'
 
@@ -13,8 +13,6 @@ import NO_IMAGE from 'assets/icons/no-image-icon.png'
 import styles from './Course.module.css'
 
 export function Course() {
-  const navigate = useNavigate()
-  const {lessons, setSelected} = useOutletContext() as any
   const {courseId} = useParams()
 
   const {isLoading, isError, error, data: course} = useQuery(`courses/${courseId}`, getSingleCourseFactory(courseId), {
@@ -28,21 +26,15 @@ export function Course() {
       <div className={styles.courseStats}>
         <p className={styles.courseStat}><img className={styles.statsIcon} src={USER_ICON} />Instructor</p>
         <p className={styles.courseStat}><img className={styles.statsIcon} src={RATING_ICON} />4.8</p>
-        <p className={styles.courseStat}><img className={styles.statsIcon} src={LESSONS_ICON} />1 Lessons</p>
-        <p className={styles.courseStat}><img className={styles.statsIcon} src={QUIZZES_ICON} />1 Quizzes</p>
-        <p className={styles.courseStat}><img className={styles.statsIcon} src={TOPICS_ICON} />1 Topics</p>
-        <p className={styles.courseStat}><img className={styles.statsIcon} src={VIDEOS_ICON} />1 Videos</p>
+        <p className={styles.courseStat}><img className={styles.statsIcon} src={LESSONS_ICON} />{course.stats.lessons} Lessons</p>
+        <p className={styles.courseStat}><img className={styles.statsIcon} src={QUIZZES_ICON} />{course.stats.quizzes} Quizzes</p>
+        <p className={styles.courseStat}><img className={styles.statsIcon} src={TOPICS_ICON} />{course.stats.topics} Topics</p>
+        <p className={styles.courseStat}><img className={styles.statsIcon} src={VIDEOS_ICON} />{course.stats.videos} Videos</p>
       </div>
       <p className={styles.courseDescription}>{course.description}</p>
     </div>
     <div className={styles.startCourseContainer}>
-      <button
-        className={styles.startCourse}
-        onClick={() => {
-          navigate(`lessons/${lessons[0]._id}`)
-          setSelected(`${lessons[0]._id}`)
-        }}
-      >
+      <button className={styles.startCourse}>
         START COURSE
       </button>
     </div>
