@@ -8,8 +8,6 @@ export function OrganizationMembers({organizationId}) {
     select: response => response.data.data
   })
 
-  if (!isLoading) console.log(members)
-
   return <div className={`${styles.container}`}>
     <h3 className={`${styles.title}`}>Members</h3>
     <div className={`${styles.membersContainer}`}>
