@@ -1,6 +1,6 @@
-import {useParams} from 'react-router'
+import {useParams, useNavigate, useOutletContext} from 'react-router'
 import {useQuery} from 'react-query'
-import {getSingleCourseFactory} from 'api/coursesAPI'
+import {getSingleCourseFactory, useGetCourseFullCurriculum} from 'api/coursesAPI'
 
 import USER_ICON from 'assets/icons/profile-user.png'
 import LESSONS_ICON from 'assets/icons/lessons.png'
@@ -13,13 +13,17 @@ import NO_IMAGE from 'assets/icons/no-image-icon.png'
 import styles from './Course.module.css'
 
 export function Course() {
+  const navigate = useNavigate()
   const {courseId} = useParams()
+  const {setSelected, setExpandedLesson} = useOutletContext() as any
 
   const {isLoading, isError, error, data: course} = useQuery(`courses/${courseId}`, getSingleCourseFactory(courseId), {
     select: response => response.data.data
   })
 
-  return (!isLoading && <div className={styles.courseContainer}>
+  const {isLoading: isCourseCurriculumLoading, courseCurriculum} = useGetCourseFullCurriculum(courseId)
+
+  return (!isLoading && !isCourseCurriculumLoading && <div className={styles.courseContainer}>
     <img className={`${styles.coursePreview} ${!course.preview && styles.noCoursePreview}`}  src={course.preview || NO_IMAGE} />
     <div className={styles.courseInfo}>
       <h3 className={styles.courseTitle}>{course.title}</h3>
@@ -34,7 +38,18 @@ export function Course() {
       <p className={styles.courseDescription}>{course.description}</p>
     </div>
     <div className={styles.startCourseContainer}>
-      <button className={styles.startCourse}>
+      <button
+        className={styles.startCourse}
+        onClick={() => {
+          const lessonId = courseCurriculum?.lessons[0]?._id
+
+          if (lessonId) {
+            navigate(`lessons/${lessonId}`)
+            setSelected(`/lessons/${lessonId}`)
+            setExpandedLesson((prev) => [...prev.filter(id => id !== lessonId), lessonId])
+          }
+        }}
+      >
         START COURSE
       </button>
     </div>
