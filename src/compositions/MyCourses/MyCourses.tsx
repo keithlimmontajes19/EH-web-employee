@@ -18,7 +18,7 @@ export function MyCourses() {
     <h1 className={`${styles.title}`}>My Courses</h1>
     {isLoading && <Loading />}
     {!isLoading && response.data.slice(0, 3).map((course) => {
-      return <div className={`${styles.container}`}>
+      return <div key={course._id} className={`${styles.container}`}>
         <img className={`${styles.preview}`}  src={course.preview || noImage} />
         <div className={`${styles.courseInfo}`}>
           <h3 className={`${styles.courseTitle}`}>{course.title}</h3>

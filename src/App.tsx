@@ -54,7 +54,12 @@ export default function App() {
               <Route path="lessons">
                 <Route path=":lessonId" element={<Lesson />} />
               </Route>
-              <Route path="lessons/:lessonId/contents/:contentId" element={<LessonContent />} />
+              <Route path="lessons/:lessonId/contents/:contentId">
+                <Route index element={<LessonContent />} />
+                <Route path="questions">
+                  <Route path=":questionId" />
+                </Route>
+              </Route>
             </Route>
           </Route>
           <Route path="team">

@@ -19,6 +19,7 @@ export function CourseLayout() {
     <h3 className={styles.title}>Curriculum</h3>
     <ol className={styles.curriculum}>
       <li
+        key={courseId}
         className={`${styles.lesson} ${selected === `/learn/${courseId}` ? styles.selected : ''}`}
         onClick={() => {
           setSelected(`/learn/${courseId}`)

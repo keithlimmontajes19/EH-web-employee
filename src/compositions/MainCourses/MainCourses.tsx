@@ -16,7 +16,7 @@ export function MainCourses() {
     <h2 className={`${styles.title}`}>Main Courses</h2>
     <div className={`${styles.coursesContainer}`}>
       {!isLoading && response.data.map((course) => {
-        return <div className={`${styles.courseCard}`} onClick={() => {navigate(`${course._id}`)}}>
+        return <div key={course._id} className={`${styles.courseCard}`} onClick={() => {navigate(`${course._id}`)}}>
           <img className={`${styles.preview}`}  src={course.preview || noImage} />
           <div className={`${styles.courseInfo}`}>
             <h3 className={`${styles.courseTitle}`}>{course.title}</h3>
