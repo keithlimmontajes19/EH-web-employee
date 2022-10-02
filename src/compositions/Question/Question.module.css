@@ -1,6 +1,23 @@
 .questionContainer {
+  display: flex;
+  flex-direction: column;
   width: 75%;
   height: 75%;
   background: white;
   border-radius: 25px;
+  padding: 16px;
+}
+
+.quizTitle {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  color: #a2a1bd;
+}
+
+.questionTitle {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: #635ffa;
 }
