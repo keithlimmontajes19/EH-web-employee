@@ -22,7 +22,7 @@ import './index.css'
 
 const queryClient = new QueryClient()
 const root = document.getElementById('root')
-const content = <StrictMode>
+const content =
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
       {/* TO DO: error in persist gate */}
@@ -35,6 +35,6 @@ const content = <StrictMode>
       {/* </PersistGate> */}
     </Provider>
   </QueryClientProvider>
-</StrictMode>
+
 
 render(content, root)

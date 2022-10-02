@@ -1,6 +1,6 @@
-import {useParams, useOutletContext, useNavigate} from 'react-router'
+import {useParams, useNavigate, useOutletContext} from 'react-router'
 import {useQuery} from 'react-query'
-import {getSingleCourseFactory} from 'api/coursesAPI'
+import {getSingleCourseFactory, useGetCourseFullCurriculum} from 'api/coursesAPI'
 
 import USER_ICON from 'assets/icons/profile-user.png'
 import LESSONS_ICON from 'assets/icons/lessons.png'
@@ -14,24 +14,26 @@ import styles from './Course.module.css'
 
 export function Course() {
   const navigate = useNavigate()
-  const {lessons, setSelected} = useOutletContext() as any
   const {courseId} = useParams()
+  const {setSelected, setExpandedLesson} = useOutletContext() as any
 
   const {isLoading, isError, error, data: course} = useQuery(`courses/${courseId}`, getSingleCourseFactory(courseId), {
     select: response => response.data.data
   })
 
-  return (!isLoading && <div className={styles.courseContainer}>
+  const {isLoading: isCourseCurriculumLoading, courseCurriculum} = useGetCourseFullCurriculum(courseId)
+
+  return (!isLoading && !isCourseCurriculumLoading && <div className={styles.courseContainer}>
     <img className={`${styles.coursePreview} ${!course.preview && styles.noCoursePreview}`}  src={course.preview || NO_IMAGE} />
     <div className={styles.courseInfo}>
       <h3 className={styles.courseTitle}>{course.title}</h3>
       <div className={styles.courseStats}>
         <p className={styles.courseStat}><img className={styles.statsIcon} src={USER_ICON} />Instructor</p>
         <p className={styles.courseStat}><img className={styles.statsIcon} src={RATING_ICON} />4.8</p>
-        <p className={styles.courseStat}><img className={styles.statsIcon} src={LESSONS_ICON} />1 Lessons</p>
-        <p className={styles.courseStat}><img className={styles.statsIcon} src={QUIZZES_ICON} />1 Quizzes</p>
-        <p className={styles.courseStat}><img className={styles.statsIcon} src={TOPICS_ICON} />1 Topics</p>
-        <p className={styles.courseStat}><img className={styles.statsIcon} src={VIDEOS_ICON} />1 Videos</p>
+        <p className={styles.courseStat}><img className={styles.statsIcon} src={LESSONS_ICON} />{course.stats.lessons} Lessons</p>
+        <p className={styles.courseStat}><img className={styles.statsIcon} src={QUIZZES_ICON} />{course.stats.quizzes} Quizzes</p>
+        <p className={styles.courseStat}><img className={styles.statsIcon} src={TOPICS_ICON} />{course.stats.topics} Topics</p>
+        <p className={styles.courseStat}><img className={styles.statsIcon} src={VIDEOS_ICON} />{course.stats.videos} Videos</p>
       </div>
       <p className={styles.courseDescription}>{course.description}</p>
     </div>
@@ -39,8 +41,13 @@ export function Course() {
       <button
         className={styles.startCourse}
         onClick={() => {
-          navigate(`lessons/${lessons[0]._id}`)
-          setSelected(`${lessons[0]._id}`)
+          const lessonId = courseCurriculum?.lessons[0]?._id
+
+          if (lessonId) {
+            navigate(`lessons/${lessonId}`)
+            setSelected(`/lessons/${lessonId}`)
+            setExpandedLesson((prev) => [...prev.filter(id => id !== lessonId), lessonId])
+          }
         }}
       >
         START COURSE

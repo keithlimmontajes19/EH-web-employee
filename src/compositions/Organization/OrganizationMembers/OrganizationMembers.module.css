@@ -30,6 +30,14 @@
   border-radius: 50%;
 }
 
+.defaultAvatar {
+  width: 150px;
+  height: 150px;
+  padding: 16px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
 .memberInfo {
   margin-top: 16px;
 }

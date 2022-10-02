@@ -19,10 +19,12 @@
 
 .curriculum {
   padding: 0;
+  width: 230px;
 }
 
 .curriculum li {
   list-style-type: none;
+  user-select: none;
 }
 
 .lesson {
@@ -48,4 +50,20 @@
 .selected {
   background: #a3a2ef;
   border-radius: 0 30px 30px 0;
+}
+
+.lessonContent {
+  width: 230px;
+  height: 38px;
+  color: #4c4b7b;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.lessonContent:hover {
+  cursor: pointer;
 }
