@@ -21,3 +21,38 @@
   line-height: 28px;
   color: #635ffa;
 }
+
+.questionNavigate {
+  display: flex;
+  flex-direction: row;
+  margin-top: 64px;
+  width: 370px;
+  height: 48px;
+  justify-content: flex-end;
+  width: 80%;
+}
+
+.backBtn {
+  background: #635ffa;
+  border: none;
+  width: 185px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.nextBtn {
+  background: white;
+  border: none;
+  width: 185px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  color: #635ffa;
+  cursor: pointer;
+}

@@ -1,12 +1,12 @@
 import {useState} from 'react'
 import {useGetQuizQuestions} from 'api/quizzesAPI'
+import {useSubmitQuestionAnswer} from 'api/questionsAPI'
 import styles from './Quiz.module.css'
 import Question from 'compositions/Question'
 
 export default function Quiz(props) {
   const {quiz} = props
   const [quizStarted, setQuizStarted] = useState(false)
-  const [questionPOS, setQuestionPOS] = useState(0)
 
   const {isLoading, questions} = useGetQuizQuestions(quiz._id)
 
@@ -30,12 +30,7 @@ export default function Quiz(props) {
       <Question
         quiz={quiz}
         questions={questions}
-        questionPOS={questionPOS}
       />
-      <div className={`${styles.questionNavigate}`}>
-        <button className={`${styles.backBtn}`}>BACK</button>
-        <button className={`${styles.nextBtn}`}>NEXT</button>
-      </div>
     </div>}
   </>
 }
