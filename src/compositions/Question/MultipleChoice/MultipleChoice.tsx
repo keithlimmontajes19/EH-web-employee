@@ -11,7 +11,7 @@ export default function MultipleChoice(props) {
   useEffect(() => {
     if (!isLoading && !isError) setUserAnswer(questionAnswer)
     else setUserAnswer([])
-  }, [isLoading, isError])
+  }, [questionAnswer])
 
   return (!isLoading && <ul className={`${styles.choices}`}>
     {choices.map((choice, index) => {

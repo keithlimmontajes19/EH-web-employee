@@ -39,7 +39,7 @@ export default function Question(props) {
         onClick={() => {
           setQuestionPOS((prev) => prev + 1)
           submitQuestionAnswer.mutateAsync(userAnswer).then()
-          queryClient.invalidateQueries([`/questions/${question._id}/answer`], {exact: true})
+          queryClient.invalidateQueries([`/questions/${question._id}/answer`])
         }}
       >
         NEXT
@@ -48,7 +48,7 @@ export default function Question(props) {
         className={`${styles.nextBtn}`}
         onClick={() => {
           submitQuestionAnswer.mutateAsync(userAnswer).then()
-          queryClient.invalidateQueries([`/questions/${question._id}/answer`], {exact: true})
+          queryClient.invalidateQueries([`/questions/${question._id}/answer`])
         }}
       >
         FINISH
