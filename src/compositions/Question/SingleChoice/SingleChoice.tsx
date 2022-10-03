@@ -10,7 +10,6 @@ export default function SingleChoice(props) {
 
   useEffect(() => {
     if (!isLoading && !isError) setUserAnswer(questionAnswer)
-    else setUserAnswer([])
   }, [questionAnswer])
 
   return (!isLoading && <ul className={`${styles.choices}`}>
