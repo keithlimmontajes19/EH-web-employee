@@ -30,7 +30,10 @@ export default function Question(props) {
     <div className={`${styles.questionNavigate}`}>
       {questionPOS > 0 && <button
         className={`${styles.backBtn}`}
-        onClick={() => (setQuestionPOS((prev) => prev - 1))}
+        onClick={() => {
+          setQuestionPOS((prev) => prev - 1)
+          setUserAnswer(null)
+        }}
       >
         BACK
       </button>}
@@ -38,8 +41,12 @@ export default function Question(props) {
         className={`${styles.nextBtn}`}
         onClick={() => {
           setQuestionPOS((prev) => prev + 1)
+
+          if (userAnswer === null) return
+
           submitQuestionAnswer.mutateAsync(userAnswer).then()
-          queryClient.invalidateQueries([`/questions/${question._id}/answer`], {exact: true})
+          queryClient.invalidateQueries([`/questions/${question._id}/answer`])
+          setUserAnswer(null)
         }}
       >
         NEXT
@@ -47,8 +54,10 @@ export default function Question(props) {
       {questionPOS === (questions.length - 1) && <button
         className={`${styles.nextBtn}`}
         onClick={() => {
+          if (userAnswer === null) return
           submitQuestionAnswer.mutateAsync(userAnswer).then()
-          queryClient.invalidateQueries([`/questions/${question._id}/answer`], {exact: true})
+          queryClient.invalidateQueries([`/questions/${question._id}/answer`])
+          setUserAnswer(null)
         }}
       >
         FINISH

@@ -55,8 +55,6 @@ export function useSubmitQuestionAnswer({questionId}) {
   const accessToken = localStorage.getItem('accessToken')
 
   return useMutation((answer) => {
-    console.log(answer)
-
     return questionsAPI.put(
       `/questions/${questionId}/answer`,
       {answer},
