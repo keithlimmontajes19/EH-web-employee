@@ -17,7 +17,7 @@ export default function FillInTheBlanks(props) {
   const splitString = question?.description?.trim().split(/\s+/)
   const answerForm = createElement('div', {}, splitString.map((string, index) => {
     return <>
-      {string === '____' ? <input
+      {string === '____' ? <input className={`${styles.blankInput}`}
         type="text"
         defaultValue={userAnswer[index]}
         onChange={(e) => setUserAnswer((ans) => {
