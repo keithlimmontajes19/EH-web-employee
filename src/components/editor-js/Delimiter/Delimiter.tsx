@@ -1,3 +1,3 @@
 export default function Delimiter({data}: any) {
-  return <></>
+  return <hr />
 }

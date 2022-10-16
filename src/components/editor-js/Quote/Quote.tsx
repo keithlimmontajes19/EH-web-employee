@@ -1,3 +1,7 @@
 export default function Quote({data}: any) {
-  return <></>
+  const {text, caption, alignment} = data
+
+  return <blockquote>
+    <p>{text}</p>
+  </blockquote>
 }
