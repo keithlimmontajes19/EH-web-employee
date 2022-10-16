@@ -14,20 +14,21 @@ import Warning from './Warning/Warning'
 
 export default function BlockViewer(props) {
   const block = props.block
+  const data = block?.data
 
-  if (block?.type === 'checklist') return <CheckList data={props.data} />
-  if (block?.type === 'code') return <Code data={props.data} />
-  if (block?.type === 'delimiter') return <Delimiter data={props.data} />
-  if (block?.type === 'header') return <Header data={props.data} />
-  if (block?.type === 'image') return <Image data={props.data} />
-  if (block?.type === 'linkTool') return <LinkTool data={props.data} />
-  if (block?.type === 'list') return <List data={props.data} />
-  if (block?.type === 'paragraph') return <Paragraph data={props.data} />
-  if (block?.type === 'quote') return <Quote data={props.data} />
-  if (block?.type === 'raw') return <RawHtml data={props.data} />
-  if (block?.type === 'table') return <Table data={props.data} />
-  if (block?.type === 'video') return <Video data={props.data} />
-  if (block?.type === 'warning') return <Warning data={props.data} />
+  if (block?.type === 'checklist') return <CheckList data={data} />
+  if (block?.type === 'code') return <Code data={data} />
+  if (block?.type === 'delimiter') return <Delimiter data={data} />
+  if (block?.type === 'header') return <Header data={data} />
+  if (block?.type === 'image') return <Image data={data} />
+  if (block?.type === 'linkTool') return <LinkTool data={data} />
+  if (block?.type === 'list') return <List data={data} />
+  if (block?.type === 'paragraph') return <Paragraph data={data} />
+  if (block?.type === 'quote') return <Quote data={data} />
+  if (block?.type === 'raw') return <RawHtml data={data} />
+  if (block?.type === 'table') return <Table data={data} />
+  if (block?.type === 'video') return <Video data={data} />
+  if (block?.type === 'warning') return <Warning data={data} />
 
   return <p>Unsupported block type...</p>
 }
