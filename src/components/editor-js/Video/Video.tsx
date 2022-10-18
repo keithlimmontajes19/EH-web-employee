@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import styles from './Video.module.css'
 
 export default function Video({data}: any) {
   const url = data?.file?.url || ''
@@ -17,12 +18,12 @@ export default function Video({data}: any) {
       }
     })
     .then((response) => response.json())
-    .then((data) => setVideo(data))
+    .then((result) => setVideo(result.data))
   }, [videoId])
 
   if (!video) return <p>Loading...</p>
 
-  return <video controls>
+  return <video className={styles.video} controls>
     <source src={video} />
   </video>
 }

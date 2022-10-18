@@ -28,3 +28,7 @@
   object-fit: none;
   background: silver;
 }
+
+.blockContainer {
+  margin: 4px;
+}

@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import styles from './Image.module.css'
 
 export default function Image({data}: any) {
   const url = data?.file?.url || ''
@@ -17,10 +18,10 @@ export default function Image({data}: any) {
       }
     })
     .then((response) => response.json())
-    .then((data) => setImage(data))
+    .then((result) => setImage(result.data))
   }, [imageId])
 
   if (!image) return <p>Loading...</p>
 
-  return <img src={image} />
+  return <img className={styles.image} src={image} />
 }

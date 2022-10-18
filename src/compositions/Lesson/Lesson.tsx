@@ -23,10 +23,11 @@ export function Lesson() {
     {!isLoading && !isError && <div className={styles.lessonContainer}>
       <img className={`${styles.lessonPreview} ${!lesson.preview && styles.noLessonPreview}`} src={lesson.preview || NO_IMAGE} />
       <h3 className={styles.lessonTitle}>{lesson.title}</h3>
-      <p className={styles.lessonDescription}>{lesson.description}</p>
+      {blocks.map((block) => {
+        return <div className={styles.blockContainer}>
+          <BlockViewer key={block?.id} block={block} />
+        </div>
+      })}
     </div>}
-    {blocks.map((block) => {
-      return <BlockViewer key={block?.id} block={block} />
-    })}
   </>
 }
