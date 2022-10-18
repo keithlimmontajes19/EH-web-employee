@@ -35,7 +35,6 @@ export function Course() {
         <p className={styles.courseStat}><img className={styles.statsIcon} src={TOPICS_ICON} />{course.stats.topics} Topics</p>
         <p className={styles.courseStat}><img className={styles.statsIcon} src={VIDEOS_ICON} />{course.stats.videos} Videos</p>
       </div>
-      <p className={styles.courseDescription}>{course.description}</p>
     </div>
     <div className={styles.startCourseContainer}>
       <button
