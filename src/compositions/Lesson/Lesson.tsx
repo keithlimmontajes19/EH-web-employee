@@ -6,6 +6,8 @@ import NO_IMAGE from 'assets/icons/no-image-icon.png'
 
 import styles from './Lesson.module.css'
 
+import DUMMY_BLOCKS from 'temp/data/dummy-blocks'
+
 export function Lesson() {
   const {lessonId} = useParams()
   const {isLoading, isError, error, lesson, tag} = useGetSingleLesson(lessonId)
@@ -18,6 +20,24 @@ export function Lesson() {
   } catch {
     blocks = []
   }
+
+  blocks = [{
+    "id": "b9t2ihRWv0",
+    "type": "table",
+    "data": {
+      "withHeadings": false,
+      "content": [
+        [
+          "Table",
+          "Table 2"
+        ],
+        [
+          "1",
+          "2"
+        ]
+      ]
+    }
+  }]
 
   return <>
     {!isLoading && !isError && <div className={styles.lessonContainer}>
