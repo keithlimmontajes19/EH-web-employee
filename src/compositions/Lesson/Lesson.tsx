@@ -6,6 +6,8 @@ import NO_IMAGE from 'assets/icons/no-image-icon.png'
 
 import styles from './Lesson.module.css'
 
+import DUMMY_BLOCKS from 'temp/data/dummy-blocks'
+
 export function Lesson() {
   const {lessonId} = useParams()
   const {isLoading, isError, error, lesson, tag} = useGetSingleLesson(lessonId)
