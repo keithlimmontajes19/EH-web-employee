@@ -21,24 +21,6 @@ export function Lesson() {
     blocks = []
   }
 
-  blocks = [{
-    "id": "b9t2ihRWv0",
-    "type": "table",
-    "data": {
-      "withHeadings": false,
-      "content": [
-        [
-          "Table",
-          "Table 2"
-        ],
-        [
-          "1",
-          "2"
-        ]
-      ]
-    }
-  }]
-
   return <>
     {!isLoading && !isError && <div className={styles.lessonContainer}>
       <img className={`${styles.lessonPreview} ${!lesson.preview && styles.noLessonPreview}`} src={lesson.preview || NO_IMAGE} />
