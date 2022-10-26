@@ -18,7 +18,9 @@ export default function Topic(props) {
     <div className={`${styles.topicInfoContainer}`}>
       <h3 className={`${styles.topicTitle}`}>{topic.title}</h3>
       {blocks.map((block) => {
-        return <BlockViewer key={block?.id} block={block} />
+        return <div className={styles.blockContainer}>
+          <BlockViewer key={block?.id} block={block} />
+        </div>
       })}
     </div>
   </div>
