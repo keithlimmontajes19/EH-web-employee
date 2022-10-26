@@ -51,13 +51,13 @@ axiosInstance.interceptors.response.use(
       !error?.response?.config.__isRetryRequest
     ) {
       store.dispatch({type: 'GET_AUTHENTICATION_FAILED'});
-      store.dispatch(
-        openNotification({
-          onShow: true,
-          type: 'warning',
-          message: 'Session has Expired!',
-        }),
-      );
+      // store.dispatch(
+      //   openNotification({
+      //     onShow: true,
+      //     type: 'warning',
+      //     message: 'Session has Expired!',
+      //   }),
+      // );
 
       localStorage.clear();
       return error;
