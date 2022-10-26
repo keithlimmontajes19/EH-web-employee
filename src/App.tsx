@@ -23,6 +23,7 @@ import {CourseLayout} from 'layouts/CourseLayout'
 import {Course} from 'compositions/Course'
 import {Lesson} from 'compositions/Lesson'
 import LessonContent from 'compositions/LessonContent'
+import Register from 'pages/register/Register'
 
 export default function App() {
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function App() {
     <Route path="/" element={<Layout />}>
       {/* public routes */}
       <Route path="login" element={<Login />} />
+      {/* <Route path="register" element={<Register />} /> */}
       <Route path="logout" element={<Logout />} />
 
       <Route path="forgot-password">
