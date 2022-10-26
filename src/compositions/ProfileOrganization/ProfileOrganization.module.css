@@ -46,6 +46,14 @@
   line-height: 32px;
 }
 
+.organizationMemberCount {
+  color: #a2a1bd;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  text-align: center;
+}
+
 .scaleDown {
   object-fit: scale-down;
 }

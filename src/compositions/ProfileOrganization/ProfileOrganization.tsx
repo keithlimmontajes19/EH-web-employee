@@ -25,6 +25,7 @@ export default function ProfileOrganization() {
           src={!isLoading && organization.avatar || ORGANIZATION_ICON}
         />
         <h3 className={`${styles.organizationName}`}>{organization.name}</h3>
+        <p className={`${styles.organizationMemberCount}`}>Members: {organization?.members?.length || 0}</p>
       </div>)}
     </div>
   </div>

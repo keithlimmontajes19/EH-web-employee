@@ -145,7 +145,7 @@ export default function LoginForm() {
         <SignupContainer>
           <LabelStyled>New on our platform?</LabelStyled>
           <LabelStyled>
-            <Link to="/" className={styles.link}>Create an account</Link>
+            <Link to="/register" className={styles.link}>Create an account</Link>
           </LabelStyled>
         </SignupContainer>
       </Form>
