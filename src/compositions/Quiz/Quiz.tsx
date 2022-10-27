@@ -10,6 +10,8 @@ export default function Quiz(props) {
 
   const {isLoading, questions} = useGetQuizQuestions(quiz._id)
 
+  console.log(questions)
+
   return <>
     {!isLoading && !quizStarted && <div className={`${styles.container}`}>
       <h2 className={`${styles.title}`}>{quiz?.title}</h2>
@@ -18,6 +20,7 @@ export default function Quiz(props) {
         <button
           className={`${styles.startQuizBtn}`}
           onClick={() => {
+            if (!questions?.length) return
             setQuizStarted(true)
           }}
         >

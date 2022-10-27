@@ -16,7 +16,7 @@ export default function Topic(props) {
   return <div className={`${styles.topicContainer}`}>
     <img className={`${styles.topicPreview} ${!topic.preview && styles.noTopicPreview}`}  src={topic.preview || NO_IMAGE} />
     <div className={`${styles.topicInfoContainer}`}>
-      <h3 className={`${styles.topicTitle}`}>{topic.title}</h3>
+      {/* <h3 className={`${styles.topicTitle}`}>{topic.title}</h3> */}
       {blocks.map((block) => {
         return <div className={styles.blockContainer}>
           <BlockViewer key={block?.id} block={block} />
