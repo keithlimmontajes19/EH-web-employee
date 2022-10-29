@@ -18,7 +18,7 @@ export function CourseLayout() {
   <div className={styles.sidenav}>
     <h3 className={styles.title}>Curriculum</h3>
     <ol className={styles.curriculum}>
-      <li
+      {/* <li
         key={courseId}
         className={`${styles.lesson} ${selected === `/learn/${courseId}` ? styles.selected : ''}`}
         onClick={() => {
@@ -27,7 +27,7 @@ export function CourseLayout() {
         }}
       >
         <span style={{paddingLeft: '13px'}}>Introduction</span>
-      </li>
+      </li> */}
 
       {!isLoading && courseCurriculum.lessons.map((lesson) => {
         return <>

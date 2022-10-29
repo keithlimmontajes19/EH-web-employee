@@ -23,7 +23,7 @@ export function Lesson() {
 
   return <>
     {!isLoading && !isError && <div className={styles.lessonContainer}>
-      <img className={`${styles.lessonPreview} ${!lesson.preview && styles.noLessonPreview}`} src={lesson.preview || NO_IMAGE} />
+      {lesson?.preview && <img className={`${styles.lessonPreview} ${!lesson.preview && styles.noLessonPreview}`} src={lesson.preview || NO_IMAGE} />}
       {/* <h3 className={styles.lessonTitle}>{lesson.title}</h3> */}
       {blocks.map((block) => {
         return <div className={styles.blockContainer}>
