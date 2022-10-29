@@ -40,7 +40,7 @@ export function CourseLayout() {
             }}
           >
             <div>
-                <span
+                {lesson?.contents?.length > 0 && <span
                   className={styles.expandLesson}
                   onClick={() => {
                     if (expandedLesson.includes(lesson._id)) setExpandedLesson((prev) => prev.filter((lessonId) => lessonId !== lesson._id))
@@ -48,7 +48,8 @@ export function CourseLayout() {
                   }}
                 >
                   <FontAwesomeIcon icon={!expandedLesson.includes(lesson._id) ? faCaretRight : faCaretDown}/>
-                </span>
+                </span>}
+                {lesson?.contents?.length === 0 && <span style={{paddingLeft: '13px'}}></span>}
                 <span
                   onClick={() => {
                     setSelected(`/learn/${courseId}/lessons/${lesson._id}`)
