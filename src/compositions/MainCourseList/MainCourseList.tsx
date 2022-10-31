@@ -2,6 +2,9 @@ import React from 'react'
 import {ScrollMenu, VisibilityContext} from 'react-horizontal-scrolling-menu'
 import {useGetUserCourses} from 'api/usersAPI'
 
+import ReactPlayer from 'react-player'
+import {ReactPlayerProps} from 'react-player/types/lib'
+
 import styles from './MainCourseList.module.css'
 
 import {
@@ -124,17 +127,17 @@ const MainCourseList = () => {
   const {isLoading, isError, error, courses, tag} = useGetUserCourses(userId)
 
   const isItemSelected = (id) => !!selected.find((el) => el === id);
-  const handleClick = (id) => () => {
+  const handleClick = (id) => {
     const itemSelected = isItemSelected(id);
 
     setSelected((currentSelected) =>
       itemSelected
         ? currentSelected.filter((el) => el !== id)
         : currentSelected.concat(id),
-    );
+    )
   };
 
-
+  const ReactPlayerProps = ReactPlayer as unknown as React.FC<ReactPlayerProps>;
 
   return (
     <ScrollMenu
