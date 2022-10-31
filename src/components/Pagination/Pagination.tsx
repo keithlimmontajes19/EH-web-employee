@@ -6,7 +6,7 @@ import {Pagination} from 'antd';
 
 const PaginationComponent = (props: PropsType): ReactElement => {
   const onChange = (e) => {
-    console.log(e);
+    // console.log(e);
   };
 
   return (

@@ -20,11 +20,16 @@
 .curriculum {
   padding: 0;
   width: 230px;
+  margin-right: 16px;
 }
 
 .curriculum li {
   list-style-type: none;
   user-select: none;
+  height: auto;
+  padding: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .lesson {
@@ -55,6 +60,7 @@
 .lessonContent {
   width: 230px;
   height: 38px;
+  margin-left: 24px;
   color: #4c4b7b;
   font-weight: 700;
   font-size: 16px;
