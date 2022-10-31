@@ -56,7 +56,7 @@ export function CourseLayout() {
                     navigate(`lessons/${lesson._id}`)
                   }}
                 >
-                  {lesson.title}
+                  {lesson.title.slice(0, 45)}{lesson.title.length > 45 ? '...' : ''}
                 </span>
               </div>
           </li>
