@@ -27,9 +27,11 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
+  "include": [ 
     "**/*.ts",
     "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
     "src/compositions/Announcement/Announcement.jsx"
   ],
   "exclude": ["node_modules"]

@@ -7,7 +7,8 @@ export const Container = styled.div`
   margin-bottom: ${20}px;
   background-color: ${theme.WHITE};
   height: ${240}px;
-  max-width: ${376}px;
+  max-width: ${385}px;
+  box-shadow: 0px 3px 10px rgba(43, 46, 74, 0.15);
 `;
 
 export const FlexRow = styled.div`
