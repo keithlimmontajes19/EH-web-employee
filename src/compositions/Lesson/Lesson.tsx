@@ -26,20 +26,22 @@ export function Lesson() {
   }
 
 
-  const ReactPlayerProps = ReactPlayer as unknown as React.FC<ReactPlayerProps>;
+  const ReactPlayerProps = ReactPlayer as unknown as React.FC<ReactPlayerProps>
 
   return <>
     {!isLoading && !isError && <div className={styles.lessonContainer}>
       {/* {lesson?.preview && <img className={`${styles.lessonPreview} ${!lesson.preview && styles.noLessonPreview}`} src={lesson.preview || NO_IMAGE} />} */}
       {/* <h3 className={styles.lessonTitle}>{lesson.title}</h3> */}
-      {lesson?.preview && <Avatar
+      {lesson?.preview && <div style={{width: '100%'}}><Avatar
         src={lesson?.preview}
-        size="large"
         shape="square"
+        size="large"
+        // size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
         style={{
           width: '100%',
-          minHeight: 350,
-          maxHeight: 350,
+          minHeight: 400,
+          maxHeight: 580,
+          height: '100%',
           borderRadius: 15,
         }}
         icon={(
@@ -57,7 +59,7 @@ export function Lesson() {
             // ]}
           />
         )}
-      />}
+      /></div>}
       {blocks.map((block) => {
         return <div className={styles.blockContainer}>
           <BlockViewer key={block?.id} block={block} />
