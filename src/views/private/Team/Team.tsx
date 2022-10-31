@@ -1,5 +1,6 @@
 import {ReactElement} from 'react';
 
+import {Row, Col} from 'antd';
 import {FlexWrap, CardFolders, TitleHeader, TitleLabel} from './styled';
 
 /* reducer action */
@@ -19,7 +20,7 @@ const Team = (): ReactElement => {
   const content = () => {
     return (
       <FlexWrap>
-        <div style={{minWidth: 580, marginRight: 15}}>
+        <div style={{minWidth: 580, marginRight: 40}}>
           <CarouselAnnouncement />
         </div>
 
@@ -34,6 +35,7 @@ const Team = (): ReactElement => {
                   style={{
                     minHeight: 360,
                     maxHeight: 360,
+                    maxWidth: 500,
                     overflowY: 'scroll',
                     scrollbarWidth: 'none',
                   }}>
