@@ -21,6 +21,8 @@ export function Lesson() {
     blocks = []
   }
 
+  console.log(blocks)
+
   return <>
     {!isLoading && !isError && <div className={styles.lessonContainer}>
       {lesson?.preview && <img className={`${styles.lessonPreview} ${!lesson.preview && styles.noLessonPreview}`} src={lesson.preview || NO_IMAGE} />}
