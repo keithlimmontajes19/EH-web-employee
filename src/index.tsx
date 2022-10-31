@@ -15,10 +15,12 @@ import App from './App'
 import 'antd/dist/antd.min.css'
 import './styles/index.css'
 import 'react-circular-progressbar/dist/styles.css'
-import 'pure-react-carousel/dist/react-carousel.es.css'
-// import 'node_modules/video-react/dist/video-react.css'
+// import 'pure-react-carousel/dist/react-carousel.es.css'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import './index.css'
+// import 'node_modules/video-react/dist/video-react.css'
+
 
 const queryClient = new QueryClient()
 const root = document.getElementById('root')

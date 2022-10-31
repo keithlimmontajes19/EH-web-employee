@@ -24,3 +24,16 @@
 }
 
 @import '~gleap/build/index.min.css';
+
+.player-wrapper {
+  position: relative;
+  min-height: 430px;
+  height: 430px;
+  max-height: 430px;
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

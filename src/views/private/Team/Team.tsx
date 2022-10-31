@@ -1,26 +1,16 @@
 import {ReactElement} from 'react';
 
-import {
-  FlexWrap,
-  Container,
-  CardStyled,
-  LabelStyled,
-  CardFolders,
-  TitleHeader,
-  TitleLabel,
-} from './styled';
+import {Row, Col} from 'antd';
+import {FlexWrap, CardFolders, TitleHeader, TitleLabel} from './styled';
 
 /* reducer action */
 import {RootState} from 'ducks/store';
 import {useSelector} from 'react-redux';
 
 import Loading from 'components/Loading';
-import IconImage from 'components/IconImage';
 import PagesDetail from 'compositions/PagesDetail';
 import FolderDetail from 'compositions/FolderDetail';
-import ANNOUNCEMENT from 'assets/icons/announcement.png';
-
-import Announcement from 'compositions/Announcement';
+import CarouselAnnouncement from 'compositions/CarouselAnnouncement';
 
 const Team = (): ReactElement => {
   const {data, loading}: any = useSelector<RootState>(
@@ -30,7 +20,9 @@ const Team = (): ReactElement => {
   const content = () => {
     return (
       <FlexWrap>
-        <Announcement />
+        <div style={{minWidth: 580, marginRight: 40}}>
+          <CarouselAnnouncement />
+        </div>
 
         {(data || []).map((item) => {
           return (item?.boards || []).map((board: any) => {
@@ -43,6 +35,7 @@ const Team = (): ReactElement => {
                   style={{
                     minHeight: 360,
                     maxHeight: 360,
+                    maxWidth: 500,
                     overflowY: 'scroll',
                     scrollbarWidth: 'none',
                   }}>
