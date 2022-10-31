@@ -31,23 +31,27 @@ const CarouselAnnouncement = (): ReactElement => {
   }, []);
 
   const carouseContent = (item: any) => {
-    console.log(item);
     if (item?.imageURL) {
       return (
-        <Image
-          width="100%"
-          height={452}
-          src={item?.imageURL}
-          style={{borderRadius: 15}}
-        />
+        <div
+          key={item?._id}
+          style={{borderRadius: 15, maxHeight: 430, minHeight: 450}}>
+          <Image
+            width="100%"
+            height={452}
+            src={item?.imageURL}
+            style={{borderRadius: 15}}
+          />
+        </div>
       );
     } else if (item?.videoURL) {
       return (
-        <div className="video-wrapper">
+        <div className="player-wrapper">
           <ReactPlayerProps
+            playing
             controls={true}
-            width="100%"
-            height="100%"
+            width={'100%'}
+            height={'100%'}
             url={[
               {
                 src: item?.videoURL,
@@ -59,7 +63,9 @@ const CarouselAnnouncement = (): ReactElement => {
       );
     } else {
       return (
-        <div>
+        <div
+          key={item?._id}
+          style={{borderRadius: 15, maxHeight: 430, minHeight: 450}}>
           <p>{item?.title}</p>
           <p>{item?.description}</p>
         </div>
@@ -75,13 +81,7 @@ const CarouselAnnouncement = (): ReactElement => {
           showThumbs={false}
           showStatus={false}
           dynamicHeight={false}>
-          {(data || []).map((item) => (
-            <div
-              key={item?._id}
-              style={{borderRadius: 15, maxHeight: 430, minHeight: 450}}>
-              {carouseContent(item)}
-            </div>
-          ))}
+          {(data || []).map((item) => carouseContent(item))}
         </Carousel>
       </CarouselContainer>
     );
