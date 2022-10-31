@@ -14,6 +14,8 @@ import Rewards from 'compositions/Rewards';
 import Leaderboard from 'compositions/Leaderboard';
 import Announcement from 'compositions/Announcement';
 import MainCourseList from 'compositions/MainCourseList';
+import CarouselAnnouncement from 'compositions/CarouselAnnouncement';
+import {MainCourses} from 'compositions/MainCourses';
 
 import HomeHeader from './HomeHeader/HomeHeader';
 import HomeInfo from './HomeInfo/HomeInfo';
@@ -36,15 +38,12 @@ const Home = (): ReactElement => {
         <SubContainer>
           <Leaderboard />
           <Label bottom={35} />
-          <Announcement />
+          <CarouselAnnouncement />
         </SubContainer>
         <Rewards />
       </FlexWrap>
-      <Label size={25} bold="bold" bottom={20} left={20}>
-        Main Courses
-      </Label>
       <SubContainer>
-        <MainCourseList />
+        <MainCourses />
       </SubContainer>
     </Container>
   );
